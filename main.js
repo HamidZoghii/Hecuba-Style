@@ -1,0 +1,1571 @@
+/* ==========================================================================
+   HECUBA STYLE — Shared JavaScript
+   Sample Product Data + Component Interactions
+   Used across all pages (Home, Shop, Category, Product, About/Contact)
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------------
+     01. SAMPLE PRODUCT DATA
+     A small, realistic dataset that demonstrates the full data structure.
+     Easily extendable to 120+ products — this shape maps 1:1 to a future
+     WooCommerce product (name → post_title, category → product_cat,
+     colors/sizes → product attributes/variations, images → gallery).
+     ------------------------------------------------------------------------ */
+  const BRAND = 'هکوبا استایل';
+
+  const PRODUCTS = [
+    {
+      id: 'hb-001', sku: 'HEC-BRA-1001',
+      name: 'سوتین بدون سیم مدل النا', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 690000, comparePrice: 890000,
+      colors: ['#202020', '#B96777', '#E8DFD2'],
+      sizes: ['75B', '80B', '85B', '90B'],
+      material: 'کاتن پنبه‌ای نرم', model: 'بدون سیم', usage: 'روزمره', brand: BRAND,
+      description: 'یک سوتین بدون سیم که تمام روز حسش نمی‌کنی؛ نرم، سبک و بدون هیچ فشاری روی پوست.',
+      rating: 4.8, reviews: 126, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-010', sku: 'HEC-BRA-1010',
+      name: 'سوتین فرم‌دهنده پوش‌آپ', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 790000, comparePrice: 990000,
+      colors: ['#202020', '#B96777', '#737C54'],
+      sizes: ['70B', '75B', '80B', '85B', '90B'],
+      material: 'میکروفایبر بدون درز', model: 'پوش‌آپ', usage: 'مجلسی', brand: BRAND,
+      description: 'فرم‌دهی طبیعی برای لحظه‌های خاص، بدون این‌که حس کنی چیزی اضافه پوشیدی.',
+      rating: 4.8, reviews: 174, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-011', sku: 'HEC-BRA-1011',
+      name: 'سوتین اسپرت بدون درز', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 590000, comparePrice: null,
+      colors: ['#202020', '#9CA286', '#FFFFFF'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه تنفس‌پذیر ورزشی', model: 'اسپرت', usage: 'ورزشی', brand: BRAND,
+      description: 'برای روزهای پرتحرک؛ بدون درز، خنک و کاملاً همراه با حرکات بدن.',
+      rating: 4.7, reviews: 88, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-012', sku: 'HEC-BRA-1012',
+      name: 'سوتین کلاسیک سه‌بند', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 650000, comparePrice: 790000,
+      colors: ['#202020', '#C9A992', '#8E3045'],
+      sizes: ['70B', '75B', '80B', '85B'],
+      material: 'کاتن ممزوج', model: 'کلاسیک', usage: 'روزمره', brand: BRAND,
+      description: 'یک انتخاب کلاسیک و همیشگی برای پوشیدن زیر هر نوع لباسی، هر روز.',
+      rating: 4.6, reviews: 102, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-003', sku: 'HEC-BRF-1003',
+      name: 'شورت کمرگهی راحت روزانه', category: 'شورت زنانه', categorySlug: 'brief',
+      price: 290000, comparePrice: 350000,
+      colors: ['#202020', '#9CA286', '#E8DFD2', '#B96777'],
+      sizes: ['S', 'M', 'L', 'XL', '2XL'],
+      material: 'کاتن الاستیک', model: 'کمرگهی', usage: 'روزمره', brand: BRAND,
+      description: 'راحتی واقعی برای هر روز؛ کش نرم، بدون فشار روی کمر و پوست.',
+      rating: 4.7, reviews: 212, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-013', sku: 'HEC-BRF-1013',
+      name: 'شورت تانگا دانتل', category: 'شورت زنانه', categorySlug: 'brief',
+      price: 340000, comparePrice: null,
+      colors: ['#202020', '#B96777', '#8E3045'],
+      sizes: ['S', 'M', 'L'],
+      material: 'دانتل نرم', model: 'تانگا', usage: 'مجلسی', brand: BRAND,
+      description: 'ظریف و سبک، برای شب‌هایی که دلت می‌خواد کمی خاص‌تر باشی.',
+      rating: 4.5, reviews: 47, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-014', sku: 'HEC-BRF-1014',
+      name: 'شورت فول شکم‌گیر', category: 'شورت زنانه', categorySlug: 'brief',
+      price: 320000, comparePrice: 380000,
+      colors: ['#202020', '#C9A992'],
+      sizes: ['M', 'L', 'XL', '2XL'],
+      material: 'میکروفایبر فرم‌دهنده', model: 'فول', usage: 'روزمره', brand: BRAND,
+      description: 'پوشش کامل و فرم‌دهنده، برای روزهایی که به آرامش و ثبات بیشتری نیاز داری.',
+      rating: 4.6, reviews: 71, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-002', sku: 'HEC-SET-1002',
+      name: 'ست دو تکه آدل', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 1290000, comparePrice: null,
+      colors: ['#202020', '#8E3045'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'لمینت گلدوزی‌شده', model: 'دو تکه', usage: 'مجلسی', brand: BRAND,
+      description: 'ست دو تکه‌ای که هم زیباست، هم اندازه‌ی روزهای معمولی و هم لحظه‌های خاص.',
+      rating: 4.9, reviews: 84, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-015', sku: 'HEC-SET-1015',
+      name: 'ست سه‌تکه بی‌تریس', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 1590000, comparePrice: 1890000,
+      colors: ['#202020', '#B96777'],
+      sizes: ['S', 'M', 'L'],
+      material: 'توری گلدوزی‌شده', model: 'سه‌تکه', usage: 'مجلسی', brand: BRAND,
+      description: 'سه تکه‌ای ظریف با گلدوزی دست‌ساز، برای وقتی می‌خوای حس متفاوتی داشته باشی.',
+      rating: 4.8, reviews: 36, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-016', sku: 'HEC-SET-1016',
+      name: 'ست پنبه‌ای روزمره', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 690000, comparePrice: null,
+      colors: ['#9CA286', '#E8DFD2', '#202020'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'کاتن نرم', model: 'دو تکه', usage: 'روزمره', brand: BRAND,
+      description: 'یک ست ساده و پنبه‌ای برای شروع روزهایی که فقط راحتی مهمه.',
+      rating: 4.7, reviews: 59, tags: [], inStock: true
+    },
+    {
+      id: 'hb-005', sku: 'HEC-BRL-1005',
+      name: 'نیم‌تنه بافت پنبه‌ای', category: 'نیم‌تنه', categorySlug: 'bralette',
+      price: 450000, comparePrice: null,
+      colors: ['#737C54', '#202020', '#E8DFD2'],
+      sizes: ['S', 'M', 'L'],
+      material: 'ریب کاتن', model: 'ساده', usage: 'روزمره', brand: BRAND,
+      description: 'سبک، بدون قالب و بدون بند اضافه؛ درست مثل نپوشیدن هیچ‌چیز.',
+      rating: 4.5, reviews: 39, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-017', sku: 'HEC-BRL-1017',
+      name: 'نیم‌تنه ورزشی کراپ', category: 'نیم‌تنه', categorySlug: 'bralette',
+      price: 420000, comparePrice: 480000,
+      colors: ['#202020', '#9CA286', '#FFFFFF'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه ورزشی کشی', model: 'اسپرت', usage: 'ورزشی', brand: BRAND,
+      description: 'کراپ ورزشی که زیر هر تاپی هم شیک می‌شینه، هم حمایت لازم رو می‌ده.',
+      rating: 4.6, reviews: 64, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-007', sku: 'HEC-FNT-1007',
+      name: 'ست فانتزی گلدوزی مون', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
+      price: 1490000, comparePrice: null,
+      colors: ['#202020', '#B96777'],
+      sizes: ['S', 'M', 'L'],
+      material: 'دانتل فرانسوی', model: 'توری', usage: 'مجلسی', brand: BRAND,
+      description: 'گلدوزی ظریف روی توری فرانسوی، برای شب‌هایی که قراره به‌یادماندنی باشن.',
+      rating: 4.9, reviews: 45, tags: ['new'], inStock: false
+    },
+    {
+      id: 'hb-018', sku: 'HEC-FNT-1018',
+      name: 'ست فانتزی توری گل‌دار', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
+      price: 1350000, comparePrice: 1650000,
+      colors: ['#202020', '#8E3045', '#B96777'],
+      sizes: ['S', 'M', 'L'],
+      material: 'توری الاستیک ظریف', model: 'توری', usage: 'مجلسی', brand: BRAND,
+      description: 'طرح گل‌دار روی توری الاستیک، ظریف و راحت در آن واحد.',
+      rating: 4.8, reviews: 29, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-004', sku: 'HEC-BOD-1004',
+      name: 'بادی مدل رزا', category: 'بادی زنانه', categorySlug: 'bodysuit',
+      price: 990000, comparePrice: 1250000,
+      colors: ['#202020', '#6D2436'],
+      sizes: ['S', 'M', 'L'],
+      material: 'مدال فرانسه با دانتل', model: 'توری', usage: 'مجلسی', brand: BRAND,
+      description: 'بادی‌ای که زیر هر لباسی فرم می‌گیره و ظاهر مرتبی به کل استایلت می‌ده.',
+      rating: 4.6, reviews: 58, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-019', sku: 'HEC-BOD-1019',
+      name: 'بادی ساده روزمره', category: 'بادی زنانه', categorySlug: 'bodysuit',
+      price: 690000, comparePrice: null,
+      colors: ['#202020', '#E8DFD2', '#C9A992'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'کاتن الاستیک', model: 'ساده', usage: 'روزمره', brand: BRAND,
+      description: 'یک بادی ساده و کاتن برای روزهایی که دنبال یک لایه‌ی راحت زیر لباس هستی.',
+      rating: 4.5, reviews: 41, tags: [], inStock: true
+    },
+    {
+      id: 'hb-020', sku: 'HEC-BOD-1020',
+      name: 'بادی تور گلدوزی', category: 'بادی زنانه', categorySlug: 'bodysuit',
+      price: 1090000, comparePrice: 1290000,
+      colors: ['#202020', '#8E3045'],
+      sizes: ['S', 'M', 'L'],
+      material: 'توری گلدوزی‌شده', model: 'توری', usage: 'مجلسی', brand: BRAND,
+      description: 'گلدوزی روی توری، برای لحظه‌هایی که دلت جزئیات ظریف می‌خواد.',
+      rating: 4.7, reviews: 33, tags: ['bestseller', 'sale'], inStock: true
+    },
+    {
+      id: 'hb-006', sku: 'HEC-SLP-1006',
+      name: 'لباس خواب ساتن کوتاه', category: 'لباس خواب', categorySlug: 'sleepwear',
+      price: 890000, comparePrice: 1090000,
+      colors: ['#8E3045', '#202020'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'ساتن نرم', model: 'کلاسیک', usage: 'مجلسی', brand: BRAND,
+      description: 'ساتن نرم روی پوست؛ سبک، خنک و کمی هم لاکچری برای شب.',
+      hasVideo: true,
+      rating: 4.8, reviews: 97, tags: ['bestseller', 'sale'], inStock: true
+    },
+    {
+      id: 'hb-021', sku: 'HEC-SLP-1021',
+      name: 'لباس خواب پنبه‌ای بلند', category: 'لباس خواب', categorySlug: 'sleepwear',
+      price: 590000, comparePrice: null,
+      colors: ['#E8DFD2', '#9CA286', '#202020'],
+      sizes: ['S', 'M', 'L', 'XL', 'Free Size'],
+      material: 'کاتن نخی نرم', model: 'ساده', usage: 'خانگی', brand: BRAND,
+      description: 'پنبه‌ای، بلند و آرامش‌بخش؛ دقیقاً چیزی که برای یک خواب خوب لازم داری.',
+      rating: 4.6, reviews: 52, tags: [], inStock: true
+    },
+    {
+      id: 'hb-022', sku: 'HEC-SLP-1022',
+      name: 'لباس خواب حریر با شال', category: 'لباس خواب', categorySlug: 'sleepwear',
+      price: 1190000, comparePrice: null,
+      colors: ['#B96777', '#202020'],
+      sizes: ['S', 'M', 'L'],
+      material: 'حریر لطیف', model: 'توری', usage: 'مجلسی', brand: BRAND,
+      description: 'حریر لطیف با یک شال همراه، برای شب‌هایی که می‌خوای خاص بپوشی.',
+      rating: 4.9, reviews: 22, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-008', sku: 'HEC-SWM-1008',
+      name: 'مایو یک‌تکه کلاسیک', category: 'مایو و بیکینی', categorySlug: 'swim',
+      price: 990000, comparePrice: 1190000,
+      colors: ['#202020', '#737C54'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'لایکرا مقاوم به کلر', model: 'کلاسیک', usage: 'ساحلی', brand: BRAND,
+      description: 'یک‌تکه و کلاسیک، مقاوم در برابر کلر استخر و رنگ‌ثابت زیر آفتاب.',
+      rating: 4.6, reviews: 31, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-023', sku: 'HEC-SWM-1023',
+      name: 'بیکینی دو تکه فرم‌دهنده', category: 'مایو و بیکینی', categorySlug: 'swim',
+      price: 890000, comparePrice: null,
+      colors: ['#202020', '#C9A992', '#8E3045'],
+      sizes: ['S', 'M', 'L'],
+      material: 'لایکرا فرم‌دهنده', model: 'پوش‌آپ', usage: 'ساحلی', brand: BRAND,
+      description: 'فرم‌دهنده و راحت، برای روزهای ساحل بدون نگرانی از فرم بدن.',
+      rating: 4.5, reviews: 18, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-009', sku: 'HEC-CMF-1009',
+      name: 'ست راحتی خانگی دو تکه', category: 'لباس راحتی', categorySlug: 'loungewear',
+      price: 750000, comparePrice: null,
+      colors: ['#E8DFD2', '#9CA286'],
+      sizes: ['S', 'M', 'L', 'XL', 'Free Size'],
+      material: 'نخ پنبه‌ای گرم', model: 'دو تکه', usage: 'خانگی', brand: BRAND,
+      description: 'ست راحتی نخی برای شب‌های خانه؛ نرم، گرم و بدون هیچ محدودیتی در حرکت.',
+      rating: 4.7, reviews: 63, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-024', sku: 'HEC-CMF-1024',
+      name: 'شلوار و تاپ راحتی نخی', category: 'لباس راحتی', categorySlug: 'loungewear',
+      price: 640000, comparePrice: 720000,
+      colors: ['#202020', '#E8DFD2', '#737C54'],
+      sizes: ['S', 'M', 'L', 'XL', '2XL'],
+      material: 'نخ پنبه‌ای', model: 'ساده', usage: 'خانگی', brand: BRAND,
+      description: 'شلوار و تاپ نخی که بعد از یک روز طولانی حس آزادی می‌ده.',
+      rating: 4.6, reviews: 44, tags: ['sale'], inStock: true
+    }
+  ];
+
+  const COLOR_MAP = {
+    '#202020': 'مشکی', '#737C54': 'زیتونی', '#9CA286': 'سبز سیج',
+    '#E8DFD2': 'بژ', '#C9A992': 'نودی', '#B96777': 'زرشکی روشن',
+    '#8E3045': 'زرشکی تیره', '#6D2436': 'زرشکی تیره', '#FFFFFF': 'سفید'
+  };
+  window.HECUBA = window.HECUBA || {};
+  window.HECUBA.COLOR_MAP = COLOR_MAP;
+
+  const CATEGORIES = [
+    { name: 'سوتین', slug: 'bra' },
+    { name: 'شورت', slug: 'brief' },
+    { name: 'ست', slug: 'set' },
+    { name: 'نیم‌تنه', slug: 'bralette' },
+    { name: 'فانتزی', slug: 'fantasy' },
+    { name: 'بادی', slug: 'bodysuit' },
+    { name: 'لباس خواب', slug: 'sleepwear' },
+    { name: 'مایو', slug: 'swim' },
+    { name: 'راحتی', slug: 'loungewear' }
+  ];
+
+  window.HECUBA = window.HECUBA || {};
+  window.HECUBA.PRODUCTS = PRODUCTS;
+  window.HECUBA.CATEGORIES = CATEGORIES;
+
+  /* Category landing-page copy (→ WooCommerce term name/description) */
+  const CATEGORY_INFO = {
+    bra: { name: 'سوتین زنانه', desc: 'از بدون‌سیم روزمره تا پوش‌آپ مجلسی — سوتینی که هم فرم می‌ده، هم راحته.' },
+    brief: { name: 'شورت زنانه', desc: 'شورت‌های روزمره تا فانتزی، با پارچه‌های نرم و سایزبندی کامل.' },
+    set: { name: 'ست لباس زیر', desc: 'ست‌های هماهنگ سوتین و شورت، برای روزهای معمولی و لحظه‌های خاص.' },
+    bralette: { name: 'نیم‌تنه', desc: 'سبک، بدون قالب و راحت — برای روزهایی که فقط راحتی می‌خوای.' },
+    fantasy: { name: 'لباس زیر فانتزی', desc: 'دانتل و توری ظریف برای لحظه‌های خاص — شیک، نه اغراق‌شده.' },
+    bodysuit: { name: 'بادی زنانه', desc: 'فرم‌دهنده و شیک، زیر هر نوع لباسی می‌شینه.' },
+    sleepwear: { name: 'لباس خواب', desc: 'از ساتن شب تا پنبه‌ای روزمره — خواب راحت با ظاهر زیبا.' },
+    swim: { name: 'مایو و بیکینی', desc: 'مدل‌های کلاسیک و فرم‌دهنده برای استخر و ساحل.' },
+    loungewear: { name: 'لباس راحتی', desc: 'ست‌های نخی گرم و نرم برای خانه — راحتی که شیک هم هست.' }
+  };
+  window.HECUBA.CATEGORY_INFO = CATEGORY_INFO;
+
+  /* ------------------------------------------------------------------------
+     02. HELPERS
+     ------------------------------------------------------------------------ */
+  function formatToman(n) {
+    return n.toLocaleString('fa-IR') + ' تومان';
+  }
+  window.HECUBA.formatToman = formatToman;
+
+  function starsSVG(rating) {
+    const full = Math.round(rating);
+    let out = '';
+    for (let i = 0; i < 5; i++) {
+      out += i < full
+        ? '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.8 4.8 17.5l1-5.8L1.5 7.6l5.9-.8z"/></svg>'
+        : '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M10 1.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L10 14.8 4.8 17.5l1-5.8L1.5 7.6l5.9-.8z"/></svg>';
+    }
+    return out;
+  }
+  window.HECUBA.starsSVG = starsSVG;
+
+  function loadJSON(key, fallback) {
+    try {
+      const v = JSON.parse(localStorage.getItem(key));
+      return Array.isArray(v) ? v : fallback;
+    } catch (e) { return fallback; }
+  }
+  function saveJSON(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* storage unavailable */ }
+  }
+
+  /* ------------------------------------------------------------------------
+     03. CART + WISHLIST STATE (localStorage-backed, persists across pages)
+     ------------------------------------------------------------------------ */
+  const DISCOUNT_CODES = {
+    'HECUBA10': { type: 'percent', value: 10, label: '۱۰٪ تخفیف' },
+    'WELCOME50': { type: 'fixed', value: 50000, label: '۵۰,۰۰۰ تومان تخفیف' }
+  };
+  const FREE_SHIPPING_THRESHOLD = 1500000;
+  const SHIPPING_METHODS = {
+    post: { label: 'پست پیشتاز', cost: 45000, eta: '۲ تا ۵ روز کاری' },
+    tipax: { label: 'تیپاکس', cost: 40000, eta: '۲ تا ۴ روز کاری' },
+    courier: { label: 'پیک تهران', cost: 35000, eta: 'همان روز یا فردا (فقط تهران)' }
+  };
+  window.HECUBA.DISCOUNT_CODES = DISCOUNT_CODES;
+  window.HECUBA.FREE_SHIPPING_THRESHOLD = FREE_SHIPPING_THRESHOLD;
+  window.HECUBA.SHIPPING_METHODS = SHIPPING_METHODS;
+
+  const Store = {
+    cart: loadJSON('hecuba_cart', []),
+    wishlist: loadJSON('hecuba_wishlist', []),
+    recentlyViewed: loadJSON('hecuba_recently_viewed', []),
+    discountCode: (function () { try { return localStorage.getItem('hecuba_discount') || null; } catch (e) { return null; } })(),
+
+    addToCart(productId, qty, variant) {
+      qty = qty || 1;
+      const color = variant && variant.color ? variant.color : null;
+      const size = variant && variant.size ? variant.size : null;
+      const existing = this.cart.find(i => i.id === productId && i.color === color && i.size === size);
+      if (existing) { existing.qty += qty; } else { this.cart.push({ id: productId, color: color, size: size, qty: qty }); }
+      saveJSON('hecuba_cart', this.cart);
+      this.updateBadges();
+    },
+    cartCount() {
+      return this.cart.reduce((sum, i) => sum + i.qty, 0);
+    },
+    cartLines() {
+      const PRODUCTS = window.HECUBA.PRODUCTS;
+      return this.cart.map((item, index) => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        return product ? { index: index, product: product, color: item.color, size: item.size, qty: item.qty } : null;
+      }).filter(Boolean);
+    },
+    cartSubtotal() {
+      return this.cartLines().reduce((sum, l) => sum + l.product.price * l.qty, 0);
+    },
+    updateCartQty(index, qty) {
+      if (!this.cart[index]) return;
+      if (qty < 1) { this.cart.splice(index, 1); }
+      else { this.cart[index].qty = qty; }
+      saveJSON('hecuba_cart', this.cart);
+      this.updateBadges();
+    },
+    removeFromCart(index) {
+      if (!this.cart[index]) return;
+      this.cart.splice(index, 1);
+      saveJSON('hecuba_cart', this.cart);
+      this.updateBadges();
+    },
+    clearCart() {
+      this.cart = [];
+      saveJSON('hecuba_cart', this.cart);
+      this.removeDiscountCode();
+      this.updateBadges();
+    },
+    applyDiscountCode(code) {
+      code = (code || '').trim().toUpperCase();
+      if (!code) return { ok: false, message: 'یک کد تخفیف وارد کن.' };
+      if (!DISCOUNT_CODES[code]) return { ok: false, message: 'این کد تخفیف معتبر نیست.' };
+      this.discountCode = code;
+      try { localStorage.setItem('hecuba_discount', code); } catch (e) { /* storage unavailable */ }
+      return { ok: true, message: DISCOUNT_CODES[code].label + ' اعمال شد.' };
+    },
+    removeDiscountCode() {
+      this.discountCode = null;
+      try { localStorage.removeItem('hecuba_discount'); } catch (e) { /* storage unavailable */ }
+    },
+    discountAmount(subtotal) {
+      if (!this.discountCode || !DISCOUNT_CODES[this.discountCode]) return 0;
+      const d = DISCOUNT_CODES[this.discountCode];
+      const amount = d.type === 'percent' ? Math.round(subtotal * d.value / 100) : d.value;
+      return Math.min(amount, subtotal);
+    },
+    toggleWishlist(productId) {
+      const idx = this.wishlist.indexOf(productId);
+      let added;
+      if (idx > -1) { this.wishlist.splice(idx, 1); added = false; }
+      else { this.wishlist.push(productId); added = true; }
+      saveJSON('hecuba_wishlist', this.wishlist);
+      this.updateBadges();
+      return added;
+    },
+    addRecentlyViewed(productId) {
+      this.recentlyViewed = this.recentlyViewed.filter(id => id !== productId);
+      this.recentlyViewed.unshift(productId);
+      this.recentlyViewed = this.recentlyViewed.slice(0, 8);
+      saveJSON('hecuba_recently_viewed', this.recentlyViewed);
+    },
+    isWishlisted(productId) {
+      return this.wishlist.indexOf(productId) > -1;
+    },
+    updateBadges() {
+      document.querySelectorAll('[data-cart-count]').forEach(el => {
+        const n = this.cartCount();
+        el.textContent = n;
+        el.style.display = n > 0 ? 'flex' : 'none';
+      });
+      document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+        const n = this.wishlist.length;
+        el.textContent = n;
+        el.style.display = n > 0 ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.wishlist-btn[data-product-id]').forEach(btn => {
+        const active = this.isWishlisted(btn.getAttribute('data-product-id'));
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      if (typeof renderCartDrawer === 'function') renderCartDrawer();
+      document.dispatchEvent(new CustomEvent('hecuba:store-updated'));
+    }
+  };
+  window.HECUBA.Store = Store;
+
+  /* ------------------------------------------------------------------------
+     04. TOAST
+     ------------------------------------------------------------------------ */
+  function ensureToastRegion() {
+    let region = document.querySelector('.toast-region');
+    if (!region) {
+      region = document.createElement('div');
+      region.className = 'toast-region';
+      region.setAttribute('aria-live', 'polite');
+      document.body.appendChild(region);
+    }
+    return region;
+  }
+  function showToast(message) {
+    const region = ensureToastRegion();
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = message;
+    region.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('show'));
+    setTimeout(() => {
+      el.classList.remove('show');
+      setTimeout(() => el.remove(), 250);
+    }, 2200);
+  }
+  window.HECUBA.showToast = showToast;
+
+  /* ------------------------------------------------------------------------
+     05. PRODUCT CARD TEMPLATE (shared by Home / Shop / Category / Related)
+     ------------------------------------------------------------------------ */
+  function productCardHTML(p) {
+    const discount = p.comparePrice ? Math.round((1 - p.price / p.comparePrice) * 100) : 0;
+    const badges = [];
+    if (p.tags.includes('new')) badges.push('<span class="badge badge-new">جدید</span>');
+    if (discount > 0) badges.push('<span class="badge badge-sale">%' + discount.toLocaleString('fa-IR') + ' تخفیف</span>');
+    if (p.tags.includes('bestseller')) badges.push('<span class="badge badge-bestseller">پرفروش</span>');
+    if (!p.inStock) badges.push('<span class="badge badge-outofstock">ناموجود</span>');
+
+    const swatches = p.colors.slice(0, 4).map((c, i) =>
+      '<button type="button" class="swatch" style="background:' + c + '" data-attribute="color" data-value="' + c + '" aria-label="رنگ ' + (window.HECUBA.COLOR_MAP[c] || (i + 1)) + '" title="' + (window.HECUBA.COLOR_MAP[c] || '') + '" aria-pressed="false"></button>'
+    ).join('');
+    const moreSwatches = p.colors.length > 4 ? '<span class="swatch-more">+' + (p.colors.length - 4) + '</span>' : '';
+
+    return (
+      '<article class="product-card" data-product-id="' + p.id + '">' +
+        '<div class="media">' +
+          '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
+            '<div class="ph-image ratio-3-4"><span>' + p.category + '</span></div>' +
+            '<div class="ph-image ratio-3-4 img-secondary tone-dark"><span>نمای دوم</span></div>' +
+          '</a>' +
+          '<div class="card-badges">' + badges.join('') + '</div>' +
+          '<button type="button" class="wishlist-btn" data-product-id="' + p.id + '" aria-pressed="false" aria-label="افزودن به علاقه‌مندی">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>' +
+          '</button>' +
+          '<button type="button" class="quick-add-btn" data-quick-add="' + p.id + '">افزودن سریع</button>' +
+        '</div>' +
+        '<div class="info">' +
+          '<span class="cat-label">' + p.category + '</span>' +
+          '<h3 class="name">' + p.name + '</h3>' +
+          '<div class="price-row">' +
+            '<span class="price num">' + formatToman(p.price) + '</span>' +
+            (p.comparePrice ? '<span class="price-compare num">' + formatToman(p.comparePrice) + '</span>' : '') +
+          '</div>' +
+          '<div class="swatches">' + swatches + moreSwatches + '</div>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+  window.HECUBA.productCardHTML = productCardHTML;
+
+  function renderProductList(selector, products) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    el.innerHTML = products.map(productCardHTML).join('');
+  }
+  window.HECUBA.renderProductList = renderProductList;
+
+  /* ------------------------------------------------------------------------
+     05b. CART DRAWER (dynamic mini-cart, rendered into every page's header)
+     ------------------------------------------------------------------------ */
+  function cartLineHTML(line, compact) {
+    const variantParts = [];
+    if (line.color) variantParts.push('رنگ: ' + (COLOR_MAP[line.color] || line.color));
+    if (line.size) variantParts.push('سایز: ' + line.size);
+    const variantText = variantParts.join(' | ');
+    return (
+      '<div class="cart-line" data-cart-index="' + line.index + '">' +
+        '<a href="product.html?id=' + line.product.id + '" class="cart-line-thumb"><div class="ph-image ratio-3-4"></div></a>' +
+        '<div class="cart-line-body">' +
+          '<a href="product.html?id=' + line.product.id + '" class="cart-line-name">' + line.product.name + '</a>' +
+          (variantText ? '<span class="cart-line-variant">' + variantText + '</span>' : '') +
+          '<div class="cart-line-bottom">' +
+            '<div class="qty-stepper sm" data-qty-control="' + line.index + '">' +
+              '<button type="button" data-qty-plus aria-label="افزایش تعداد">+</button>' +
+              '<span class="num">' + line.qty.toLocaleString('fa-IR') + '</span>' +
+              '<button type="button" data-qty-minus aria-label="کاهش تعداد">−</button>' +
+            '</div>' +
+            '<span class="cart-line-price num">' + formatToman(line.product.price * line.qty) + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="cart-line-remove" data-cart-remove="' + line.index + '" aria-label="حذف از سبد">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2m2 0l-1 13a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7"/></svg>' +
+        '</button>' +
+      '</div>'
+    );
+  }
+  window.HECUBA.cartLineHTML = cartLineHTML;
+
+  function shippingProgressHTML(subtotal) {
+    const remain = FREE_SHIPPING_THRESHOLD - subtotal;
+    const pct = Math.min(100, Math.round(subtotal / FREE_SHIPPING_THRESHOLD * 100));
+    if (remain <= 0) {
+      return (
+        '<div class="shipping-progress"><div class="shipping-progress-msg done">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>' +
+          'سفارش شما شامل ارسال رایگان می‌شود' +
+        '</div></div>'
+      );
+    }
+    return (
+      '<div class="shipping-progress">' +
+        '<div class="shipping-progress-msg"><span class="num">' + formatToman(remain) + '</span>&nbsp;تا ارسال رایگان فاصله داری</div>' +
+        '<div class="shipping-progress-track"><div class="shipping-progress-fill" style="width:' + pct + '%"></div></div>' +
+      '</div>'
+    );
+  }
+  window.HECUBA.shippingProgressHTML = shippingProgressHTML;
+
+  function renderCartDrawer() {
+    const bodyEl = document.getElementById('cart-drawer-body');
+    const footEl = document.getElementById('cart-drawer-foot');
+    if (!bodyEl || !footEl) return;
+    const lines = Store.cartLines();
+    if (!lines.length) {
+      bodyEl.innerHTML =
+        '<div class="empty-drawer-state">' +
+          '<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="1.4"><path d="M6 8V6a4 4 0 118 0v2M3 8h14l-1 12H4L3 8z"/></svg>' +
+          '<p class="text-muted">سبد خرید شما خالی است.<br>محصولات مورد علاقه‌ات را اضافه کن.</p>' +
+          '<a href="shop.html" class="btn btn-secondary" data-close-drawer>مشاهده فروشگاه</a>' +
+        '</div>';
+      footEl.innerHTML = '';
+      return;
+    }
+    bodyEl.innerHTML = lines.map(l => cartLineHTML(l, true)).join('');
+    const subtotal = Store.cartSubtotal();
+    footEl.innerHTML =
+      shippingProgressHTML(subtotal) +
+      '<div class="cart-summary-row"><span>جمع سبد خرید</span><span class="val num">' + formatToman(subtotal) + '</span></div>' +
+      '<a href="cart.html" class="btn btn-outline btn-block" data-close-drawer style="margin-top:10px;">مشاهده سبد خرید</a>' +
+      '<a href="checkout.html" class="btn btn-primary btn-block" data-close-drawer style="margin-top:8px;">تسویه‌حساب</a>';
+  }
+  window.HECUBA.renderCartDrawer = renderCartDrawer;
+
+  document.addEventListener('click', function (e) {
+    const removeBtn = e.target.closest('[data-cart-remove]');
+    if (removeBtn) {
+      Store.removeFromCart(Number(removeBtn.getAttribute('data-cart-remove')));
+      showToast('محصول از سبد خرید حذف شد');
+      return;
+    }
+    const qtyCtrl = e.target.closest('[data-qty-control]');
+    if (qtyCtrl) {
+      const index = Number(qtyCtrl.getAttribute('data-qty-control'));
+      const line = Store.cart[index];
+      if (!line) return;
+      if (e.target.closest('[data-qty-plus]')) Store.updateCartQty(index, line.qty + 1);
+      else if (e.target.closest('[data-qty-minus]')) Store.updateCartQty(index, line.qty - 1);
+    }
+  });
+
+  /* ------------------------------------------------------------------------
+     06. GLOBAL EVENT DELEGATION (wishlist + quick add, works on injected cards)
+     ------------------------------------------------------------------------ */
+  document.addEventListener('click', function (e) {
+    const wishBtn = e.target.closest('.wishlist-btn[data-product-id]');
+    if (wishBtn) {
+      const added = Store.toggleWishlist(wishBtn.getAttribute('data-product-id'));
+      showToast(added ? 'به علاقه‌مندی‌ها اضافه شد' : 'از علاقه‌مندی‌ها حذف شد');
+      return;
+    }
+    const quickAdd = e.target.closest('[data-quick-add]');
+    if (quickAdd) {
+      Store.addToCart(quickAdd.getAttribute('data-quick-add'), 1);
+      showToast('به سبد خرید اضافه شد');
+      return;
+    }
+  });
+
+  /* ------------------------------------------------------------------------
+     07. DRAWERS (Mobile Menu / Cart / Search) — generic open/close by data attrs
+     ------------------------------------------------------------------------ */
+  function openDrawer(id) {
+    const drawer = document.getElementById(id);
+    const overlay = document.querySelector('.overlay[data-for="' + id + '"]') || document.getElementById('global-overlay');
+    if (!drawer) return;
+    drawer.classList.add('is-open');
+    if (overlay) overlay.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const focusable = drawer.querySelector('button, a, input');
+    if (focusable) focusable.focus({ preventScroll: true });
+  }
+  function closeDrawer(id) {
+    const drawer = document.getElementById(id);
+    const overlay = document.querySelector('.overlay[data-for="' + id + '"]') || document.getElementById('global-overlay');
+    if (!drawer) return;
+    drawer.classList.remove('is-open');
+    if (overlay) overlay.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  window.HECUBA.openDrawer = openDrawer;
+  window.HECUBA.closeDrawer = closeDrawer;
+
+  document.addEventListener('click', function (e) {
+    const opener = e.target.closest('[data-open-drawer]');
+    if (opener) { openDrawer(opener.getAttribute('data-open-drawer')); return; }
+    const closer = e.target.closest('[data-close-drawer]');
+    if (closer) {
+      const drawer = closer.closest('.drawer, .modal, .filter-panel');
+      if (drawer) closeDrawer(drawer.id);
+      return;
+    }
+    if (e.target.classList.contains('overlay')) {
+      document.querySelectorAll('.drawer.is-open, .modal.is-open, .filter-panel.is-open').forEach(d => closeDrawer(d.id));
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.drawer.is-open, .modal.is-open, .filter-panel.is-open').forEach(d => closeDrawer(d.id));
+    }
+  });
+
+  /* ------------------------------------------------------------------------
+     08. ACCORDION (FAQ, Product Info Tabs in later phases)
+     ------------------------------------------------------------------------ */
+  document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('.accordion-trigger');
+    if (!trigger) return;
+    const item = trigger.closest('.accordion-item');
+    const isOpen = item.classList.contains('open');
+    if (item.closest('[data-accordion-single]')) {
+      item.parentElement.querySelectorAll('.accordion-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+    item.classList.toggle('open', !isOpen);
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  /* ------------------------------------------------------------------------
+     09. HEADER SEARCH OVERLAY — simple live-filter demo against PRODUCTS
+     ------------------------------------------------------------------------ */
+  function initSearch() {
+    const inputs = document.querySelectorAll('[data-search-input]');
+    inputs.forEach(input => {
+      input.addEventListener('input', function () {
+        const q = input.value.trim();
+        const resultsEl = document.querySelector(input.getAttribute('data-search-results-target') || '#search-results');
+        if (!resultsEl) return;
+        if (q.length < 1) { resultsEl.innerHTML = ''; resultsEl.classList.remove('has-results'); return; }
+        const matches = PRODUCTS.filter(p => (p.name + ' ' + p.category).indexOf(q) > -1).slice(0, 5);
+        resultsEl.classList.add('has-results');
+        resultsEl.innerHTML = matches.length
+          ? matches.map(p =>
+              '<a href="product.html?id=' + p.id + '" class="search-result-row">' +
+                '<div class="ph-image ratio-1-1" style="width:44px;height:44px;flex-shrink:0"></div>' +
+                '<span>' + p.name + '</span>' +
+                '<span class="text-muted text-sm num" style="margin-inline-start:auto">' + formatToman(p.price) + '</span>' +
+              '</a>'
+            ).join('')
+          : '<p class="text-muted text-sm" style="padding:12px 4px">نتیجه‌ای برای «' + q + '» پیدا نشد.</p>';
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     10. CATALOG ENGINE — shared Filter + Sort logic for Shop & Category pages
+     Real-time, client-side, no page reload. The generated markup mirrors what
+     "Filter Everything" (checkbox groups) will produce once wired to real
+     WooCommerce product attributes.
+     ------------------------------------------------------------------------ */
+  const SIZE_LIST = ['S', 'M', 'L', 'XL', '2XL', 'Free Size', '70B', '75B', '80B', '85B', '90B'];
+
+  function uniqueBy(arr, keyFn) {
+    const seen = new Map();
+    arr.forEach(item => {
+      const k = keyFn(item);
+      seen.set(k, (seen.get(k) || 0) + 1);
+    });
+    return seen;
+  }
+
+  function initCatalogPage(config) {
+    const grid = document.querySelector(config.gridSel);
+    if (!grid) return;
+    const form = document.querySelector(config.formSel);
+    const countEl = document.querySelector(config.countSel);
+    const sortEl = document.querySelector(config.sortSel);
+    const chipsEl = document.querySelector(config.chipsSel);
+    const emptyEl = config.emptySel ? document.querySelector(config.emptySel) : null;
+    const scope = config.lockCategory
+      ? PRODUCTS.filter(p => p.categorySlug === config.lockCategory)
+      : PRODUCTS;
+
+    const params = new URLSearchParams(location.search);
+    const state = {
+      categories: new Set(config.lockCategory ? [config.lockCategory] : (params.get('cat') ? [params.get('cat')] : [])),
+      sizes: new Set(),
+      colors: new Set(),
+      materials: new Set(),
+      models: new Set(),
+      usages: new Set(),
+      onlyDiscount: params.get('filter') === 'sale',
+      onlyInStock: false,
+      maxPrice: 2000000,
+      tag: params.get('filter') === 'new' ? 'new' : (params.get('filter') === 'bestseller' ? 'bestseller' : null)
+    };
+
+    /* ---- Build filter group markup from live catalog data ---- */
+    function buildCheckboxGroup(containerSel, items, groupName, checkedSet) {
+      const el = document.querySelector(containerSel);
+      if (!el) return;
+      el.innerHTML = items.map(function (it) {
+        const checked = checkedSet.has(it.value) ? ' checked' : '';
+        return (
+          '<label class="filter-check">' +
+            '<input type="checkbox" name="' + groupName + '" value="' + it.value + '"' + checked + '>' +
+            '<span>' + it.label + '</span>' +
+            '<span class="filter-check-count">' + it.count.toLocaleString('fa-IR') + '</span>' +
+          '</label>'
+        );
+      }).join('');
+    }
+
+    function buildColorGroup(containerSel, items, checkedSet) {
+      const el = document.querySelector(containerSel);
+      if (!el) return;
+      el.innerHTML = items.map(function (it) {
+        const active = checkedSet.has(it.value) ? ' aria-pressed="true"' : ' aria-pressed="false"';
+        return (
+          '<button type="button" class="filter-swatch" data-color-filter="' + it.value + '" style="background:' + it.value + '" title="' + it.label + ' (' + it.count.toLocaleString('fa-IR') + ')"' + active + '></button>'
+        );
+      }).join('');
+    }
+
+    if (!config.lockCategory) {
+      const catCounts = uniqueBy(scope, p => p.categorySlug);
+      const catItems = CATEGORIES.filter(c => catCounts.has(c.slug)).map(c => ({ value: c.slug, label: c.name, count: catCounts.get(c.slug) }));
+      buildCheckboxGroup(config.groups.category, catItems, 'category', state.categories);
+    } else {
+      const catGroupEl = document.querySelector(config.groups.category);
+      const catGroupWrap = catGroupEl && catGroupEl.closest('.filter-group');
+      if (catGroupWrap) catGroupWrap.style.display = 'none';
+    }
+
+    const sizeCounts = uniqueBy(scope.flatMap(p => p.sizes), s => s);
+    const sizeItems = SIZE_LIST.filter(s => sizeCounts.has(s)).map(s => ({ value: s, label: s, count: sizeCounts.get(s) }));
+    buildCheckboxGroup(config.groups.size, sizeItems, 'size', state.sizes);
+
+    const colorCounts = uniqueBy(scope.flatMap(p => p.colors), c => c);
+    const colorItems = Array.from(colorCounts.keys()).map(hex => ({ value: hex, label: COLOR_MAP[hex] || hex, count: colorCounts.get(hex) }));
+    buildColorGroup(config.groups.color, colorItems, state.colors);
+
+    const materialCounts = uniqueBy(scope, p => p.material);
+    buildCheckboxGroup(config.groups.material, Array.from(materialCounts.keys()).map(m => ({ value: m, label: m, count: materialCounts.get(m) })), 'material', state.materials);
+
+    const modelCounts = uniqueBy(scope, p => p.model);
+    buildCheckboxGroup(config.groups.model, Array.from(modelCounts.keys()).map(m => ({ value: m, label: m, count: modelCounts.get(m) })), 'model', state.models);
+
+    const usageCounts = uniqueBy(scope, p => p.usage);
+    buildCheckboxGroup(config.groups.usage, Array.from(usageCounts.keys()).map(u => ({ value: u, label: u, count: usageCounts.get(u) })), 'usage', state.usages);
+
+    if (config.groups.brand) {
+      const brandEl = document.querySelector(config.groups.brand);
+      const brandCounts = uniqueBy(scope, p => p.brand);
+      if (brandEl) {
+        brandEl.innerHTML = Array.from(brandCounts.keys()).map(function (b) {
+          return (
+            '<label class="filter-check" style="opacity:.7;">' +
+              '<input type="checkbox" checked disabled>' +
+              '<span>' + b + '</span>' +
+              '<span class="filter-check-count">' + brandCounts.get(b).toLocaleString('fa-IR') + '</span>' +
+            '</label>'
+          );
+        }).join('');
+      }
+    }
+
+    /* ---- Filtering + sorting ---- */
+    function applyFilters() {
+      let list = scope.filter(function (p) {
+        if (state.categories.size && !state.categories.has(p.categorySlug)) return false;
+        if (state.sizes.size && !p.sizes.some(s => state.sizes.has(s))) return false;
+        if (state.colors.size && !p.colors.some(c => state.colors.has(c))) return false;
+        if (state.materials.size && !state.materials.has(p.material)) return false;
+        if (state.models.size && !state.models.has(p.model)) return false;
+        if (state.usages.size && !state.usages.has(p.usage)) return false;
+        if (state.onlyDiscount && !p.comparePrice) return false;
+        if (state.onlyInStock && !p.inStock) return false;
+        if (state.tag && !p.tags.includes(state.tag)) return false;
+        if (p.price > state.maxPrice) return false;
+        return true;
+      });
+
+      const sortVal = sortEl ? sortEl.value : 'default';
+      if (sortVal === 'price-asc') list = list.slice().sort((a, b) => a.price - b.price);
+      else if (sortVal === 'price-desc') list = list.slice().sort((a, b) => b.price - a.price);
+      else if (sortVal === 'bestseller') list = list.slice().sort((a, b) => (b.tags.includes('bestseller') ? 1 : 0) - (a.tags.includes('bestseller') ? 1 : 0));
+      else if (sortVal === 'discount') list = list.slice().sort((a, b) => {
+        const da = a.comparePrice ? 1 - a.price / a.comparePrice : 0;
+        const db = b.comparePrice ? 1 - b.price / b.comparePrice : 0;
+        return db - da;
+      });
+      else if (sortVal === 'new') list = list.slice().sort((a, b) => (b.tags.includes('new') ? 1 : 0) - (a.tags.includes('new') ? 1 : 0));
+
+      grid.innerHTML = list.map(productCardHTML).join('');
+      if (countEl) countEl.textContent = list.length.toLocaleString('fa-IR');
+      if (emptyEl) emptyEl.style.display = list.length ? 'none' : 'block';
+      renderChips();
+    }
+
+    function renderChips() {
+      if (!chipsEl) return;
+      const chips = [];
+      state.categories.forEach(v => { if (!config.lockCategory) chips.push({ group: 'categories', val: v, label: (CATEGORIES.find(c => c.slug === v) || {}).name || v }); });
+      state.sizes.forEach(v => chips.push({ group: 'sizes', val: v, label: 'سایز ' + v }));
+      state.colors.forEach(v => chips.push({ group: 'colors', val: v, label: COLOR_MAP[v] || v }));
+      state.materials.forEach(v => chips.push({ group: 'materials', val: v, label: v }));
+      state.models.forEach(v => chips.push({ group: 'models', val: v, label: v }));
+      state.usages.forEach(v => chips.push({ group: 'usages', val: v, label: v }));
+      if (state.onlyDiscount) chips.push({ group: 'onlyDiscount', val: '1', label: 'دارای تخفیف' });
+      if (state.onlyInStock) chips.push({ group: 'onlyInStock', val: '1', label: 'فقط موجود' });
+
+      chipsEl.style.display = chips.length ? 'flex' : 'none';
+      chipsEl.innerHTML = chips.map(c =>
+        '<button type="button" class="filter-chip" data-chip-group="' + c.group + '" data-chip-val="' + c.val + '">' + c.label +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+        '</button>'
+      ).join('') + (chips.length ? '<button type="button" class="filter-chip filter-chip-clear" data-chip-clear>پاک کردن همه</button>' : '');
+    }
+
+    function removeChip(group, val) {
+      if (group === 'onlyDiscount') { state.onlyDiscount = false; syncCheckbox('onlyDiscount', false); }
+      else if (group === 'onlyInStock') { state.onlyInStock = false; syncCheckbox('onlyInStock', false); }
+      else if (state[group]) {
+        state[group].delete(val);
+        const input = form && form.querySelector('input[value="' + CSS.escape(val) + '"]');
+        if (input) input.checked = false;
+        const swatch = form && form.querySelector('[data-color-filter="' + CSS.escape(val) + '"]');
+        if (swatch) swatch.setAttribute('aria-pressed', 'false');
+      }
+      applyFilters();
+    }
+    function syncCheckbox(name, val) {
+      if (!form) return;
+      const input = form.querySelector('[data-toggle="' + name + '"]');
+      if (input) input.checked = val;
+    }
+
+    if (form) {
+      form.addEventListener('change', function (e) {
+        const t = e.target;
+        if (t.name === 'category') { t.checked ? state.categories.add(t.value) : state.categories.delete(t.value); }
+        else if (t.name === 'size') { t.checked ? state.sizes.add(t.value) : state.sizes.delete(t.value); }
+        else if (t.name === 'material') { t.checked ? state.materials.add(t.value) : state.materials.delete(t.value); }
+        else if (t.name === 'model') { t.checked ? state.models.add(t.value) : state.models.delete(t.value); }
+        else if (t.name === 'usage') { t.checked ? state.usages.add(t.value) : state.usages.delete(t.value); }
+        else if (t.getAttribute('data-toggle') === 'onlyDiscount') { state.onlyDiscount = t.checked; }
+        else if (t.getAttribute('data-toggle') === 'onlyInStock') { state.onlyInStock = t.checked; }
+        applyFilters();
+      });
+      form.addEventListener('click', function (e) {
+        const swatch = e.target.closest('[data-color-filter]');
+        if (swatch) {
+          const hex = swatch.getAttribute('data-color-filter');
+          const active = swatch.getAttribute('aria-pressed') === 'true';
+          swatch.setAttribute('aria-pressed', String(!active));
+          active ? state.colors.delete(hex) : state.colors.add(hex);
+          applyFilters();
+        }
+      });
+      const priceRange = form.querySelector('[data-price-range]');
+      const priceOut = form.querySelector('[data-price-output]');
+      if (priceRange) {
+        priceRange.addEventListener('input', function () {
+          state.maxPrice = Number(priceRange.value);
+          if (priceOut) priceOut.textContent = window.HECUBA.formatToman(state.maxPrice);
+          applyFilters();
+        });
+      }
+      const resetBtn = form.querySelector('[data-reset-filters]');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          form.querySelectorAll('input[type="checkbox"]').forEach(cb => { if (!config.lockCategory || cb.name !== 'category') cb.checked = false; });
+          form.querySelectorAll('[data-color-filter]').forEach(sw => sw.setAttribute('aria-pressed', 'false'));
+          if (priceRange) { priceRange.value = priceRange.max; state.maxPrice = Number(priceRange.max); if (priceOut) priceOut.textContent = window.HECUBA.formatToman(state.maxPrice); }
+          state.sizes.clear(); state.colors.clear(); state.materials.clear(); state.models.clear(); state.usages.clear();
+          if (!config.lockCategory) state.categories.clear();
+          state.onlyDiscount = false; state.onlyInStock = false; state.tag = null;
+          applyFilters();
+        });
+      }
+    }
+    if (chipsEl) {
+      chipsEl.addEventListener('click', function (e) {
+        if (e.target.closest('[data-chip-clear]')) { if (form) form.querySelector('[data-reset-filters]').click(); return; }
+        const chip = e.target.closest('.filter-chip');
+        if (chip) removeChip(chip.getAttribute('data-chip-group'), chip.getAttribute('data-chip-val'));
+      });
+    }
+    if (sortEl) sortEl.addEventListener('change', applyFilters);
+
+    if (state.onlyDiscount) syncCheckbox('onlyDiscount', true);
+    applyFilters();
+  }
+  window.HECUBA.initCatalogPage = initCatalogPage;
+
+  /* ------------------------------------------------------------------------
+     10c. PRODUCT PAGE ENGINE
+     ------------------------------------------------------------------------ */
+  const REVIEW_POOL = [
+    { name: 'مریم.ک', text: 'کیفیت پارچه واقعاً خوبه، دقیقاً مثل عکس بود و سایزش هم درست اومد.' },
+    { name: 'نگار ر.', text: 'راحتیش فوق‌العاده‌ست، برای استفاده روزمره عالیه. حتماً باز سفارش می‌دم.' },
+    { name: 'سارا م.', text: 'بسته‌بندی خیلی شیک بود و ارسال هم سریع‌تر از چیزی بود که فکر می‌کردم.' },
+    { name: 'الهام ت.', text: 'رنگش حتی از عکس هم قشنگ‌تره. فقط کاش سایزبندیش یکم دقیق‌تر توضیح داده می‌شد.' },
+    { name: 'پریسا ا.', text: 'برای هدیه گرفتم، خودم هم عاشقش شدم و یکی برای خودم سفارش دادم.' },
+    { name: 'یگانه س.', text: 'جنسش نرمه و اصلاً پوستم رو اذیت نکرد. راضی‌ام از خریدم.' },
+    { name: 'رها ن.', text: 'دقیقاً همونی بود که دنبالش بودم؛ هم راحت، هم شیک.' },
+    { name: 'شیدا ح.', text: 'قیمتش نسبت به کیفیتش خیلی خوبه. پیشنهادش می‌کنم.' }
+  ];
+
+  function hashStr(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) { h = ((h << 5) - h + str.charCodeAt(i)) | 0; }
+    return Math.abs(h);
+  }
+
+  /* Deterministic per-variant stock: ~90% in-stock, but the first size listed
+     for a given color is always guaranteed available so a product with
+     inStock:true is never accidentally shown as fully sold out. */
+  function stockForVariant(product, color, size) {
+    if (!product.inStock) return false;
+    if (!color || !size) return null; // unknown until both are selected
+    if (product.sizes[0] === size) return true;
+    return hashStr(product.id + color + size) % 10 !== 0;
+  }
+  window.HECUBA.stockForVariant = stockForVariant;
+
+  function pickReviews(productId, count) {
+    const start = hashStr(productId) % REVIEW_POOL.length;
+    const out = [];
+    for (let i = 0; i < count; i++) out.push(REVIEW_POOL[(start + i) % REVIEW_POOL.length]);
+    return out;
+  }
+
+  function nearestOf(value, options) {
+    return options.reduce((best, o) => Math.abs(o - value) < Math.abs(best - value) ? o : best, options[0]);
+  }
+
+  function buildWhyList(p) {
+    return [
+      'جنس ' + p.material,
+      'مدل ' + p.model + '، مناسب برای ' + p.usage,
+      'دوخت تمیز و راحت روی پوست',
+      'ارسال سریع و امکان تعویض سایز'
+    ];
+  }
+
+  function initProductPage() {
+    const grid = document.querySelector('#pd-root');
+    if (!grid) return;
+    const PRODUCTS = window.HECUBA.PRODUCTS;
+    const COLOR_MAP = window.HECUBA.COLOR_MAP;
+    const params = new URLSearchParams(location.search);
+    const product = PRODUCTS.find(p => p.id === params.get('id')) || PRODUCTS[0];
+
+    const state = { colorIndex: 0, size: null, qty: 1, mainIndex: 0 };
+
+    /* ---- Head / meta ---- */
+    document.title = product.name + ' | هکوبا استایل';
+    const metaDesc = document.getElementById('page-description');
+    if (metaDesc) metaDesc.setAttribute('content', product.description);
+    const crumbCat = document.getElementById('crumb-cat');
+    if (crumbCat) { crumbCat.textContent = product.category; crumbCat.href = 'category.html?cat=' + product.categorySlug; }
+    const crumbName = document.getElementById('crumb-name');
+    if (crumbName) crumbName.textContent = product.name;
+
+    /* ---- Gallery ---- */
+    const galleryLabels = ['تصویر اصلی', 'نمای دوم', 'جزئیات پارچه', 'روی مدل'];
+    const thumbsEl = document.getElementById('gallery-thumbs');
+    const mainEl = document.getElementById('gallery-main-image');
+
+    function renderMain() {
+      const isVideo = product.hasVideo && state.mainIndex === galleryLabels.length;
+      mainEl.className = 'ph-image ratio-3-4' + (state.mainIndex % 2 === 1 ? ' tone-dark' : '');
+      mainEl.innerHTML = '<span>' + (isVideo ? 'پیش‌نمایش ویدئو محصول' : galleryLabels[state.mainIndex] + ' — ' + (COLOR_MAP[product.colors[state.colorIndex]] || '')) + '</span>';
+    }
+    function renderThumbs() {
+      let html = galleryLabels.map((label, i) =>
+        '<button type="button" class="thumb' + (i === state.mainIndex ? ' active' : '') + '" data-thumb="' + i + '" aria-label="' + label + '"><div class="ph-image' + (i % 2 === 1 ? ' tone-dark' : '') + '"></div></button>'
+      ).join('');
+      if (product.hasVideo) {
+        const vi = galleryLabels.length;
+        html += '<button type="button" class="thumb video-thumb' + (vi === state.mainIndex ? ' active' : '') + '" data-thumb="' + vi + '" aria-label="ویدئو محصول"><div class="ph-image tone-dark"></div><svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l12 7-12 7z"/></svg></button>';
+      }
+      thumbsEl.innerHTML = html;
+    }
+    thumbsEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-thumb]');
+      if (!btn) return;
+      state.mainIndex = Number(btn.getAttribute('data-thumb'));
+      renderMain(); renderThumbs();
+    });
+    document.getElementById('gallery-main').addEventListener('click', function () {
+      document.getElementById('zoom-main-image').className = mainEl.className;
+      document.getElementById('zoom-main-image').innerHTML = mainEl.innerHTML;
+      openDrawer('zoom-modal');
+    });
+    renderMain(); renderThumbs();
+
+    /* ---- Info: category / title / rating / price / description ---- */
+    document.getElementById('pd-category').textContent = product.category;
+    document.getElementById('pd-category').href = 'category.html?cat=' + product.categorySlug;
+    document.getElementById('pd-title').textContent = product.name;
+    document.getElementById('pd-stars').innerHTML = starsSVG(product.rating);
+    document.getElementById('pd-rating-num').textContent = product.rating.toLocaleString('fa-IR');
+    document.getElementById('pd-review-count').textContent = 'مشاهده ' + product.reviews.toLocaleString('fa-IR') + ' دیدگاه';
+    document.getElementById('pd-desc').textContent = product.description;
+
+    const discount = product.comparePrice ? Math.round((1 - product.price / product.comparePrice) * 100) : 0;
+    document.getElementById('pd-price').textContent = formatToman(product.price);
+    if (product.comparePrice) {
+      document.getElementById('pd-price-compare').textContent = formatToman(product.comparePrice);
+      document.getElementById('pd-price-compare').style.display = '';
+      document.getElementById('pd-discount-badge').textContent = '%' + discount.toLocaleString('fa-IR') + ' تخفیف';
+      document.getElementById('pd-discount-badge').style.display = '';
+    }
+
+    /* ---- Colors ---- */
+    const colorEl = document.getElementById('pd-colors');
+    function renderColors() {
+      colorEl.innerHTML = product.colors.map((c, i) =>
+        '<button type="button" style="background:' + c + '" data-attribute="color" data-value="' + c + '" aria-pressed="' + (i === state.colorIndex ? 'true' : 'false') + '" aria-label="رنگ ' + (COLOR_MAP[c] || i + 1) + '" title="' + (COLOR_MAP[c] || '') + '"></button>'
+      ).join('');
+    }
+    colorEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      state.colorIndex = Array.from(colorEl.children).indexOf(btn);
+      renderColors(); renderMain();
+      updateStockMessage(); renderSizes();
+    });
+
+    /* ---- Sizes ---- */
+    const sizeEl = document.getElementById('pd-sizes');
+    function renderSizes() {
+      const color = product.colors[state.colorIndex];
+      sizeEl.innerHTML = product.sizes.map(s => {
+        const inStock = stockForVariant(product, color, s);
+        const pressed = state.size === s ? 'true' : 'false';
+        return '<button type="button" class="size-btn" data-size="' + s + '" aria-pressed="' + pressed + '"' + (inStock ? '' : ' disabled title="این ترکیب رنگ و سایز موجود نیست"') + '>' + s + '</button>';
+      }).join('');
+    }
+    sizeEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.size-btn');
+      if (!btn || btn.disabled) return;
+      state.size = btn.getAttribute('data-size');
+      renderSizes();
+      updateStockMessage();
+    });
+
+    /* ---- Stock message ---- */
+    const stockMsgEl = document.getElementById('pd-stock-msg');
+    const addBtn = document.getElementById('pd-add-btn');
+    const buyBtn = document.getElementById('pd-buy-btn');
+    function updateStockMessage() {
+      const color = product.colors[state.colorIndex];
+      const status = stockForVariant(product, color, state.size);
+      let html, cls, disable;
+      if (status === null) {
+        html = 'سایز خود را انتخاب کنید'; cls = 'no-selection'; disable = true;
+      } else if (status === true) {
+        html = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> موجود در انبار'; cls = 'in-stock'; disable = false;
+      } else {
+        html = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg> این محصول یا ترکیب رنگ/سایز انتخابی ناموجود است'; cls = 'out-stock'; disable = true;
+      }
+      stockMsgEl.className = 'stock-msg ' + cls;
+      stockMsgEl.innerHTML = html;
+      addBtn.disabled = disable; buyBtn.disabled = disable;
+      addBtn.style.opacity = disable ? 0.55 : 1;
+      buyBtn.style.opacity = disable ? 0.55 : 1;
+    }
+
+    /* ---- Quantity ---- */
+    const qtyOut = document.getElementById('pd-qty');
+    document.getElementById('pd-qty-minus').addEventListener('click', function () { if (state.qty > 1) { state.qty--; qtyOut.textContent = state.qty.toLocaleString('fa-IR'); } });
+    document.getElementById('pd-qty-plus').addEventListener('click', function () { if (state.qty < 5) { state.qty++; qtyOut.textContent = state.qty.toLocaleString('fa-IR'); } });
+
+    /* ---- SKU ---- */
+    document.getElementById('pd-sku').textContent = 'کد محصول: ' + product.sku;
+
+    /* ---- CTAs ---- */
+    addBtn.addEventListener('click', function () {
+      Store.addToCart(product.id, state.qty, { color: product.colors[state.colorIndex], size: state.size });
+      showToast('به سبد خرید اضافه شد');
+    });
+    buyBtn.addEventListener('click', function () {
+      Store.addToCart(product.id, state.qty, { color: product.colors[state.colorIndex], size: state.size });
+      showToast('به سبد خرید اضافه شد');
+      openDrawer('cart-drawer');
+    });
+    const stickyAdd = document.getElementById('sticky-add-btn');
+    if (stickyAdd) {
+      stickyAdd.addEventListener('click', function () { addBtn.click(); });
+      document.getElementById('sticky-price').textContent = formatToman(product.price);
+    }
+
+    /* ---- Wishlist (large button) ---- */
+    const wishBtn = document.getElementById('pd-wishlist-btn');
+    function syncWish() { wishBtn.classList.toggle('active', Store.isWishlisted(product.id)); wishBtn.setAttribute('aria-pressed', Store.isWishlisted(product.id) ? 'true' : 'false'); }
+    wishBtn.addEventListener('click', function () {
+      const added = Store.toggleWishlist(product.id);
+      showToast(added ? 'به علاقه‌مندی‌ها اضافه شد' : 'از علاقه‌مندی‌ها حذف شد');
+      syncWish();
+    });
+
+    /* ---- Why this product ---- */
+    document.getElementById('pd-why-list').innerHTML = buildWhyList(product).map(t =>
+      '<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>' + t + '</span></li>'
+    ).join('');
+
+    /* ---- Info accordion: description / material / size table (static) / care / exchange / shipping ---- */
+    document.getElementById('acc-description').textContent = product.description + ' این محصول با دقت و توجه به کیفیت پارچه و دوخت تولید شده تا در استفاده روزمره همراه مطمئنی برایت باشد.';
+    document.getElementById('acc-material').textContent = 'جنس: ' + product.material + ' — مدل: ' + product.model + ' — کاربرد پیشنهادی: ' + product.usage + '.';
+
+    /* ---- Reviews ---- */
+    document.getElementById('rs-num').textContent = product.rating.toLocaleString('fa-IR');
+    document.getElementById('rs-stars').innerHTML = starsSVG(product.rating);
+    document.getElementById('rs-count').textContent = product.reviews.toLocaleString('fa-IR') + ' دیدگاه';
+    const reviews = pickReviews(product.id, 4);
+    document.getElementById('review-grid').innerHTML = reviews.map((r, i) =>
+      '<div class="review-card">' +
+        '<div class="review-card-head"><span class="review-name">' + r.name + '</span><span class="review-date">' + (i + 1) + ' هفته پیش</span></div>' +
+        '<div class="stars">' + starsSVG(4.5 + (i % 2 === 0 ? 0.5 : 0)) + '</div>' +
+        '<p class="review-text">' + r.text + '</p>' +
+        '<span class="review-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> خرید تایید‌شده</span>' +
+      '</div>'
+    ).join('');
+
+    /* ---- Related products ---- */
+    const related = PRODUCTS.filter(p => p.categorySlug === product.categorySlug && p.id !== product.id).slice(0, 4);
+    if (related.length) {
+      renderProductList('#related-grid', related);
+    } else {
+      const sec = document.getElementById('related-section');
+      if (sec) sec.style.display = 'none';
+    }
+
+    /* ---- Recently viewed ---- */
+    Store.addRecentlyViewed(product.id);
+    const recent = Store.recentlyViewed.filter(id => id !== product.id).map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean).slice(0, 4);
+    const recentSection = document.getElementById('recently-viewed-section');
+    if (recent.length) { renderProductList('#recently-viewed-grid', recent); } else if (recentSection) { recentSection.style.display = 'none'; }
+
+    /* ---- Size guide modal (static content, no wiring needed beyond drawer open) ---- */
+
+    /* ---- Size finder (only relevant for bra sizing) ---- */
+    const finderBtn = document.getElementById('open-size-finder');
+    if (product.categorySlug !== 'bra') {
+      if (finderBtn) finderBtn.style.display = 'none';
+    } else if (finderBtn) {
+      let bandVal = 75, bustVal = 85;
+      const bandRange = document.getElementById('finder-band-range');
+      const bustRange = document.getElementById('finder-bust-range');
+      const bandOut = document.getElementById('finder-band-out');
+      const bustOut = document.getElementById('finder-bust-out');
+      bandRange.addEventListener('input', function () { bandVal = Number(bandRange.value); bandOut.textContent = bandVal.toLocaleString('fa-IR') + ' سانتی‌متر'; });
+      bustRange.addEventListener('input', function () { bustVal = Number(bustRange.value); bustOut.textContent = bustVal.toLocaleString('fa-IR') + ' سانتی‌متر'; });
+      bandOut.textContent = bandVal.toLocaleString('fa-IR') + ' سانتی‌متر';
+      bustOut.textContent = bustVal.toLocaleString('fa-IR') + ' سانتی‌متر';
+
+      const steps = document.querySelectorAll('#size-finder-modal .finder-step');
+      function goStep(n) {
+        steps.forEach(s => s.classList.toggle('active', Number(s.getAttribute('data-step')) === n));
+      }
+      document.getElementById('finder-next-1').addEventListener('click', function () { goStep(2); });
+      document.getElementById('finder-back-2').addEventListener('click', function () { goStep(1); });
+      document.getElementById('finder-next-2').addEventListener('click', function () {
+        const bandOptions = [70, 75, 80, 85, 90];
+        const suggested = nearestOf(bandVal, bandOptions) + 'B';
+        document.getElementById('finder-result-size').textContent = suggested;
+        goStep(3);
+      });
+      document.getElementById('finder-restart').addEventListener('click', function () { goStep(1); });
+      document.getElementById('finder-select-size').addEventListener('click', function () {
+        const suggested = document.getElementById('finder-result-size').textContent;
+        if (product.sizes.includes(suggested)) {
+          state.size = suggested;
+          renderSizes();
+          updateStockMessage();
+          showToast('سایز ' + suggested + ' انتخاب شد');
+        }
+        closeDrawer('size-finder-modal');
+        goStep(1);
+      });
+    }
+
+    renderColors(); renderSizes(); updateStockMessage(); syncWish();
+  }
+  window.HECUBA.initProductPage = initProductPage;
+
+  /* ------------------------------------------------------------------------
+     10d. CART PAGE ENGINE
+     ------------------------------------------------------------------------ */
+  function initCartPage() {
+    const root = document.getElementById('cart-page-root');
+    if (!root) return;
+    const linesEl = document.getElementById('cart-page-lines');
+    const emptyEl = document.getElementById('cart-empty-state');
+    const layoutEl = document.getElementById('cart-layout');
+    const summaryEl = document.getElementById('cart-summary');
+    const stickyBar = document.getElementById('cart-sticky-bar');
+
+    let lastDiscountMsg = '';
+
+    function render() {
+      const lines = Store.cartLines();
+      if (!lines.length) {
+        layoutEl.style.display = 'none';
+        emptyEl.style.display = 'flex';
+        if (stickyBar) stickyBar.style.display = 'none';
+        return;
+      }
+      layoutEl.style.display = '';
+      emptyEl.style.display = 'none';
+
+      linesEl.innerHTML = lines.map(l => cartLineHTML(l)).join('');
+
+      const subtotal = Store.cartSubtotal();
+      const discount = Store.discountAmount(subtotal);
+      const freeShip = subtotal >= FREE_SHIPPING_THRESHOLD;
+      const total = subtotal - discount;
+
+      let html = shippingProgressHTML(subtotal);
+      html += '<div class="discount-row">' +
+        '<input type="text" class="input" id="discount-input" placeholder="کد تخفیف" value="' + (Store.discountCode || '') + '">' +
+        '<button type="button" class="btn btn-outline" id="discount-apply-btn">اعمال</button>' +
+      '</div>';
+      html += '<div id="discount-msg-area">' + lastDiscountMsg + '</div>';
+      html += '<div class="cart-summary-row"><span>جمع سبد خرید</span><span class="val num">' + formatToman(subtotal) + '</span></div>';
+      if (discount > 0) html += '<div class="cart-summary-row discount"><span>تخفیف</span><span class="val num">−' + formatToman(discount) + '</span></div>';
+      html += '<div class="cart-summary-row"><span>هزینه ارسال</span><span class="val">' + (freeShip ? 'رایگان' : 'محاسبه در تسویه‌حساب') + '</span></div>';
+      html += '<div class="cart-summary-row total"><span>جمع کل</span><span class="val num">' + formatToman(total) + '</span></div>';
+      html += '<a href="checkout.html" class="btn btn-primary btn-block" style="margin-top:var(--space-4);">ادامه به تسویه‌حساب</a>';
+      html += '<div class="trust-badge-inline" style="margin-top:var(--space-4); justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-4.5 7-11V5l-7-2-7 2v5c0 6.5 7 11 7 11z"/></svg>پرداخت امن و ضمانت تعویض سایز</div>';
+      summaryEl.innerHTML = html;
+
+      if (stickyBar) {
+        stickyBar.style.display = '';
+        document.getElementById('cart-sticky-total').textContent = formatToman(total);
+      }
+
+      document.getElementById('discount-apply-btn').addEventListener('click', function () {
+        const val = document.getElementById('discount-input').value;
+        const result = Store.applyDiscountCode(val);
+        lastDiscountMsg = '<div class="discount-msg ' + (result.ok ? 'ok' : 'err') + '">' + result.message + '</div>';
+        render();
+      });
+    }
+
+    document.addEventListener('hecuba:store-updated', render);
+    render();
+  }
+  window.HECUBA.initCartPage = initCartPage;
+
+  /* ------------------------------------------------------------------------
+     10e. CHECKOUT PAGE ENGINE
+     ------------------------------------------------------------------------ */
+  function initCheckoutPage() {
+    const root = document.getElementById('checkout-root');
+    if (!root) return;
+    const emptyEl = document.getElementById('checkout-empty-state');
+    const layoutEl = document.getElementById('checkout-layout');
+
+    const lines = Store.cartLines();
+    if (!lines.length) {
+      layoutEl.style.display = 'none';
+      emptyEl.style.display = 'flex';
+      return;
+    }
+    layoutEl.style.display = '';
+    emptyEl.style.display = 'none';
+
+    let selectedShipping = 'post';
+    const citySelect = document.getElementById('checkout-city');
+    const shippingCards = document.querySelectorAll('[data-shipping-method]');
+
+    function updateShippingAvailability() {
+      const isTehran = citySelect.value === 'تهران';
+      shippingCards.forEach(card => {
+        const method = card.getAttribute('data-shipping-method');
+        if (method === 'courier') {
+          card.classList.toggle('disabled', !isTehran);
+          card.querySelector('input').disabled = !isTehran;
+          if (!isTehran && selectedShipping === 'courier') {
+            selectedShipping = 'post';
+            card.querySelector('input').checked = false;
+            document.querySelector('[data-shipping-method="post"] input').checked = true;
+          }
+        }
+      });
+      syncShippingCardStyles();
+      renderSummary();
+    }
+    function syncShippingCardStyles() {
+      shippingCards.forEach(card => {
+        card.classList.toggle('selected', card.getAttribute('data-shipping-method') === selectedShipping);
+      });
+    }
+    shippingCards.forEach(card => {
+      card.addEventListener('click', function () {
+        const input = card.querySelector('input');
+        if (input.disabled) return;
+        selectedShipping = card.getAttribute('data-shipping-method');
+        shippingCards.forEach(c => c.querySelector('input').checked = false);
+        input.checked = true;
+        syncShippingCardStyles();
+        renderSummary();
+      });
+    });
+    citySelect.addEventListener('change', updateShippingAvailability);
+
+    function renderSummary() {
+      const summaryLinesEl = document.getElementById('checkout-summary-lines');
+      summaryLinesEl.innerHTML = Store.cartLines().map(l => {
+        const variant = [l.color ? (COLOR_MAP[l.color] || '') : '', l.size || ''].filter(Boolean).join(' / ');
+        return '<div class="summary-mini-line"><div class="ph-image ratio-3-4"></div><span class="name">' + l.product.name + (variant ? ' <span class="text-muted">(' + variant + ')</span>' : '') + '</span><span class="qty num">×' + l.qty + '</span></div>';
+      }).join('');
+
+      const subtotal = Store.cartSubtotal();
+      const discount = Store.discountAmount(subtotal);
+      const freeShip = (subtotal - discount) >= FREE_SHIPPING_THRESHOLD || subtotal >= FREE_SHIPPING_THRESHOLD;
+      const shippingCost = freeShip ? 0 : SHIPPING_METHODS[selectedShipping].cost;
+      const total = subtotal - discount + shippingCost;
+
+      let html = '<div class="cart-summary-row"><span>جمع سبد خرید</span><span class="val num">' + formatToman(subtotal) + '</span></div>';
+      if (discount > 0) html += '<div class="cart-summary-row discount"><span>تخفیف</span><span class="val num">−' + formatToman(discount) + '</span></div>';
+      html += '<div class="cart-summary-row"><span>هزینه ارسال (' + SHIPPING_METHODS[selectedShipping].label + ')</span><span class="val num">' + (shippingCost === 0 ? 'رایگان' : formatToman(shippingCost)) + '</span></div>';
+      html += '<div class="cart-summary-row total"><span>مبلغ قابل پرداخت</span><span class="val num">' + formatToman(total) + '</span></div>';
+      document.getElementById('checkout-summary-totals').innerHTML = html;
+      root.dataset.total = total;
+    }
+
+    document.getElementById('discount-apply-btn-checkout').addEventListener('click', function () {
+      const val = document.getElementById('discount-input-checkout').value;
+      const result = Store.applyDiscountCode(val);
+      document.getElementById('discount-msg-area-checkout').innerHTML = '<div class="discount-msg ' + (result.ok ? 'ok' : 'err') + '">' + result.message + '</div>';
+      renderSummary();
+    });
+
+    /* OTP placeholder */
+    document.getElementById('send-otp-btn').addEventListener('click', function () {
+      const phone = document.getElementById('checkout-phone').value.trim();
+      if (!/^09\d{9}$/.test(phone)) { showToast('شماره موبایل را درست وارد کن'); return; }
+      document.getElementById('otp-note').classList.add('show');
+      showToast('کد تایید به شماره شما پیامک شد (نمونه)');
+    });
+
+    /* Submit / fake payment */
+    function markInvalid(el) { el.style.borderColor = 'var(--color-error)'; }
+    function clearInvalid(el) { el.style.borderColor = ''; }
+
+    document.getElementById('checkout-submit-btn').addEventListener('click', function () {
+      const name = document.getElementById('checkout-name');
+      const phone = document.getElementById('checkout-phone');
+      const province = document.getElementById('checkout-province');
+      const city = document.getElementById('checkout-city');
+      const address = document.getElementById('checkout-address');
+      const postal = document.getElementById('checkout-postal');
+      const fields = [name, phone, province, city, address, postal];
+      fields.forEach(clearInvalid);
+
+      let firstInvalid = null;
+      if (!name.value.trim()) { markInvalid(name); firstInvalid = firstInvalid || name; }
+      if (!/^09\d{9}$/.test(phone.value.trim())) { markInvalid(phone); firstInvalid = firstInvalid || phone; }
+      if (!province.value) { markInvalid(province); firstInvalid = firstInvalid || province; }
+      if (!city.value) { markInvalid(city); firstInvalid = firstInvalid || city; }
+      if (address.value.trim().length < 10) { markInvalid(address); firstInvalid = firstInvalid || address; }
+      if (!/^\d{10}$/.test(postal.value.trim())) { markInvalid(postal); firstInvalid = firstInvalid || postal; }
+
+      if (firstInvalid) {
+        showToast('لطفاً اطلاعات ضروری را کامل و درست وارد کن');
+        if (typeof firstInvalid.scrollIntoView === 'function') firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus();
+        return;
+      }
+
+      const btn = this;
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="pay-loading"><span class="spinner"></span> در حال انتقال به درگاه پرداخت...</span>';
+
+      setTimeout(function () {
+        const orderNumber = 'HEC-' + Math.floor(100000 + Math.random() * 900000);
+        const total = Number(root.dataset.total) || Store.cartSubtotal();
+        const orderData = {
+          orderNumber: orderNumber,
+          itemCount: Store.cartCount(),
+          total: total,
+          eta: SHIPPING_METHODS[selectedShipping].eta,
+          shippingLabel: SHIPPING_METHODS[selectedShipping].label
+        };
+        try { sessionStorage.setItem('hecuba_last_order', JSON.stringify(orderData)); } catch (e) { /* unavailable */ }
+        Store.clearCart();
+        location.href = 'order-success.html';
+      }, 900);
+    });
+
+    syncShippingCardStyles();
+    updateShippingAvailability();
+  }
+  window.HECUBA.initCheckoutPage = initCheckoutPage;
+
+  /* ------------------------------------------------------------------------
+     10f. WISHLIST PAGE ENGINE
+     ------------------------------------------------------------------------ */
+  function initWishlistPage() {
+    const grid = document.getElementById('wishlist-grid');
+    if (!grid) return;
+    const emptyEl = document.getElementById('wishlist-empty-state');
+
+    function render() {
+      const PRODUCTS = window.HECUBA.PRODUCTS;
+      const items = Store.wishlist.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+      if (!items.length) {
+        grid.style.display = 'none';
+        emptyEl.style.display = 'flex';
+        return;
+      }
+      grid.style.display = '';
+      emptyEl.style.display = 'none';
+      grid.innerHTML = items.map(productCardHTML).join('');
+    }
+    document.addEventListener('hecuba:store-updated', render);
+    render();
+  }
+  window.HECUBA.initWishlistPage = initWishlistPage;
+
+  /* ------------------------------------------------------------------------
+     10g. ORDER SUCCESS PAGE ENGINE
+     ------------------------------------------------------------------------ */
+  function initOrderSuccessPage() {
+    const root = document.getElementById('order-success-root');
+    if (!root) return;
+    let order = null;
+    try { order = JSON.parse(sessionStorage.getItem('hecuba_last_order')); } catch (e) { /* none */ }
+    if (!order) {
+      order = { orderNumber: 'HEC-' + Math.floor(100000 + Math.random() * 900000), itemCount: 0, total: 0, eta: '۲ تا ۵ روز کاری', shippingLabel: 'پست پیشتاز' };
+    }
+    document.getElementById('order-number').textContent = order.orderNumber;
+    document.getElementById('order-total').textContent = formatToman(order.total);
+    document.getElementById('order-eta').textContent = order.eta;
+    document.getElementById('order-shipping-label').textContent = order.shippingLabel;
+  }
+  window.HECUBA.initOrderSuccessPage = initOrderSuccessPage;
+
+  /* ------------------------------------------------------------------------
+     10h. CONTACT PAGE (UI-only in prototype — rebuilt with WPForms in WP phase)
+     ------------------------------------------------------------------------ */
+  function initContactPage() {
+    const btn = document.getElementById('contact-submit-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      const name = document.getElementById('contact-name');
+      const phone = document.getElementById('contact-phone');
+      const message = document.getElementById('contact-message');
+      [name, phone, message].forEach(el => el.style.borderColor = '');
+      let invalid = null;
+      if (!name.value.trim()) invalid = name;
+      if (!/^09\d{9}$/.test(phone.value.trim())) invalid = invalid || phone;
+      if (!message.value.trim()) invalid = invalid || message;
+      if (invalid) {
+        invalid.style.borderColor = 'var(--color-error)';
+        showToast('لطفاً فیلدهای ضروری را کامل کن');
+        invalid.focus();
+        return;
+      }
+      showToast('پیام شما ارسال شد — به‌زودی باهات تماس می‌گیریم');
+      document.getElementById('contact-form').reset();
+    });
+  }
+  window.HECUBA.initContactPage = initContactPage;
+
+  /* ------------------------------------------------------------------------
+     10b. STICKY HEADER SHADOW ON SCROLL
+     ------------------------------------------------------------------------ */
+  function initHeaderScrollState() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+    let last = 0;
+    window.addEventListener('scroll', function () {
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 8);
+      last = y;
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------------------------------------
+     11. INIT
+     ------------------------------------------------------------------------ */
+  document.addEventListener('DOMContentLoaded', function () {
+    Store.updateBadges();
+    initSearch();
+    initHeaderScrollState();
+  });
+
+})();

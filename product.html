@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title id="page-title">محصول | هکوبا استایل</title>
+<meta name="description" id="page-description" content="مشاهده جزئیات محصول در فروشگاه هکوبا استایل.">
+<link rel="canonical" href="./product.html">
+
+<!-- Google tag (gtag.js) — Placeholder, to be connected via Site Kit by Google in WordPress phase -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
+<!-- <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX'); </script> -->
+
+<!-- Schema.org — Product (preliminary; populated dynamically in WordPress by Rank Math + WooCommerce) -->
+<script type="application/ld+json" id="product-schema">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "محصول هکوبا استایل",
+  "brand": {"@type": "Brand", "name": "Hecuba Style"}
+}
+</script>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">رفتن به محتوای اصلی</a>
+
+<!-- ==========================================================================
+     HEADER  (Component → XPRO Theme Builder: Header Part — identical to index.html)
+     ========================================================================== -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+
+    <button type="button" class="btn-icon" data-open-drawer="mobile-menu" aria-label="باز کردن منو" style="order:1; --tw:1;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <a href="index.html" class="logo" aria-label="هکوبا استایل — صفحه اصلی" style="order:2;">Hecuba<span>·</span>Style</a>
+
+    <nav aria-label="منوی اصلی" style="order:3;">
+      <ul class="main-nav">
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="shop.html">فروشگاه</a></li>
+        <li class="has-mega" tabindex="0">
+          <a href="shop.html">دسته‌بندی‌ها</a>
+          <div class="mega-menu">
+            <div>
+              <div class="col-title">لباس زیر</div>
+              <ul>
+                <li><a href="category.html?cat=bra">سوتین</a></li>
+                <li><a href="category.html?cat=brief">شورت</a></li>
+                <li><a href="category.html?cat=set">ست</a></li>
+                <li><a href="category.html?cat=bralette">نیم‌تنه</a></li>
+                <li><a href="category.html?cat=fantasy">فانتزی</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="col-title">پوشاک</div>
+              <ul>
+                <li><a href="category.html?cat=sleepwear">لباس خواب</a></li>
+                <li><a href="category.html?cat=loungewear">لباس راحتی</a></li>
+                <li><a href="category.html?cat=bodysuit">بادی</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="col-title">ساحلی</div>
+              <ul>
+                <li><a href="category.html?cat=swim">مایو</a></li>
+                <li><a href="category.html?cat=swim">بیکینی</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a href="shop.html?filter=new">جدیدها</a></li>
+        <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
+        <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-search-desktop" style="order:4;">
+      <div class="search-field">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" class="input" placeholder="جستجو در هکوبا…" aria-label="جستجو" data-search-input data-search-results-target="#search-results-desktop">
+      </div>
+      <div id="search-results-desktop" class="search-results" style="position:absolute; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); width:280px; padding:8px; box-shadow:var(--shadow-md); margin-top:4px;"></div>
+    </div>
+
+    <div class="header-actions" style="order:5;">
+      <button type="button" class="btn-icon" data-open-drawer="search-drawer" aria-label="جستجو" style="display:inline-flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <a href="wishlist.html" class="btn-icon" aria-label="علاقه‌مندی‌ها" style="position:relative;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>
+        <span class="icon-badge-count" data-wishlist-count style="display:none;">0</span>
+      </a>
+      <button type="button" class="btn-icon" data-open-drawer="cart-drawer" aria-label="سبد خرید" style="position:relative;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8V6a4 4 0 118 0v2M3 8h14l-1 12H4L3 8z"/></svg>
+        <span class="icon-badge-count" data-cart-count style="display:none;">0</span>
+      </button>
+      <a href="javascript:void(0)" class="btn-icon" aria-label="حساب کاربری" style="display:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 4-6 7.5-6s6 2 7.5 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="global-overlay"></div>
+
+<!-- Mobile menu drawer -->
+<aside class="drawer from-start" id="mobile-menu" aria-hidden="true" aria-label="منوی موبایل">
+  <div class="drawer-head">
+    <span class="logo" style="font-size:1.1rem;">Hecuba<span>·</span>Style</span>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن منو">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html">خانه</a></li>
+      <li><a href="shop.html">فروشگاه</a></li>
+      <li>
+        <details>
+          <summary>دسته‌بندی‌ها
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="mobile-sub-list">
+            <a href="category.html?cat=bra">سوتین</a>
+            <a href="category.html?cat=brief">شورت</a>
+            <a href="category.html?cat=set">ست لباس زیر</a>
+            <a href="category.html?cat=bralette">نیم‌تنه</a>
+            <a href="category.html?cat=fantasy">فانتزی</a>
+            <a href="category.html?cat=bodysuit">بادی</a>
+            <a href="category.html?cat=sleepwear">لباس خواب</a>
+            <a href="category.html?cat=swim">مایو و بیکینی</a>
+            <a href="category.html?cat=loungewear">لباس راحتی</a>
+          </div>
+        </details>
+      </li>
+      <li><a href="shop.html?filter=new">جدیدها</a></li>
+      <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
+      <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
+      <li><a href="about.html">درباره ما</a></li>
+      <li><a href="contact.html">تماس با ما</a></li>
+    </ul>
+  </div>
+  <div class="drawer-foot">
+    <div class="trust-badge-inline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-4.5 7-11V5l-7-2-7 2v5c0 6.5 7 11 7 11z"/></svg>
+      پرداخت امن · تعویض سایز آسان
+    </div>
+  </div>
+</aside>
+
+<!-- Search drawer (mobile) -->
+<aside class="drawer sheet" id="search-drawer" aria-hidden="true" aria-label="جستجو">
+  <div class="modal-handle"></div>
+  <div class="drawer-head" style="padding-inline:0; border:0;">
+    <div class="search-field" style="width:100%;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" class="input" placeholder="مثلاً «سوتین مشکی»…" aria-label="جستجو" data-search-input data-search-results-target="#search-results" autofocus>
+    </div>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن جستجو">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" style="padding-inline:0;">
+    <div id="search-results" class="search-results"></div>
+    <p class="text-muted text-sm" style="margin-top:var(--space-4);">پرجستجوترین‌ها: سوتین بدون سیم، ست فانتزی، لباس راحتی</p>
+  </div>
+</aside>
+
+<!-- Cart drawer (dynamic — populated by renderCartDrawer() in main.js) -->
+<aside class="drawer" id="cart-drawer" aria-hidden="true" aria-label="سبد خرید">
+  <div class="drawer-head">
+    <h2 class="h3" style="margin:0;">سبد خرید شما</h2>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن سبد خرید">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="cart-drawer-body"></div>
+  <div class="drawer-foot" id="cart-drawer-foot"></div>
+</aside>
+<!-- ==========================================================================
+     MAIN CONTENT — Product Detail Page
+     Single template driven by ?id=  (e.g. product.html?id=hb-001)
+     ========================================================================== -->
+<main id="main-content">
+  <div class="container" style="padding-top: var(--space-4);">
+    <nav class="breadcrumb" aria-label="مسیر صفحه">
+      <a href="index.html">خانه</a>
+      <span class="sep">/</span>
+      <a href="shop.html">فروشگاه</a>
+      <span class="sep">/</span>
+      <a href="category.html?cat=bra" id="crumb-cat">دسته‌بندی</a>
+      <span class="sep">/</span>
+      <span class="current" id="crumb-name">نام محصول</span>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div id="pd-root" class="product-hero">
+
+      <!-- GALLERY -->
+      <div class="gallery">
+        <button type="button" class="gallery-main" id="gallery-main" style="width:100%; display:block; padding:0; border:0;" aria-label="بزرگ‌نمایی تصویر">
+          <div class="ph-image ratio-3-4" id="gallery-main-image"><span>تصویر اصلی</span></div>
+          <span class="zoom-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+            بزرگ‌نمایی
+          </span>
+        </button>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+
+      <!-- INFO -->
+      <div class="pd-info">
+        <a href="category.html?cat=bra" class="pd-category-link" id="pd-category">دسته‌بندی</a>
+        <h1 class="pd-title" id="pd-title">نام محصول</h1>
+
+        <div class="pd-rating-row">
+          <span class="rating">
+            <span class="stars" id="pd-stars"></span>
+            <span class="num" id="pd-rating-num"></span>
+          </span>
+          <a href="#reviews" id="pd-review-count">مشاهده دیدگاه‌ها</a>
+        </div>
+
+        <div class="pd-price-row">
+          <span class="pd-price num" id="pd-price"></span>
+          <span class="pd-price-compare num" id="pd-price-compare" style="display:none;"></span>
+          <span class="pd-discount-badge" id="pd-discount-badge" style="display:none;"></span>
+        </div>
+
+        <p class="pd-desc" id="pd-desc"></p>
+
+        <div class="select-block">
+          <div class="select-block-head">
+            <span class="select-block-label">رنگ</span>
+          </div>
+          <div class="color-select" id="pd-colors"></div>
+        </div>
+
+        <div class="select-block">
+          <div class="select-block-head">
+            <span class="select-block-label">سایز</span>
+            <button type="button" class="size-guide-link" data-open-drawer="size-guide-modal">راهنمای انتخاب سایز</button>
+          </div>
+          <div class="size-select" id="pd-sizes"></div>
+          <div style="margin-top:10px;">
+            <button type="button" class="btn-ghost" id="open-size-finder" data-open-drawer="size-finder-modal" style="font-size:var(--fs-small); padding:0;">
+              پیدا نمی‌کنی سایزت رو؟ پیدا کردن سایز ←
+            </button>
+          </div>
+        </div>
+
+        <div class="stock-msg no-selection" id="pd-stock-msg">سایز خود را انتخاب کنید</div>
+        <div class="sku-line" id="pd-sku"></div>
+
+        <div class="qty-cta-row">
+          <div class="qty-stepper">
+            <button type="button" id="pd-qty-plus" aria-label="افزایش تعداد">+</button>
+            <span id="pd-qty" class="num">۱</span>
+            <button type="button" id="pd-qty-minus" aria-label="کاهش تعداد">−</button>
+          </div>
+          <button type="button" class="btn btn-primary pd-add-btn" id="pd-add-btn">افزودن به سبد خرید</button>
+          <button type="button" class="wishlist-btn-lg" id="pd-wishlist-btn" aria-pressed="false" aria-label="افزودن به علاقه‌مندی">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>
+          </button>
+        </div>
+        <div class="pd-secondary-row">
+          <button type="button" class="btn btn-outline" id="pd-buy-btn">خرید مستقیم</button>
+        </div>
+
+        <div class="trust-row-compact">
+          <div class="trust-badge-inline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>ارسال سراسر کشور</div>
+          <div class="trust-badge-inline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5M15 4l3 3-3 3M9 20l-3-3 3-3"/></svg>ضمانت تعویض سایز</div>
+          <div class="trust-badge-inline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-4.5 7-11V5l-7-2-7 2v5c0 6.5 7 11 7 11z"/></svg>پرداخت امن</div>
+          <div class="trust-badge-inline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>پشتیبانی پاسخگو</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY THIS PRODUCT -->
+  <section class="section-tight">
+    <div class="container" style="max-width:720px;">
+      <h2 class="h3" style="margin-bottom:var(--space-4);">چرا این محصول؟</h2>
+      <ul class="why-list" id="pd-why-list"></ul>
+    </div>
+  </section>
+
+  <!-- PRODUCT INFO ACCORDION -->
+  <section class="section-tight">
+    <div class="container" style="max-width:820px;">
+      <div data-accordion-single>
+        <div class="accordion-item open">
+          <button type="button" class="accordion-trigger" aria-expanded="true">
+            توضیحات محصول
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div><p id="acc-description"></p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" aria-expanded="false">
+            جنس و ویژگی‌ها
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div><p id="acc-material"></p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" aria-expanded="false">
+            جدول سایز
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div>
+            <table class="size-guide-table">
+              <thead><tr><th>سایز</th><th>دور زیر سینه (cm)</th><th>دور سینه (cm)</th></tr></thead>
+              <tbody>
+                <tr><td class="num">70B</td><td class="num">۶۸–۷۲</td><td class="num">۸۸–۹۲</td></tr>
+                <tr><td class="num">75B</td><td class="num">۷۳–۷۷</td><td class="num">۹۳–۹۷</td></tr>
+                <tr><td class="num">80B</td><td class="num">۷۸–۸۲</td><td class="num">۹۸–۱۰۲</td></tr>
+                <tr><td class="num">85B</td><td class="num">۸۳–۸۷</td><td class="num">۱۰۳–۱۰۷</td></tr>
+                <tr><td class="num">90B</td><td class="num">۸۸–۹۲</td><td class="num">۱۰۸–۱۱۲</td></tr>
+              </tbody>
+            </table>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" aria-expanded="false">
+            نحوه شست‌وشو و نگهداری
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div><p>شست‌وشو با دست یا برنامه ملایم ماشین لباسشویی، در دمای پایین. از سفیدکننده و خشک‌کن ماشینی استفاده نکنید و پس از شست‌وشو در سایه خشک کنید.</p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" aria-expanded="false">
+            قوانین تعویض و مرجوعی
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div><p>در صورتی که محصول استفاده و شسته نشده و تگ و بسته‌بندی سالم باشد، تا ۷ روز پس از دریافت امکان تعویض سایز وجود دارد. محصولات استفاده‌شده یا خارج‌شده از بسته‌بندی بهداشتی قابل مرجوع نیستند.</p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" aria-expanded="false">
+            ارسال
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel"><div><p>ارسال به سراسر ایران — تهران ۱ تا ۲ روز کاری، سایر شهرها ۲ تا ۵ روز کاری. سفارش‌های بالای ۱,۵۰۰,۰۰۰ تومان ارسال رایگان دارند.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section-tight" id="reviews">
+    <div class="container" style="max-width:820px;">
+      <h2 class="h3" style="margin-bottom:var(--space-5);">دیدگاه‌های مشتریان</h2>
+      <div class="rating-summary">
+        <div>
+          <span class="big-num num" id="rs-num"></span>
+          <div class="stars" id="rs-stars"></div>
+          <span class="text-muted text-sm num" id="rs-count"></span>
+        </div>
+      </div>
+      <div class="review-grid" id="review-grid"></div>
+    </div>
+  </section>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="section" id="related-section">
+    <div class="container">
+      <div class="section-head">
+        <div><h2 class="section-title">محصولات مرتبط</h2></div>
+      </div>
+      <div class="product-grid" id="related-grid"></div>
+    </div>
+  </section>
+
+  <!-- RECENTLY VIEWED -->
+  <section class="section-tight" id="recently-viewed-section" style="background:var(--color-secondary);">
+    <div class="container">
+      <div class="section-head">
+        <div><h2 class="section-title">بازدیدهای اخیر</h2></div>
+      </div>
+      <div class="product-scroller" id="recently-viewed-grid"></div>
+    </div>
+  </section>
+
+  <div class="mobile-cta-spacer"></div>
+</main>
+
+<!-- STICKY MOBILE ADD-TO-CART BAR -->
+<div class="sticky-mobile-cta">
+  <span class="price num" id="sticky-price"></span>
+  <button type="button" class="btn btn-primary" id="sticky-add-btn">افزودن به سبد</button>
+</div>
+
+<!-- ZOOM MODAL -->
+<div class="modal zoom-modal" id="zoom-modal" aria-hidden="true" aria-label="بزرگ‌نمایی تصویر محصول">
+  <div class="modal-handle"></div>
+  <div class="modal-head">
+    <span class="h3" style="margin:0;">نمای بزرگ</span>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="ph-image ratio-3-4" id="zoom-main-image"></div>
+</div>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="modal" id="size-guide-modal" aria-hidden="true" aria-label="راهنمای انتخاب سایز">
+  <div class="modal-handle"></div>
+  <div class="modal-head">
+    <span class="h3" style="margin:0;">راهنمای انتخاب سایز</span>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <p class="text-muted text-sm" style="margin-bottom:var(--space-3);">دور زیر سینه رو با یک متر نواری، درست زیر سینه اندازه بگیر. دور سینه رو هم از پرحجم‌ترین قسمت اندازه بگیر.</p>
+  <table class="size-guide-table">
+    <thead><tr><th>سایز</th><th>دور زیر سینه (cm)</th><th>دور سینه (cm)</th></tr></thead>
+    <tbody>
+      <tr><td class="num">70B</td><td class="num">۶۸–۷۲</td><td class="num">۸۸–۹۲</td></tr>
+      <tr><td class="num">75B</td><td class="num">۷۳–۷۷</td><td class="num">۹۳–۹۷</td></tr>
+      <tr><td class="num">80B</td><td class="num">۷۸–۸۲</td><td class="num">۹۸–۱۰۲</td></tr>
+      <tr><td class="num">85B</td><td class="num">۸۳–۸۷</td><td class="num">۱۰۳–۱۰۷</td></tr>
+      <tr><td class="num">90B</td><td class="num">۸۸–۹۲</td><td class="num">۱۰۸–۱۱۲</td></tr>
+    </tbody>
+  </table>
+  <p class="text-muted text-sm" style="margin-top:var(--space-4);">برای سایر محصولات (شورت، ست، لباس راحتی و…):</p>
+  <table class="size-guide-table">
+    <thead><tr><th>سایز</th><th>دور کمر (cm)</th><th>دور باسن (cm)</th></tr></thead>
+    <tbody>
+      <tr><td>S</td><td class="num">۶۲–۶۶</td><td class="num">۹۰–۹۴</td></tr>
+      <tr><td>M</td><td class="num">۶۷–۷۱</td><td class="num">۹۵–۹۹</td></tr>
+      <tr><td>L</td><td class="num">۷۲–۷۶</td><td class="num">۱۰۰–۱۰۴</td></tr>
+      <tr><td>XL</td><td class="num">۷۷–۸۲</td><td class="num">۱۰۵–۱۱۰</td></tr>
+      <tr><td>2XL</td><td class="num">۸۳–۸۹</td><td class="num">۱۱۱–۱۱۷</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SIZE FINDER MODAL -->
+<div class="modal" id="size-finder-modal" aria-hidden="true" aria-label="پیدا کردن سایز">
+  <div class="modal-handle"></div>
+  <div class="modal-head">
+    <span class="h3" style="margin:0;">پیدا کردن سایز</span>
+    <button type="button" class="btn-icon" data-close-drawer aria-label="بستن">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="finder-step active" data-step="1">
+    <div class="finder-progress">مرحله ۱ از ۲</div>
+    <p>دور زیر سینه‌ات چند سانتی‌متره؟</p>
+    <div class="finder-input-row">
+      <output id="finder-band-out">۷۵ سانتی‌متر</output>
+      <input type="range" min="65" max="95" step="1" value="75" id="finder-band-range" aria-label="دور زیر سینه">
+    </div>
+    <div class="finder-nav">
+      <button type="button" class="btn btn-primary" id="finder-next-1">ادامه</button>
+    </div>
+  </div>
+
+  <div class="finder-step" data-step="2">
+    <div class="finder-progress">مرحله ۲ از ۲</div>
+    <p>دور سینه‌ات چند سانتی‌متره؟</p>
+    <div class="finder-input-row">
+      <output id="finder-bust-out">۸۵ سانتی‌متر</output>
+      <input type="range" min="75" max="120" step="1" value="85" id="finder-bust-range" aria-label="دور سینه">
+    </div>
+    <div class="finder-nav">
+      <button type="button" class="btn btn-outline" id="finder-back-2">بازگشت</button>
+      <button type="button" class="btn btn-primary" id="finder-next-2">مشاهده نتیجه</button>
+    </div>
+  </div>
+
+  <div class="finder-step" data-step="3">
+    <div class="finder-result">
+      <span class="text-muted text-sm">سایز پیشنهادی شما</span>
+      <div class="result-size num" id="finder-result-size">75B</div>
+      <span class="text-muted text-sm">این عدد یک تخمین اولیه‌ست؛ برای اطمینان بیشتر، جدول سایز رو هم ببین.</span>
+    </div>
+    <div class="finder-nav">
+      <button type="button" class="btn btn-outline" id="finder-restart">اندازه‌گیری دوباره</button>
+      <button type="button" class="btn btn-primary" id="finder-select-size">انتخاب این سایز</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <span class="logo">Hecuba<span>·</span>Style</span>
+      <p>هکوبا استایل، فروشگاه آنلاین تخصصی لباس زیر و پوشاک زنانه؛ جایی برای پیدا کردن چیزی که هم زیباست، هم راحت، هم انتخابش ساده‌ست.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/hecubastyle" target="_blank" rel="noopener" aria-label="اینستاگرام هکوبا">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://wa.me/989120000000" target="_blank" rel="noopener" aria-label="واتساپ هکوبا">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.4-4A8 8 0 1112 20a7.9 7.9 0 01-4-1.1z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>فروشگاه</h4>
+      <ul>
+        <li><a href="shop.html">همه محصولات</a></li>
+        <li><a href="shop.html?filter=new">جدیدها</a></li>
+        <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
+        <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="blog.html">وبلاگ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>راهنما</h4>
+      <ul>
+        <li><a href="faq.html">سؤالات پرتکرار</a></li>
+        <li><a href="size-guide.html">راهنمای سایز</a></li>
+        <li><a href="shipping.html">ارسال</a></li>
+        <li><a href="returns.html">تعویض و مرجوعی</a></li>
+        <li><a href="privacy.html">حریم خصوصی</a></li>
+        <li><a href="terms.html">قوانین و مقررات</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>تماس با ما</h4>
+      <ul>
+        <li><a href="tel:02191000000" class="num">021-91000000</a></li>
+        <li><a href="https://wa.me/989120000000" class="num">واتساپ: 09120000000</a></li>
+        <li><a href="mailto:hello@hecubastyle.ir">hello@hecubastyle.ir</a></li>
+        <li>تهران — شنبه تا پنجشنبه، ۱۰ تا ۱۹</li>
+      </ul>
+      <div class="footer-trust">
+        <div class="trust-seal">اینماد<br>(نمونه)</div>
+        <div class="trust-seal">ساماندهی<br>(نمونه)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© <span class="num" id="footer-year"></span> Hecuba Style — تمامی حقوق محفوظ است.</span>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">حریم خصوصی</a>
+      <a href="terms.html">قوانین و مقررات</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/989120000000" class="whatsapp-float" target="_blank" rel="noopener" aria-label="گفتگو در واتساپ">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.4-4A8 8 0 1112 20a7.9 7.9 0 01-4-1.1z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.HECUBA.initProductPage();
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  });
+</script>
+</body>
+</html>
