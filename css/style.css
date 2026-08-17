@@ -640,10 +640,9 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   box-shadow: var(--shadow-lg);
 }
 html[dir="rtl"] .drawer { transform: translateX(-100%); }
-.drawer.is-open { transform: translateX(0); }
+.drawer.is-open { transform: translateX(0) !important; }
 .drawer.from-start { inset-inline-end: auto; inset-inline-start: 0; transform: translateX(-100%); }
 html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
-.drawer.from-start.is-open { transform: translateX(0); }
 
 .drawer-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -661,7 +660,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   transform: translateY(100%);
 }
-.drawer.sheet.is-open { transform: translateY(0); }
+.drawer.sheet.is-open { transform: translateY(0) !important; }
 
 /* --------------------------------------------------------------------------
    13. TOAST
