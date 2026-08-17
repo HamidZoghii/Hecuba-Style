@@ -18,7 +18,7 @@
 
   const PRODUCTS = [
     {
-      id: 'hb-001', sku: 'HEC-BRA-1001', image: 'images/bra-main.jpg',
+      id: 'hb-001', sku: 'HEC-BRA-1001', image: 'images/AX/bra-sage-smooth.png',
       name: 'سوتین بدون سیم مدل النا', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 690000, comparePrice: 890000,
       colors: ['#202020', '#B96777', '#E8DFD2'],
@@ -28,7 +28,7 @@
       rating: 4.8, reviews: 126, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/set-main.jpg',
+      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.png',
       name: 'سوتین فرم‌دهنده پوش‌آپ', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 790000, comparePrice: 990000,
       colors: ['#202020', '#B96777', '#737C54'],
@@ -48,7 +48,7 @@
       rating: 4.7, reviews: 88, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-012', sku: 'HEC-BRA-1012', image: 'images/bra-main.jpg',
+      id: 'hb-012', sku: 'HEC-BRA-1012', image: 'images/AX/bra-mocha-smooth.png',
       name: 'سوتین کلاسیک سه‌بند', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 650000, comparePrice: 790000,
       colors: ['#202020', '#C9A992', '#8E3045'],
@@ -58,7 +58,7 @@
       rating: 4.6, reviews: 102, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-003', sku: 'HEC-BRF-1003', image: 'images/brief-main.jpg',
+      id: 'hb-003', sku: 'HEC-BRF-1003', image: 'images/AX/panty-sage-smooth.png',
       name: 'شورت کمرگهی راحت روزانه', category: 'شورت زنانه', categorySlug: 'brief',
       price: 290000, comparePrice: 350000,
       colors: ['#202020', '#9CA286', '#E8DFD2', '#B96777'],
@@ -68,7 +68,7 @@
       rating: 4.7, reviews: 212, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/brief-main.jpg',
+      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.png',
       name: 'شورت تانگا دانتل', category: 'شورت زنانه', categorySlug: 'brief',
       price: 340000, comparePrice: null,
       colors: ['#202020', '#B96777', '#8E3045'],
@@ -78,7 +78,7 @@
       rating: 4.5, reviews: 47, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/bra-main.jpg',
+      id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/AX/panty-mocha-smooth.png',
       name: 'شورت فول شکم‌گیر', category: 'شورت زنانه', categorySlug: 'brief',
       price: 320000, comparePrice: 380000,
       colors: ['#202020', '#C9A992'],
@@ -88,7 +88,7 @@
       rating: 4.6, reviews: 71, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-002', sku: 'HEC-SET-1002', image: 'images/set-main.jpg',
+      id: 'hb-002', sku: 'HEC-SET-1002', image: 'images/AX/flatlay-sage-set-flowers.png',
       name: 'ست دو تکه آدل', category: 'ست لباس زیر', categorySlug: 'set',
       price: 1290000, comparePrice: null,
       colors: ['#202020', '#8E3045'],
@@ -98,7 +98,7 @@
       rating: 4.9, reviews: 84, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-015', sku: 'HEC-SET-1015', image: 'images/set-main.jpg',
+      id: 'hb-015', sku: 'HEC-SET-1015', image: 'images/AX/set-sage-with-robe.png',
       name: 'ست سه‌تکه بی‌تریس', category: 'ست لباس زیر', categorySlug: 'set',
       price: 1590000, comparePrice: 1890000,
       colors: ['#202020', '#B96777'],
@@ -108,7 +108,7 @@
       rating: 4.8, reviews: 36, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-016', sku: 'HEC-SET-1016', image: 'images/set-main.jpg',
+      id: 'hb-016', sku: 'HEC-SET-1016', image: 'images/AX/set-sage-light-with-robe.png',
       name: 'ست پنبه‌ای روزمره', category: 'ست لباس زیر', categorySlug: 'set',
       price: 690000, comparePrice: null,
       colors: ['#9CA286', '#E8DFD2', '#202020'],
@@ -158,7 +158,7 @@
       rating: 4.8, reviews: 29, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-004', sku: 'HEC-BOD-1004', image: 'images/bodysuit-main.jpg',
+      id: 'hb-004', sku: 'HEC-BOD-1004', image: 'images/AX/bodysuit-black-sheer.png',
       name: 'بادی مدل رزا', category: 'بادی زنانه', categorySlug: 'bodysuit',
       price: 990000, comparePrice: 1250000,
       colors: ['#202020', '#6D2436'],
@@ -178,7 +178,7 @@
       rating: 4.5, reviews: 41, tags: [], inStock: true
     },
     {
-      id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/bodysuit-main.jpg',
+      id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/AX/bodysuit-sage-lace.png',
       name: 'بادی تور گلدوزی', category: 'بادی زنانه', categorySlug: 'bodysuit',
       price: 1090000, comparePrice: 1290000,
       colors: ['#202020', '#8E3045'],
@@ -188,7 +188,7 @@
       rating: 4.7, reviews: 33, tags: ['bestseller', 'sale'], inStock: true
     },
     {
-      id: 'hb-006', sku: 'HEC-SLP-1006', image: 'images/sleepwear-main.jpg',
+      id: 'hb-006', sku: 'HEC-SLP-1006', image: 'images/AX/slip-sage-lace.png',
       name: 'لباس خواب ساتن کوتاه', category: 'لباس خواب', categorySlug: 'sleepwear',
       price: 890000, comparePrice: 1090000,
       colors: ['#8E3045', '#202020'],
@@ -209,7 +209,7 @@
       rating: 4.6, reviews: 52, tags: [], inStock: true
     },
     {
-      id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/sleepwear-main.jpg',
+      id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/AX/robe-sage-lace.png',
       name: 'لباس خواب حریر با شال', category: 'لباس خواب', categorySlug: 'sleepwear',
       price: 1190000, comparePrice: null,
       colors: ['#B96777', '#202020'],
