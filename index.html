@@ -108,7 +108,7 @@
     </div>
 
     <div class="header-actions" style="order:5;">
-      <button type="button" class="btn-icon" data-open-drawer="search-drawer" aria-label="جستجو" style="display:inline-flex;">
+      <button type="button" class="btn-icon" data-open-drawer="search-drawer" aria-label="جستجو">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </button>
       <a href="wishlist.html" class="btn-icon" aria-label="علاقه‌مندی‌ها" style="position:relative;">
@@ -320,11 +320,16 @@
   <section class="section-tight">
     <div class="container">
       <div class="promo-banner">
-        <div>
+        <div class="promo-banner-media">
+          <!-- TODO: تصویر اختصاصی بنر پروموشن جایگزین شود -->
+          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/set-sage-with-robe.png" alt="ست لباس زیر سبز سیج هکوبا با ربدوشامبر و گل"></div>
+          <span class="promo-discount-circle">تا<br>۳۰٪</span>
+        </div>
+        <div class="promo-banner-content">
           <h2>تا ۳۰٪ تخفیف روی انتخاب‌های ویژه</h2>
           <p>مدل‌های محدود با شرایط ویژه — تا تمام نشده، انتخاب کن.</p>
+          <a href="shop.html?filter=sale" class="btn btn-primary">مشاهده تخفیف‌ها</a>
         </div>
-        <a href="shop.html?filter=sale" class="btn btn-outline-light">مشاهده تخفیف‌ها</a>
       </div>
     </div>
   </section>
@@ -361,7 +366,7 @@
           <span class="bundle-plus">+</span>
           <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt2.jpg" alt="جوراب"></div>
         </div>
-        <div>
+        <div class="bundle-info">
           <h3 style="margin-bottom:6px;">ست کامل النا — سوتین، شورت و جوراب</h3>
           <p class="text-muted text-sm">هر تکه جدا هم قابل خریده، اما با هم صرفه‌ی بیشتری داره.</p>
           <div class="bundle-price-row" style="margin-top:10px;">
@@ -369,8 +374,8 @@
             <span class="price-compare num">۱,۲۳۰,۰۰۰ تومان</span>
           </div>
           <span class="bundle-save">۲۴۰,۰۰۰ تومان صرفه‌جویی</span>
+          <a href="shop.html" class="btn btn-primary">مشاهده ست</a>
         </div>
-        <a href="shop.html" class="btn btn-primary">مشاهده ست</a>
       </div>
     </div>
   </section>
@@ -389,7 +394,6 @@
         <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/fantasy-main.jpg" alt="لحظه‌های واقعی هکوبا"></div>
         <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt.jpg" alt="لحظه‌های واقعی هکوبا"></div>
         <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/swim-alt.jpg" alt="لحظه‌های واقعی هکوبا"></div>
-        <div class="ph-image ratio-1-1" style="display:none;"><img class="ph-photo" src="images/bodysuit-main.jpg" alt="لحظه‌های واقعی هکوبا"></div>
       </div>
     </div>
   </section>
@@ -535,13 +539,20 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var P = window.HECUBA.PRODUCTS;
+    var GRID_COUNT = window.HECUBA.HOME_GRID_COUNT;
     var byId = function (id) { return P.find(function (p) { return p.id === id; }); };
 
-    var newItems = P.filter(function (p) { return p.tags.indexOf('new') > -1; }).slice(0, 8);
-    window.HECUBA.renderProductList('#new-arrivals-grid', newItems);
+    function renderHomeGrid(selector, items) {
+      window.HECUBA.renderProductList(selector, items);
+      var el = document.querySelector(selector);
+      if (el) el.classList.toggle('grid-partial-row', items.length % 4 !== 0);
+    }
 
-    var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; });
-    window.HECUBA.renderProductList('#bestsellers-grid', bestItems);
+    var newItems = P.filter(function (p) { return p.tags.indexOf('new') > -1; }).slice(0, GRID_COUNT);
+    renderHomeGrid('#new-arrivals-grid', newItems);
+
+    var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; }).slice(0, GRID_COUNT);
+    renderHomeGrid('#bestsellers-grid', bestItems);
 
     window.HECUBA.renderProductList('#curated-grid', [byId('hb-022'), byId('hb-016')].filter(Boolean));
 

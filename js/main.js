@@ -35,7 +35,7 @@
       sizes: ['70B', '75B', '80B', '85B', '90B'],
       material: 'میکروفایبر بدون درز', model: 'پوش‌آپ', usage: 'مجلسی', brand: BRAND,
       description: 'فرم‌دهی طبیعی برای لحظه‌های خاص، بدون این‌که حس کنی چیزی اضافه پوشیدی.',
-      rating: 4.8, reviews: 174, tags: ['sale'], inStock: true
+      rating: 4.8, reviews: 174, tags: ['sale', 'bestseller'], inStock: true
     },
     {
       id: 'hb-011', sku: 'HEC-BRA-1011', image: 'images/bralette-alt.jpg',
@@ -115,7 +115,7 @@
       sizes: ['S', 'M', 'L', 'XL'],
       material: 'کاتن نرم', model: 'دو تکه', usage: 'روزمره', brand: BRAND,
       description: 'یک ست ساده و پنبه‌ای برای شروع روزهایی که فقط راحتی مهمه.',
-      rating: 4.7, reviews: 59, tags: [], inStock: true
+      rating: 4.7, reviews: 59, tags: ['new'], inStock: true
     },
     {
       id: 'hb-005', sku: 'HEC-BRL-1005', image: 'images/bralette-main.jpg',
@@ -175,7 +175,7 @@
       sizes: ['S', 'M', 'L', 'XL'],
       material: 'کاتن الاستیک', model: 'ساده', usage: 'روزمره', brand: BRAND,
       description: 'یک بادی ساده و کاتن برای روزهایی که دنبال یک لایه‌ی راحت زیر لباس هستی.',
-      rating: 4.5, reviews: 41, tags: [], inStock: true
+      rating: 4.5, reviews: 41, tags: ['bestseller'], inStock: true
     },
     {
       id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/AX/bodysuit-sage-lace.png',
@@ -206,7 +206,7 @@
       sizes: ['S', 'M', 'L', 'XL', 'Free Size'],
       material: 'کاتن نخی نرم', model: 'ساده', usage: 'خانگی', brand: BRAND,
       description: 'پنبه‌ای، بلند و آرامش‌بخش؛ دقیقاً چیزی که برای یک خواب خوب لازم داری.',
-      rating: 4.6, reviews: 52, tags: [], inStock: true
+      rating: 4.6, reviews: 52, tags: ['bestseller'], inStock: true
     },
     {
       id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/AX/robe-sage-lace.png',
@@ -280,9 +280,13 @@
     { name: 'راحتی', slug: 'loungewear' }
   ];
 
+  /* Number of items shown per homepage product grid (New Arrivals / Best Sellers) */
+  const HOME_GRID_COUNT = 8;
+
   window.HECUBA = window.HECUBA || {};
   window.HECUBA.PRODUCTS = PRODUCTS;
   window.HECUBA.CATEGORIES = CATEGORIES;
+  window.HECUBA.HOME_GRID_COUNT = HOME_GRID_COUNT;
 
   /* Category landing-page copy (→ WooCommerce term name/description) */
   const CATEGORY_INFO = {
@@ -483,10 +487,11 @@
   function productCardHTML(p) {
     const discount = p.comparePrice ? Math.round((1 - p.price / p.comparePrice) * 100) : 0;
     const badges = [];
-    if (p.tags.includes('new')) badges.push('<span class="badge badge-new">جدید</span>');
-    if (discount > 0) badges.push('<span class="badge badge-sale">%' + discount.toLocaleString('fa-IR') + ' تخفیف</span>');
-    if (p.tags.includes('bestseller')) badges.push('<span class="badge badge-bestseller">پرفروش</span>');
-    if (!p.inStock) badges.push('<span class="badge badge-outofstock">ناموجود</span>');
+    if (p.inStock) {
+      if (discount > 0) badges.push('<span class="badge badge-sale">%' + discount.toLocaleString('fa-IR') + ' تخفیف</span>');
+      else if (p.tags.includes('new')) badges.push('<span class="badge badge-new">جدید</span>');
+      else if (p.tags.includes('bestseller')) badges.push('<span class="badge badge-bestseller">پرفروش</span>');
+    }
 
     const swatches = p.colors.slice(0, 4).map((c, i) =>
       '<button type="button" class="swatch" style="background:' + c + '" data-attribute="color" data-value="' + c + '" aria-label="رنگ ' + (window.HECUBA.COLOR_MAP[c] || (i + 1)) + '" title="' + (window.HECUBA.COLOR_MAP[c] || '') + '" aria-pressed="false"></button>'
@@ -501,10 +506,11 @@
             '<div class="ph-image ratio-3-4 img-secondary' + (p.image ? '' : ' tone-dark') + '">' + (p.image ? '<img class="ph-photo" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' : '<span>نمای دوم</span>') + '</div>' +
           '</a>' +
           '<div class="card-badges">' + badges.join('') + '</div>' +
+          (p.inStock ? '' : '<div class="oos-overlay"><span>ناموجود</span></div>') +
           '<button type="button" class="wishlist-btn" data-product-id="' + p.id + '" aria-pressed="false" aria-label="افزودن به علاقه‌مندی">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>' +
           '</button>' +
-          '<button type="button" class="quick-add-btn" data-quick-add="' + p.id + '">افزودن سریع</button>' +
+          (p.inStock ? '<button type="button" class="quick-add-btn" data-quick-add="' + p.id + '">افزودن سریع</button>' : '') +
         '</div>' +
         '<div class="info">' +
           '<span class="cat-label">' + p.category + '</span>' +

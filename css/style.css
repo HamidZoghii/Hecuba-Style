@@ -465,6 +465,25 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   z-index: 2;
 }
 
+.oos-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-text) 35%, transparent);
+}
+.oos-overlay span {
+  background: color-mix(in srgb, var(--color-text) 85%, transparent);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--fs-small);
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+}
+
 .wishlist-btn {
   position: absolute;
   top: var(--space-3);
@@ -559,6 +578,13 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 @media (min-width: 640px) { .product-scroller { grid-auto-columns: 38%; } }
 @media (min-width: 1024px) {
   .product-scroller { grid-auto-flow: initial; grid-template-columns: repeat(4, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
+  /* Guard: only used when a homepage grid count isn't a multiple of 4 (see HOME_GRID_COUNT in main.js) */
+  .product-scroller.grid-partial-row, .product-grid.grid-partial-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .grid-partial-row .product-card { flex: 0 1 calc(25% - (var(--space-6) * 3 / 4)); }
 }
 
 /* --------------------------------------------------------------------------
@@ -916,8 +942,8 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 
 @media (min-width: 1024px) {
   .hero .container { grid-template-columns: 1fr 1fr; }
-  .hero { padding-block: var(--space-16) var(--space-20); }
-  .hero-media .ph-image { min-height: 480px; }
+  .hero { padding-block: var(--space-10) var(--space-16); }
+  .hero-media .ph-image { aspect-ratio: unset; height: min(70vh, 620px); max-height: min(70vh, 620px); min-height: 0; }
 }
 
 /* --------------------------------------------------------------------------
@@ -942,27 +968,75 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .category-scroller { grid-auto-columns: unset; grid-template-columns: repeat(5, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
 }
 @media (min-width: 1024px) {
-  .category-scroller { grid-template-columns: repeat(9, 1fr); gap: var(--space-3); }
-  .category-card span { font-size: var(--fs-xs); }
+  .category-scroller {
+    grid-template-columns: unset;
+    grid-auto-flow: column;
+    grid-auto-columns: 136px;
+    overflow-x: auto;
+    margin-inline: calc(var(--container-pad) * -1);
+    padding-inline: var(--container-pad);
+  }
+  .category-card span { font-size: 14px; }
+  .category-scroller .category-card .ph-image {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    min-width: 128px;
+    min-height: 128px;
+    transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+  }
+  @media (hover: hover) {
+    .category-card:hover .ph-image {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------
    20. PROMO BANNER
    -------------------------------------------------------------------------- */
 .promo-banner {
-  background: var(--color-cta);
+  background: var(--color-primary-dark);
   border-radius: var(--radius-lg);
   color: #fff;
-  padding: var(--space-8) var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  align-items: flex-start;
+  padding: var(--space-6);
+  display: grid;
+  gap: var(--space-6);
 }
 .promo-banner h2 { color: #fff; }
 .promo-banner p { color: rgba(255,255,255,0.85); max-width: 42ch; }
+.promo-banner-media { position: relative; }
+.promo-banner-media .ph-image { border-radius: var(--radius-md); }
+.promo-discount-circle {
+  position: absolute;
+  top: var(--space-3);
+  inset-inline-start: var(--space-3);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: var(--fs-small);
+  box-shadow: var(--shadow-md);
+}
+.promo-banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+}
 @media (min-width: 768px) {
-  .promo-banner { flex-direction: row; align-items: center; justify-content: space-between; padding: var(--space-10) var(--space-10); }
+  .promo-banner { grid-template-columns: 280px 1fr; align-items: center; padding: var(--space-8); }
+}
+@media (min-width: 1024px) {
+  .promo-banner { grid-template-columns: 340px 1fr; padding: var(--space-10); gap: var(--space-10); }
 }
 
 /* --------------------------------------------------------------------------
@@ -988,12 +1062,26 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 .bundle-items { display: flex; align-items: center; gap: var(--space-2); }
 .bundle-items .ph-image { width: 84px; height: 84px; border-radius: var(--radius-md); flex-shrink: 0; }
 .bundle-plus { color: var(--color-text-muted); font-weight: 700; }
+.bundle-info { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .bundle-price-row { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
 .bundle-price-row .price { font-size: 1.4rem; font-weight: 700; font-family: var(--font-en), var(--font-fa); }
-.bundle-price-row .price-compare { text-decoration: line-through; color: var(--color-text-muted); font-family: var(--font-en), var(--font-fa); }
-.bundle-save { color: var(--color-primary); font-weight: 700; font-size: var(--fs-small); }
+.bundle-price-row .price-compare { text-decoration: line-through; color: var(--color-text); font-family: var(--font-en), var(--font-fa); }
+.bundle-save {
+  display: inline-flex;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+}
 @media (min-width: 768px) {
-  .bundle-card { grid-template-columns: auto 1fr auto; align-items: center; padding: var(--space-8); }
+  .bundle-card { grid-template-columns: auto 1fr; align-items: center; padding: var(--space-8); }
+}
+@media (min-width: 1024px) {
+  .bundle-card { grid-template-columns: minmax(260px, 340px) 1fr; }
+  .bundle-items .ph-image { width: 132px; height: 132px; }
+  .bundle-info { max-width: 46ch; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1001,6 +1089,8 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
    -------------------------------------------------------------------------- */
 .instagram-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); margin-top: var(--space-6); }
 @media (min-width: 768px) { .instagram-grid { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 1024px) { .instagram-grid { grid-template-columns: repeat(4, 1fr); } }
+.instagram-grid .ph-image::after { content: ""; position: absolute; inset: 0; background: var(--color-text); opacity: 0.08; }
 .instagram-head { text-align: center; max-width: 42ch; margin-inline: auto; }
 .instagram-head .btn { margin-top: var(--space-4); }
 
