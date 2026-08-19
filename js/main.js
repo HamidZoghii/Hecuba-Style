@@ -28,7 +28,7 @@
       rating: 4.8, reviews: 126, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.png',
+      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.png', image2: 'images/AX/texture-sage-lace.png',
       name: 'سوتین فرم‌دهنده پوش‌آپ', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 790000, comparePrice: 990000,
       colors: ['#202020', '#B96777', '#737C54'],
@@ -68,7 +68,7 @@
       rating: 4.7, reviews: 212, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.png',
+      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.png', image2: 'images/AX/panty-sage-lace.png',
       name: 'شورت تانگا دانتل', category: 'شورت زنانه', categorySlug: 'brief',
       price: 340000, comparePrice: null,
       colors: ['#202020', '#B96777', '#8E3045'],
@@ -239,7 +239,7 @@
       rating: 4.5, reviews: 18, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-009', sku: 'HEC-CMF-1009', image: 'images/loungewear-alt.jpg',
+      id: 'hb-009', sku: 'HEC-CMF-1009', image: 'images/loungewear-alt.jpg', image2: 'images/loungewear-alt2.jpg',
       name: 'ست راحتی خانگی دو تکه', category: 'لباس راحتی', categorySlug: 'loungewear',
       price: 750000, comparePrice: null,
       colors: ['#E8DFD2', '#9CA286'],
@@ -283,10 +283,17 @@
   /* Number of items shown per homepage product grid (New Arrivals / Best Sellers) */
   const HOME_GRID_COUNT = 8;
 
+  /* Product Card Quick Add: categories with single-part sizing (S/M/L...) can add
+     straight to cart from the card. bra/set/fantasy are deliberately excluded —
+     bra sizing is two-part (band + cup) and per brief §21/§26 must go through the
+     Size Finder; letting Quick Add skip that raises the return-rate risk. */
+  const SIMPLE_SIZING_CATEGORIES = ['brief', 'sleepwear', 'loungewear', 'bodysuit', 'bralette', 'swim'];
+
   window.HECUBA = window.HECUBA || {};
   window.HECUBA.PRODUCTS = PRODUCTS;
   window.HECUBA.CATEGORIES = CATEGORIES;
   window.HECUBA.HOME_GRID_COUNT = HOME_GRID_COUNT;
+  window.HECUBA.SIMPLE_SIZING_CATEGORIES = SIMPLE_SIZING_CATEGORIES;
 
   /* Category landing-page copy (→ WooCommerce term name/description) */
   const CATEGORY_INFO = {
@@ -486,6 +493,23 @@
   /* ------------------------------------------------------------------------
      05. PRODUCT CARD TEMPLATE (shared by Home / Shop / Category / Related)
      ------------------------------------------------------------------------ */
+  function quickAddPanelHTML(p) {
+    if (!p.inStock) return '';
+    const isSimpleSizing = SIMPLE_SIZING_CATEGORIES.indexOf(p.categorySlug) > -1;
+    if (isSimpleSizing) {
+      const sizeBtns = p.sizes.map(function (s) {
+        const available = p.colors.some(function (c) { return stockForVariant(p, c, s); });
+        const label = 'افزودن سایز ' + s + ' به سبد خرید' + (available ? '' : ' (ناموجود)');
+        return '<button type="button" class="size-btn" data-qa-add="' + p.id + '" data-qa-size="' + s + '"' +
+          (available ? '' : ' disabled') + ' aria-label="' + label + '">' + s + '</button>';
+      }).join('');
+      return '<div class="quick-add-panel"><div class="qa-sizes" role="group" aria-label="افزودن سریع - انتخاب سایز">' + sizeBtns + '</div></div>';
+    }
+    /* bra/set/fantasy: two-part bra sizing (band + cup) needs the Size Finder
+       (brief §21/§26) before checkout — Quick Add here would just raise returns. */
+    return '<div class="quick-add-panel"><a href="product.html?id=' + p.id + '" class="btn btn-primary btn-sm btn-block">انتخاب سایز</a></div>';
+  }
+
   function productCardHTML(p) {
     const discount = p.comparePrice ? Math.round((1 - p.price / p.comparePrice) * 100) : 0;
     const badges = [];
@@ -505,14 +529,14 @@
         '<div class="media">' +
           '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
             '<div class="ph-image ratio-3-4">' + (p.image ? '<img class="ph-photo" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' : '<span>' + p.category + '</span>') + '</div>' +
-            '<div class="ph-image ratio-3-4 img-secondary' + (p.image ? '' : ' tone-dark') + '">' + (p.image ? '<img class="ph-photo" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' : '<span>نمای دوم</span>') + '</div>' +
+            (p.image2 ? '<div class="ph-image ratio-3-4 img-secondary"><img class="ph-photo" src="' + p.image2 + '" alt="" loading="lazy"></div>' : '') +
           '</a>' +
           '<div class="card-badges">' + badges.join('') + '</div>' +
           (p.inStock ? '' : '<div class="oos-overlay"><span>ناموجود</span></div>') +
           '<button type="button" class="wishlist-btn" data-product-id="' + p.id + '" aria-pressed="false" aria-label="افزودن به علاقه‌مندی">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>' +
           '</button>' +
-          (p.inStock ? '<button type="button" class="quick-add-btn" data-quick-add="' + p.id + '">افزودن سریع</button>' : '') +
+          quickAddPanelHTML(p) +
         '</div>' +
         '<div class="info">' +
           '<span class="cat-label">' + p.category + '</span>' +
@@ -638,9 +662,11 @@
       showToast(added ? 'به علاقه‌مندی‌ها اضافه شد' : 'از علاقه‌مندی‌ها حذف شد');
       return;
     }
-    const quickAdd = e.target.closest('[data-quick-add]');
-    if (quickAdd) {
-      Store.addToCart(quickAdd.getAttribute('data-quick-add'), 1);
+    const qaBtn = e.target.closest('[data-qa-add]');
+    if (qaBtn) {
+      e.stopPropagation();
+      if (qaBtn.disabled) return;
+      Store.addToCart(qaBtn.getAttribute('data-qa-add'), 1, { size: qaBtn.getAttribute('data-qa-size') });
       showToast('به سبد خرید اضافه شد');
       return;
     }
