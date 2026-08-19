@@ -35,6 +35,7 @@
 <!-- ==========================================================================
      HEADER  (Component → XPRO Theme Builder: Header Part)
      ========================================================================== -->
+<div class="announcement-bar">ارسال رایگان برای سفارش‌های بالای <span class="num" data-announcement-price></span></div>
 <header class="site-header" id="site-header">
   <div class="container header-inner">
 
@@ -244,23 +245,23 @@
     <div class="container">
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
-        ارسال به سراسر ایران
+        <span class="trust-item-text"><span class="trust-title">ارسال به سراسر ایران</span><span class="trust-sub">۱ تا ۵ روز کاری</span></span>
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5M15 4l3 3-3 3M9 20l-3-3 3-3"/></svg>
-        ضمانت تعویض سایز
+        <span class="trust-item-text"><span class="trust-title">ضمانت تعویض سایز</span><span class="trust-sub">فرآیندی ساده و سریع</span></span>
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-4.5 7-11V5l-7-2-7 2v5c0 6.5 7 11 7 11z"/></svg>
-        پرداخت امن آنلاین
+        <span class="trust-item-text"><span class="trust-title">پرداخت امن آنلاین</span><span class="trust-sub">درگاه معتبر بانکی</span></span>
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
-        پشتیبانی پاسخگو
+        <span class="trust-item-text"><span class="trust-title">پشتیبانی پاسخگو</span><span class="trust-sub">شنبه تا پنجشنبه</span></span>
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8V6a4 4 0 118 0v2M3 8h14l-1 12H4L3 8z"/></svg>
-        ارسال رایگان بالای ۱.۵ میلیون
+        <span class="trust-item-text"><span class="trust-title">ارسال رایگان بالای ۱.۵ میلیون</span><span class="trust-sub">برای همه‌ی سفارش‌ها</span></span>
       </div>
     </div>
   </section>
@@ -370,10 +371,10 @@
           <h3 style="margin-bottom:6px;">ست کامل النا — سوتین، شورت و جوراب</h3>
           <p class="text-muted text-sm">هر تکه جدا هم قابل خریده، اما با هم صرفه‌ی بیشتری داره.</p>
           <div class="bundle-price-row" style="margin-top:10px;">
-            <span class="price num">۹۹۰,۰۰۰ تومان</span>
-            <span class="price-compare num">۱,۲۳۰,۰۰۰ تومان</span>
+            <span class="price num" id="bundle-price"></span>
+            <span class="price-compare num" id="bundle-price-compare"></span>
           </div>
-          <span class="bundle-save">۲۴۰,۰۰۰ تومان صرفه‌جویی</span>
+          <span class="bundle-save" id="bundle-save"></span>
           <a href="shop.html" class="btn btn-primary">مشاهده ست</a>
         </div>
       </div>
@@ -458,6 +459,7 @@
     <div class="container">
       <div class="final-cta">
         <h2>مدل مورد علاقه‌ات را پیدا کن</h2>
+        <p>از میان کالکشن متنوع هکوبا، چیزی که واقعاً بهت میاد رو انتخاب کن.</p>
         <a href="shop.html" class="btn btn-primary">مشاهده فروشگاه</a>
       </div>
     </div>
@@ -553,6 +555,11 @@
 
     var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; }).slice(0, GRID_COUNT);
     renderHomeGrid('#bestsellers-grid', bestItems);
+
+    var BUNDLE_PRICE = 990000, BUNDLE_COMPARE = 1230000;
+    document.getElementById('bundle-price').textContent = window.HECUBA.formatToman(BUNDLE_PRICE);
+    document.getElementById('bundle-price-compare').textContent = window.HECUBA.formatToman(BUNDLE_COMPARE);
+    document.getElementById('bundle-save').textContent = window.HECUBA.formatToman(BUNDLE_COMPARE - BUNDLE_PRICE) + ' صرفه‌جویی';
 
     window.HECUBA.renderProductList('#curated-grid', [byId('hb-022'), byId('hb-016')].filter(Boolean));
 

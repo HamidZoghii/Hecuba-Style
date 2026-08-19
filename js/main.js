@@ -306,7 +306,9 @@
      02. HELPERS
      ------------------------------------------------------------------------ */
   function formatToman(n) {
-    return n.toLocaleString('fa-IR') + ' تومان';
+    var grouped = Math.round(n).toLocaleString('en-US');
+    var persian = grouped.replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+    return persian + ' تومان';
   }
   window.HECUBA.formatToman = formatToman;
 
@@ -647,6 +649,12 @@
   /* ------------------------------------------------------------------------
      07. DRAWERS (Mobile Menu / Cart / Search) — generic open/close by data attrs
      ------------------------------------------------------------------------ */
+  function getFocusableEls(container) {
+    return Array.from(container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(function (el) { return el.offsetParent !== null; });
+  }
+
   function openDrawer(id) {
     const drawer = document.getElementById(id);
     const overlay = document.querySelector('.overlay[data-for="' + id + '"]') || document.getElementById('global-overlay');
@@ -655,8 +663,20 @@
     if (overlay) overlay.classList.add('is-open');
     drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    drawer._lastFocused = document.activeElement;
     const focusable = drawer.querySelector('button, a, input');
     if (focusable) focusable.focus({ preventScroll: true });
+
+    drawer._trapHandler = function (e) {
+      if (e.key !== 'Tab') return;
+      const els = getFocusableEls(drawer);
+      if (!els.length) return;
+      const first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    drawer.addEventListener('keydown', drawer._trapHandler);
   }
   function closeDrawer(id) {
     const drawer = document.getElementById(id);
@@ -666,6 +686,10 @@
     if (overlay) overlay.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    if (drawer._trapHandler) { drawer.removeEventListener('keydown', drawer._trapHandler); drawer._trapHandler = null; }
+    if (drawer._lastFocused && typeof drawer._lastFocused.focus === 'function') drawer._lastFocused.focus({ preventScroll: true });
+    drawer._lastFocused = null;
   }
   window.HECUBA.openDrawer = openDrawer;
   window.HECUBA.closeDrawer = closeDrawer;
@@ -1359,6 +1383,12 @@
     const citySelect = document.getElementById('checkout-city');
     const shippingCards = document.querySelectorAll('[data-shipping-method]');
 
+    shippingCards.forEach(function (card) {
+      const method = SHIPPING_METHODS[card.getAttribute('data-shipping-method')];
+      const priceEl = card.querySelector('.rc-price');
+      if (method && priceEl) priceEl.textContent = formatToman(method.cost);
+    });
+
     function updateShippingAvailability() {
       const isTehran = citySelect.value === 'تهران';
       shippingCards.forEach(card => {
@@ -1679,12 +1709,26 @@
   function initHeaderScrollState() {
     const header = document.querySelector('.site-header');
     if (!header) return;
-    let last = 0;
+    let ticking = false;
+    function update() {
+      header.classList.toggle('is-scrolled', window.scrollY > 80);
+      ticking = false;
+    }
     window.addEventListener('scroll', function () {
-      const y = window.scrollY;
-      header.classList.toggle('is-scrolled', y > 8);
-      last = y;
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
     }, { passive: true });
+  }
+
+  /* ------------------------------------------------------------------------
+     10l. ANNOUNCEMENT BAR — free-shipping threshold, rendered via formatToman
+     (single source of price formatting, per project rule)
+     ------------------------------------------------------------------------ */
+  function initAnnouncementBar() {
+    const el = document.querySelector('[data-announcement-price]');
+    if (el) el.textContent = formatToman(FREE_SHIPPING_THRESHOLD);
   }
 
   /* ------------------------------------------------------------------------
@@ -1717,6 +1761,7 @@
     initSearch();
     initHeaderScrollState();
     initNavDropdowns();
+    initAnnouncementBar();
   });
 
 })();

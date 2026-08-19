@@ -345,7 +345,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   transition: border-color var(--dur-fast) var(--ease);
 }
 .input::placeholder, .textarea::placeholder { color: var(--color-text-muted); }
-.input:focus, .textarea:focus, .select:focus { border-color: var(--color-primary); outline: none; }
+.input:focus, .textarea:focus, .select:focus { border-color: var(--color-primary); }
 .textarea { resize: vertical; min-height: 110px; }
 
 .field { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
@@ -371,7 +371,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   border-radius: var(--radius-sm);
   line-height: 1.4;
 }
-.badge-new { background: var(--color-primary); color: #fff; }
+.badge-new { background: var(--color-primary-dark); color: #fff; }
 .badge-sale { background: var(--color-cta); color: #fff; }
 .badge-bestseller { background: var(--color-text); color: #fff; }
 .badge-outofstock { background: var(--color-border); color: var(--color-text-muted); }
@@ -525,7 +525,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 }
 
 .product-card .info { display: flex; flex-direction: column; gap: 4px; padding-inline: 2px; }
-.product-card .cat-label { font-size: var(--fs-xs); color: var(--color-text-muted); }
+.product-card .cat-label { font-size: var(--fs-small); color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); }
 .product-card .name {
   font-size: var(--fs-body);
   font-weight: 600;
@@ -749,10 +749,15 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 }
 .trust-item { display: flex; align-items: center; gap: 10px; font-size: var(--fs-xs); color: var(--color-primary-dark); font-weight: 600; }
 .trust-item svg { flex-shrink: 0; color: var(--color-primary); width: 20px; height: 20px; }
+.trust-item-text { display: flex; flex-direction: column; gap: 2px; }
+.trust-sub { font-size: var(--fs-xs); font-weight: 400; color: var(--color-primary-dark); }
 @media (min-width: 768px) {
   .trust-strip .container { grid-template-columns: repeat(5, 1fr); }
   .trust-item { flex-direction: column; text-align: center; gap: 8px; }
   .trust-item svg { width: 24px; height: 24px; }
+}
+@media (min-width: 1024px) {
+  .trust-strip .container { padding-block: var(--space-8); }
 }
 
 .trust-badge-inline { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); color: var(--color-text-muted); }
@@ -761,12 +766,21 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 /* --------------------------------------------------------------------------
    16. HEADER  (→ XPRO Theme Builder Header Part)
    -------------------------------------------------------------------------- */
+.announcement-bar {
+  background: var(--color-primary-dark);
+  color: #fff;
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding-block: 8px;
+}
 .site-header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+  transition: box-shadow var(--dur-base) var(--ease);
 }
 .header-inner {
   display: flex;
@@ -774,6 +788,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   justify-content: space-between;
   gap: var(--space-3);
   padding-block: var(--space-3);
+  transition: padding-block var(--dur-base) var(--ease);
 }
 .logo {
   font-family: var(--font-fa);
@@ -810,10 +825,13 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
     font-weight: 600;
     font-size: var(--fs-body);
   }
-  .main-nav > li { position: relative; padding-block: var(--space-4); }
+  .main-nav > li { position: relative; padding-block: var(--space-4); transition: padding-block var(--dur-base) var(--ease); }
   .main-nav a:hover, .main-nav a.active, .main-nav button.active { color: var(--color-primary); }
   .main-nav .has-mega:hover .mega-menu,
   .main-nav .has-mega:focus-within .mega-menu { display: grid; }
+
+  .site-header.is-scrolled .header-inner { padding-block: var(--space-2); }
+  .site-header.is-scrolled .main-nav > li { padding-block: var(--space-2); }
 
   .mega-menu {
     position: absolute;
@@ -875,11 +893,11 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 }
 .footer-brand .logo { color: #fff; font-size: 1.5rem; }
 .footer-brand .logo span { color: var(--color-cta-light); }
-.footer-brand p { margin-top: var(--space-3); color: rgba(255,255,255,0.65); font-size: var(--fs-small); line-height: var(--lh-relaxed); max-width: 320px; }
+.footer-brand p { margin-top: var(--space-3); color: rgba(255,255,255,0.8); font-size: var(--fs-small); line-height: var(--lh-relaxed); max-width: 320px; }
 
 .footer-col h4 { color: #fff; font-size: var(--fs-small); font-weight: 700; margin-bottom: var(--space-4); }
 .footer-col ul { display: flex; flex-direction: column; gap: var(--space-3); }
-.footer-col a { color: rgba(255,255,255,0.7); font-size: var(--fs-small); }
+.footer-col a { color: rgba(255,255,255,0.8); font-size: var(--fs-small); }
 .footer-col a:hover { color: #fff; }
 
 .footer-social { display: flex; gap: var(--space-3); margin-top: var(--space-5); }
@@ -897,14 +915,14 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.2);
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px; text-align: center; color: rgba(255,255,255,0.55); line-height: 1.3;
+  font-size: 9px; text-align: center; color: rgba(255,255,255,0.8); line-height: 1.3;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.15);
   padding-block: var(--space-5);
   display: flex; flex-direction: column; gap: var(--space-3);
-  font-size: var(--fs-xs); color: rgba(255,255,255,0.55);
+  font-size: var(--fs-xs); color: rgba(255,255,255,0.8);
 }
 @media (min-width: 640px) {
   .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
@@ -1068,7 +1086,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 .bundle-price-row .price-compare { text-decoration: line-through; color: var(--color-text); font-family: var(--font-en), var(--font-fa); }
 .bundle-save {
   display: inline-flex;
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: #fff;
   font-weight: 700;
   font-size: 1rem;
@@ -1120,22 +1138,34 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   text-align: center;
   padding: var(--space-10) var(--space-5);
 }
-.final-cta h2 { margin-bottom: var(--space-5); }
+.final-cta h2 { margin-bottom: var(--space-3); }
+.final-cta p {
+  color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%);
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+@media (min-width: 1024px) {
+  .final-cta { padding-block: var(--space-16); }
+}
 
 /* --------------------------------------------------------------------------
    27. WHATSAPP FLOAT
    -------------------------------------------------------------------------- */
 .whatsapp-float {
   position: fixed;
-  bottom: var(--space-4);
+  bottom: calc(72px + var(--space-4));
   inset-inline-start: var(--space-4);
   z-index: var(--z-sticky);
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: #25D366;
+  background: var(--color-primary-dark);
   color: #fff;
   display: flex; align-items: center; justify-content: center;
   box-shadow: var(--shadow-md);
+}
+@media (min-width: 1024px) {
+  .whatsapp-float { bottom: var(--space-4); }
 }
 
 /* --------------------------------------------------------------------------
