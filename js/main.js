@@ -81,7 +81,7 @@
       id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/AX/panty-mocha-smooth.png',
       name: 'شورت فول شکم‌گیر', category: 'شورت زنانه', categorySlug: 'brief',
       price: 320000, comparePrice: 380000,
-      colors: ['#202020', '#C9A992'],
+      colors: ['#737C54', '#9CA286'],
       sizes: ['M', 'L', 'XL', '2XL'],
       material: 'میکروفایبر فرم‌دهنده', model: 'فول', usage: 'روزمره', brand: BRAND,
       description: 'پوشش کامل و فرم‌دهنده، برای روزهایی که به آرامش و ثبات بیشتری نیاز داری.',
