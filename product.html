@@ -41,41 +41,55 @@
     <nav aria-label="منوی اصلی" style="order:3;">
       <ul class="main-nav">
         <li><a href="index.html">خانه</a></li>
-        <li><a href="shop.html">فروشگاه</a></li>
         <li class="has-mega" tabindex="0">
-          <a href="shop.html">دسته‌بندی‌ها</a>
-          <div class="mega-menu">
+          <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-shop">فروشگاه</button>
+          <div class="mega-menu cols-2" id="mega-shop">
             <div>
-              <div class="col-title">لباس زیر</div>
+              <div class="col-title">دسته‌بندی محصولات</div>
               <ul>
                 <li><a href="category.html?cat=bra">سوتین</a></li>
                 <li><a href="category.html?cat=brief">شورت</a></li>
-                <li><a href="category.html?cat=set">ست</a></li>
+                <li><a href="category.html?cat=set">ست لباس زیر</a></li>
                 <li><a href="category.html?cat=bralette">نیم‌تنه</a></li>
                 <li><a href="category.html?cat=fantasy">فانتزی</a></li>
-              </ul>
-            </div>
-            <div>
-              <div class="col-title">پوشاک</div>
-              <ul>
-                <li><a href="category.html?cat=sleepwear">لباس خواب</a></li>
-                <li><a href="category.html?cat=loungewear">لباس راحتی</a></li>
                 <li><a href="category.html?cat=bodysuit">بادی</a></li>
+                <li><a href="category.html?cat=sleepwear">لباس خواب</a></li>
+                <li><a href="category.html?cat=swim">مایو و بیکینی</a></li>
+                <li><a href="category.html?cat=loungewear">لباس راحتی</a></li>
               </ul>
             </div>
             <div>
-              <div class="col-title">ساحلی</div>
               <ul>
-                <li><a href="category.html?cat=swim">مایو</a></li>
-                <li><a href="category.html?cat=swim">بیکینی</a></li>
+                <li><a href="shop.html?filter=sale">فروش ویژه</a></li>
+                <li><a href="size-guide.html">راهنمای سایز</a></li>
               </ul>
             </div>
           </div>
         </li>
-        <li><a href="shop.html?filter=new">جدیدها</a></li>
-        <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
-        <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
-        <li><a href="about.html">درباره ما</a></li>
+        <li class="has-mega" tabindex="0">
+          <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-guide">راهنما</button>
+          <div class="mega-menu cols-1" id="mega-guide">
+            <div>
+              <ul>
+                <li><a href="shipping.html">نحوه ارسال</a></li>
+                <li><a href="returns.html">شرایط مرجوعی و تعویض</a></li>
+                <li><a href="faq.html">سوالات متداول</a></li>
+                <li><a href="track-order.html">پیگیری سفارش</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="has-mega" tabindex="0">
+          <a href="about.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-about">درباره ما</a>
+          <div class="mega-menu cols-1" id="mega-about">
+            <div>
+              <ul>
+                <li><a href="blog.html">بلاگ</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a href="contact.html">تماس با ما</a></li>
       </ul>
     </nav>
 
@@ -95,13 +109,13 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>
         <span class="icon-badge-count" data-wishlist-count style="display:none;">0</span>
       </a>
+      <a href="account.html" class="btn-icon" aria-label="حساب کاربری">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 4-6 7.5-6s6 2 7.5 6"/></svg>
+      </a>
       <button type="button" class="btn-icon" data-open-drawer="cart-drawer" aria-label="سبد خرید" style="position:relative;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8V6a4 4 0 118 0v2M3 8h14l-1 12H4L3 8z"/></svg>
         <span class="icon-badge-count" data-cart-count style="display:none;">0</span>
       </button>
-      <a href="javascript:void(0)" class="btn-icon" aria-label="حساب کاربری" style="display:none;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 4-6 7.5-6s6 2 7.5 6"/></svg>
-      </a>
     </div>
   </div>
 </header>
@@ -119,13 +133,13 @@
   <div class="drawer-body">
     <ul class="mobile-nav-list">
       <li><a href="index.html">خانه</a></li>
-      <li><a href="shop.html">فروشگاه</a></li>
       <li>
         <details>
-          <summary>دسته‌بندی‌ها
+          <summary>فروشگاه
             <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </summary>
           <div class="mobile-sub-list">
+            <span class="col-title">دسته‌بندی محصولات</span>
             <a href="category.html?cat=bra">سوتین</a>
             <a href="category.html?cat=brief">شورت</a>
             <a href="category.html?cat=set">ست لباس زیر</a>
@@ -135,13 +149,26 @@
             <a href="category.html?cat=sleepwear">لباس خواب</a>
             <a href="category.html?cat=swim">مایو و بیکینی</a>
             <a href="category.html?cat=loungewear">لباس راحتی</a>
+            <a href="shop.html?filter=sale">فروش ویژه</a>
+            <a href="size-guide.html">راهنمای سایز</a>
           </div>
         </details>
       </li>
-      <li><a href="shop.html?filter=new">جدیدها</a></li>
-      <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
-      <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
+      <li>
+        <details>
+          <summary>راهنما
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="mobile-sub-list">
+            <a href="shipping.html">نحوه ارسال</a>
+            <a href="returns.html">شرایط مرجوعی و تعویض</a>
+            <a href="faq.html">سوالات متداول</a>
+            <a href="track-order.html">پیگیری سفارش</a>
+          </div>
+        </details>
+      </li>
       <li><a href="about.html">درباره ما</a></li>
+      <li><a href="blog.html">بلاگ</a></li>
       <li><a href="contact.html">تماس با ما</a></li>
     </ul>
   </div>
@@ -507,30 +534,30 @@
     <div class="footer-col">
       <h4>فروشگاه</h4>
       <ul>
-        <li><a href="shop.html">همه محصولات</a></li>
+        <li><a href="shop.html">دسته‌بندی محصولات</a></li>
         <li><a href="shop.html?filter=new">جدیدها</a></li>
         <li><a href="shop.html?filter=bestseller">پرفروش‌ها</a></li>
-        <li><a href="shop.html?filter=sale">تخفیف‌ها</a></li>
-        <li><a href="about.html">درباره ما</a></li>
-        <li><a href="blog.html">وبلاگ</a></li>
+        <li><a href="shop.html?filter=sale">فروش ویژه</a></li>
+        <li><a href="size-guide.html">راهنمای سایز</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h4>راهنما</h4>
       <ul>
-        <li><a href="faq.html">سؤالات پرتکرار</a></li>
-        <li><a href="size-guide.html">راهنمای سایز</a></li>
-        <li><a href="shipping.html">ارسال</a></li>
-        <li><a href="returns.html">تعویض و مرجوعی</a></li>
-        <li><a href="privacy.html">حریم خصوصی</a></li>
-        <li><a href="terms.html">قوانین و مقررات</a></li>
+        <li><a href="shipping.html">نحوه ارسال</a></li>
+        <li><a href="returns.html">شرایط مرجوعی و تعویض</a></li>
+        <li><a href="faq.html">سوالات متداول</a></li>
+        <li><a href="track-order.html">پیگیری سفارش</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h4>تماس با ما</h4>
       <ul>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="blog.html">بلاگ</a></li>
+        <li><a href="account.html">حساب کاربری</a></li>
         <li><a href="tel:02191000000" class="num">021-91000000</a></li>
         <li><a href="https://wa.me/989120000000" class="num">واتساپ: 09120000000</a></li>
         <li><a href="mailto:hello@hecubastyle.ir">hello@hecubastyle.ir</a></li>

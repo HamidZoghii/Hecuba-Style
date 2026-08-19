@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>علاقه‌مندی‌های من | هکوبا استایل</title>
-<meta name="description" content="محصولاتی که در فروشگاه هکوبا استایل ذخیره کرده‌ای.">
-<link rel="canonical" href="./wishlist.html">
+<title>پیگیری سفارش | هکوبا استایل</title>
+<meta name="description" content="با وارد کردن شماره سفارش و شماره موبایل، وضعیت سفارش خود را در هکوبا استایل پیگیری کن.">
+<link rel="canonical" href="./track-order.html">
 
 <!-- Google tag (gtag.js) — Placeholder, to be connected via Site Kit by Google in WordPress phase -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
@@ -57,7 +57,7 @@
           </div>
         </li>
         <li class="has-mega" tabindex="0">
-          <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mega-guide">راهنما</button>
+          <button type="button" class="active" aria-haspopup="true" aria-expanded="false" aria-controls="mega-guide">راهنما</button>
           <div class="mega-menu cols-1" id="mega-guide">
             <div>
               <ul>
@@ -200,27 +200,44 @@
   <div class="drawer-foot" id="cart-drawer-foot"></div>
 </aside>
 <!-- ==========================================================================
-     MAIN CONTENT — Wishlist Page
+     MAIN CONTENT — Track Order Page
+     UI-only front-end demo — no real order backend in the prototype.
      ========================================================================== -->
 <main id="main-content">
   <div class="container page-head">
     <nav class="breadcrumb" aria-label="مسیر صفحه">
       <a href="index.html">خانه</a>
       <span class="sep">/</span>
-      <span class="current">علاقه‌مندی‌ها</span>
+      <span class="current">پیگیری سفارش</span>
     </nav>
-    <h1>علاقه‌مندی‌های من</h1>
+    <h1>پیگیری سفارش</h1>
+    <p class="category-desc">شماره سفارش و شماره موبایلی که باهاش خرید کردی رو وارد کن تا وضعیت سفارشت رو ببینی.</p>
   </div>
 
-  <div class="container" style="padding-bottom: var(--space-16);">
-    <div class="empty-page-state" id="wishlist-empty-state" style="display:none;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>
-      <h2>هنوز محصولی ذخیره نکرده‌ای</h2>
-      <p>محصولاتی که دوست داری رو با علامت قلب ذخیره کن تا اینجا پیداشون کنی.</p>
-      <a href="shop.html" class="btn btn-primary">مشاهده فروشگاه</a>
+  <div class="container" id="track-order-root" style="padding-bottom: var(--space-16); max-width: 560px;">
+    <div class="cart-page-block">
+      <div class="form-row cols-2">
+        <div class="field">
+          <label for="track-order-number">شماره سفارش</label>
+          <input type="text" class="input num" id="track-order-number" placeholder="HEC-123456">
+        </div>
+        <div class="field">
+          <label for="track-order-phone">شماره موبایل</label>
+          <input type="tel" class="input num" id="track-order-phone" placeholder="09xxxxxxxxx">
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="track-order-submit-btn">پیگیری سفارش</button>
     </div>
 
-    <div class="product-grid" id="wishlist-grid" style="display:none;"></div>
+    <div class="cart-page-block" id="track-order-result" hidden style="margin-top: var(--space-6);">
+      <div class="cart-summary-row"><span>شماره سفارش</span><span class="val num" id="track-order-number-result"></span></div>
+      <ol class="order-timeline">
+        <li class="order-timeline-step is-done"><span class="step-dot"></span><span class="step-label">ثبت سفارش</span></li>
+        <li class="order-timeline-step is-done"><span class="step-dot"></span><span class="step-label">آماده‌سازی</span></li>
+        <li class="order-timeline-step is-current"><span class="step-dot"></span><span class="step-label">تحویل به پست</span></li>
+        <li class="order-timeline-step"><span class="step-dot"></span><span class="step-label">تحویل به مشتری</span></li>
+      </ol>
+    </div>
   </div>
 </main>
 
@@ -294,7 +311,7 @@
 <script src="js/main.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    window.HECUBA.initWishlistPage();
+    window.HECUBA.initTrackOrderPage();
     document.getElementById('footer-year').textContent = new Date().getFullYear();
   });
 </script>

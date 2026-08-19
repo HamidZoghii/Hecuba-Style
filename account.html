@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>علاقه‌مندی‌های من | هکوبا استایل</title>
-<meta name="description" content="محصولاتی که در فروشگاه هکوبا استایل ذخیره کرده‌ای.">
-<link rel="canonical" href="./wishlist.html">
+<title>حساب کاربری | هکوبا استایل</title>
+<meta name="description" content="ورود یا ثبت‌نام در حساب کاربری هکوبا استایل. برای خرید از هکوبا نیازی به ساخت حساب نیست.">
+<link rel="canonical" href="./account.html">
 
 <!-- Google tag (gtag.js) — Placeholder, to be connected via Site Kit by Google in WordPress phase -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
@@ -200,27 +200,66 @@
   <div class="drawer-foot" id="cart-drawer-foot"></div>
 </aside>
 <!-- ==========================================================================
-     MAIN CONTENT — Wishlist Page
+     MAIN CONTENT — Account Page
+     UI-only in the prototype (login/OTP/sign-up have no real backend).
+     Guest Checkout stays mandatory per brief §15 — account creation is optional.
      ========================================================================== -->
 <main id="main-content">
   <div class="container page-head">
     <nav class="breadcrumb" aria-label="مسیر صفحه">
       <a href="index.html">خانه</a>
       <span class="sep">/</span>
-      <span class="current">علاقه‌مندی‌ها</span>
+      <span class="current">حساب کاربری</span>
     </nav>
-    <h1>علاقه‌مندی‌های من</h1>
+    <h1>حساب کاربری</h1>
+    <p class="category-desc">برای خرید نیازی به ساخت حساب نیست — <a href="shop.html">مستقیم برو به فروشگاه</a>.</p>
   </div>
 
-  <div class="container" style="padding-bottom: var(--space-16);">
-    <div class="empty-page-state" id="wishlist-empty-state" style="display:none;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.7 2 4 5.6 4c2 0 3.6 1.2 4.4 2.7C10.8 5.2 12.4 4 14.4 4 18 4 19.6 7.7 18 11.2c-2.5 4.7-10 9.3-10 9.3z"/></svg>
-      <h2>هنوز محصولی ذخیره نکرده‌ای</h2>
-      <p>محصولاتی که دوست داری رو با علامت قلب ذخیره کن تا اینجا پیداشون کنی.</p>
-      <a href="shop.html" class="btn btn-primary">مشاهده فروشگاه</a>
-    </div>
+  <div class="container" id="account-page-root" style="padding-bottom: var(--space-16); max-width: 480px;">
+    <div class="cart-page-block">
+      <div class="account-tabs" role="tablist" aria-label="ورود یا ثبت‌نام">
+        <button type="button" class="account-tab active" data-tab="login" role="tab" id="account-tab-login" aria-selected="true" aria-controls="account-panel-login" tabindex="0">ورود</button>
+        <button type="button" class="account-tab" data-tab="signup" role="tab" id="account-tab-signup" aria-selected="false" aria-controls="account-panel-signup" tabindex="-1">ثبت‌نام</button>
+      </div>
 
-    <div class="product-grid" id="wishlist-grid" style="display:none;"></div>
+      <div id="account-panel-login" role="tabpanel" aria-labelledby="account-tab-login">
+        <div class="finder-step active" id="account-login-step-phone">
+          <div class="field">
+            <label for="account-login-phone">شماره موبایل</label>
+            <div class="otp-row">
+              <input type="tel" class="input num" id="account-login-phone" placeholder="09xxxxxxxxx">
+              <button type="button" class="btn btn-outline" id="account-send-otp-btn">ارسال کد</button>
+            </div>
+          </div>
+        </div>
+        <div class="finder-step" id="account-login-step-otp">
+          <div class="field">
+            <label for="account-otp-input">کد تایید پیامکی</label>
+            <input type="text" class="input num" id="account-otp-input" maxlength="6" placeholder="کد ۶ رقمی">
+          </div>
+          <p class="otp-note" id="account-otp-note">کد تایید (نمونه) به شماره وارد شده پیامک شد.</p>
+          <button type="button" class="btn btn-primary btn-block" id="account-login-submit-btn">ورود</button>
+        </div>
+      </div>
+
+      <div id="account-panel-signup" role="tabpanel" aria-labelledby="account-tab-signup" hidden>
+        <form id="account-signup-form">
+          <div class="field">
+            <label for="account-signup-name">نام و نام خانوادگی</label>
+            <input type="text" class="input" id="account-signup-name" placeholder="نام شما">
+          </div>
+          <div class="field">
+            <label for="account-signup-phone">شماره موبایل</label>
+            <input type="tel" class="input num" id="account-signup-phone" placeholder="09xxxxxxxxx">
+          </div>
+          <div class="field">
+            <label for="account-signup-email">ایمیل (اختیاری)</label>
+            <input type="email" class="input" id="account-signup-email" placeholder="you@example.com">
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="account-signup-submit-btn">ثبت‌نام</button>
+        </form>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -294,7 +333,7 @@
 <script src="js/main.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    window.HECUBA.initWishlistPage();
+    window.HECUBA.initAccountPage();
     document.getElementById('footer-year').textContent = new Date().getFullYear();
   });
 </script>

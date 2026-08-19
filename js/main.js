@@ -1550,6 +1550,124 @@
   window.HECUBA.initContactPage = initContactPage;
 
   /* ------------------------------------------------------------------------
+     10i. TRACK ORDER PAGE (UI-only front-end demo)
+     ------------------------------------------------------------------------ */
+  function initTrackOrderPage() {
+    const root = document.getElementById('track-order-root');
+    if (!root) return;
+    const btn = document.getElementById('track-order-submit-btn');
+    const orderNumberInput = document.getElementById('track-order-number');
+    const phoneInput = document.getElementById('track-order-phone');
+    const result = document.getElementById('track-order-result');
+    btn.addEventListener('click', function () {
+      [orderNumberInput, phoneInput].forEach(el => el.style.borderColor = '');
+      let invalid = null;
+      if (!orderNumberInput.value.trim()) invalid = orderNumberInput;
+      if (!/^09\d{9}$/.test(phoneInput.value.trim())) invalid = invalid || phoneInput;
+      if (invalid) {
+        invalid.style.borderColor = 'var(--color-error)';
+        showToast('شماره سفارش و شماره موبایل را درست وارد کن');
+        invalid.focus();
+        return;
+      }
+      result.hidden = false;
+      document.getElementById('track-order-number-result').textContent = orderNumberInput.value.trim();
+      showToast('سفارش شما پیدا شد (نمونه)');
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+  window.HECUBA.initTrackOrderPage = initTrackOrderPage;
+
+  /* ------------------------------------------------------------------------
+     10j. ACCOUNT PAGE (Login / Sign up — UI-only, OTP placeholder per brief §66)
+     ------------------------------------------------------------------------ */
+  function initAccountPage() {
+    const root = document.getElementById('account-page-root');
+    if (!root) return;
+
+    /* Tabs */
+    const tabs = Array.from(root.querySelectorAll('.account-tab'));
+    const panels = { login: document.getElementById('account-panel-login'), signup: document.getElementById('account-panel-signup') };
+    function selectTab(name) {
+      tabs.forEach(tab => {
+        const isActive = tab.getAttribute('data-tab') === name;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+      });
+      Object.keys(panels).forEach(key => { panels[key].hidden = key !== name; });
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', function () { selectTab(tab.getAttribute('data-tab')); tab.focus(); });
+      tab.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        const nextIndex = e.key === 'ArrowLeft' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+        const nextTab = tabs[nextIndex];
+        selectTab(nextTab.getAttribute('data-tab'));
+        nextTab.focus();
+      });
+    });
+
+    /* Login — phone -> OTP (mirrors checkout.html's OTP placeholder) */
+    const loginPhoneStep = document.getElementById('account-login-step-phone');
+    const loginOtpStep = document.getElementById('account-login-step-otp');
+    const loginPhoneInput = document.getElementById('account-login-phone');
+    const sendOtpBtn = document.getElementById('account-send-otp-btn');
+    const otpNote = document.getElementById('account-otp-note');
+    const otpInput = document.getElementById('account-otp-input');
+    const loginSubmitBtn = document.getElementById('account-login-submit-btn');
+    if (sendOtpBtn) {
+      sendOtpBtn.addEventListener('click', function () {
+        const phone = loginPhoneInput.value.trim();
+        if (!/^09\d{9}$/.test(phone)) {
+          loginPhoneInput.style.borderColor = 'var(--color-error)';
+          showToast('شماره موبایل را درست وارد کن');
+          return;
+        }
+        loginPhoneInput.style.borderColor = '';
+        loginPhoneStep.classList.remove('active');
+        loginOtpStep.classList.add('active');
+        otpNote.classList.add('show');
+        showToast('کد تایید به شماره شما پیامک شد (نمونه)');
+        otpInput.focus();
+      });
+    }
+    if (loginSubmitBtn) {
+      loginSubmitBtn.addEventListener('click', function () {
+        if (!/^\d{4,6}$/.test(otpInput.value.trim())) {
+          otpInput.style.borderColor = 'var(--color-error)';
+          showToast('کد تایید را درست وارد کن');
+          return;
+        }
+        showToast('با موفقیت وارد شدید (نمونه)');
+      });
+    }
+
+    /* Sign up */
+    const signupBtn = document.getElementById('account-signup-submit-btn');
+    if (signupBtn) {
+      signupBtn.addEventListener('click', function () {
+        const name = document.getElementById('account-signup-name');
+        const phone = document.getElementById('account-signup-phone');
+        [name, phone].forEach(el => el.style.borderColor = '');
+        let invalid = null;
+        if (!name.value.trim()) invalid = name;
+        if (!/^09\d{9}$/.test(phone.value.trim())) invalid = invalid || phone;
+        if (invalid) {
+          invalid.style.borderColor = 'var(--color-error)';
+          showToast('لطفاً فیلدهای ضروری را کامل کن');
+          invalid.focus();
+          return;
+        }
+        showToast('ثبت‌نام شما با موفقیت انجام شد (نمونه)');
+        document.getElementById('account-signup-form').reset();
+      });
+    }
+  }
+  window.HECUBA.initAccountPage = initAccountPage;
+
+  /* ------------------------------------------------------------------------
      10b. STICKY HEADER SHADOW ON SCROLL
      ------------------------------------------------------------------------ */
   function initHeaderScrollState() {
@@ -1564,12 +1682,35 @@
   }
 
   /* ------------------------------------------------------------------------
+     10k. NAV DROPDOWNS — keep aria-expanded in sync with the CSS hover/focus
+     open state (display is driven entirely by CSS; this only mirrors state)
+     ------------------------------------------------------------------------ */
+  function initNavDropdowns() {
+    document.querySelectorAll('.main-nav .has-mega').forEach(function (li) {
+      const trigger = li.querySelector(':scope > a, :scope > button');
+      if (!trigger) return;
+      const open = function () { trigger.setAttribute('aria-expanded', 'true'); };
+      const close = function () { trigger.setAttribute('aria-expanded', 'false'); };
+      li.addEventListener('mouseenter', open);
+      li.addEventListener('mouseleave', close);
+      li.addEventListener('focusin', open);
+      li.addEventListener('focusout', function (e) {
+        if (!li.contains(e.relatedTarget)) close();
+      });
+      li.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { close(); trigger.blur(); }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      11. INIT
      ------------------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', function () {
     Store.updateBadges();
     initSearch();
     initHeaderScrollState();
+    initNavDropdowns();
   });
 
 })();

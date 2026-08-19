@@ -785,7 +785,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
     font-size: var(--fs-body);
   }
   .main-nav > li { position: relative; padding-block: var(--space-4); }
-  .main-nav a:hover, .main-nav a.active { color: var(--color-primary); }
+  .main-nav a:hover, .main-nav a.active, .main-nav button.active { color: var(--color-primary); }
   .main-nav .has-mega:hover .mega-menu,
   .main-nav .has-mega:focus-within .mega-menu { display: grid; }
 
@@ -799,14 +799,15 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     padding: var(--space-6);
-    grid-template-columns: repeat(3, 180px);
     gap: var(--space-6);
     z-index: var(--z-sticky);
   }
+  .mega-menu.cols-1 { grid-template-columns: minmax(200px, 240px); }
+  .mega-menu.cols-2 { grid-template-columns: repeat(2, minmax(180px, 220px)); }
   html[dir="rtl"] .mega-menu { transform: translateX(-50%); }
   .mega-menu .col-title { font-size: var(--fs-xs); color: var(--color-text-muted); margin-bottom: var(--space-3); font-weight: 700; }
   .mega-menu ul { display: flex; flex-direction: column; gap: 10px; }
-  .mega-menu a { font-weight: 500; font-size: var(--fs-small); }
+  .mega-menu a, .mega-menu button { font-weight: 500; font-size: var(--fs-small); }
   .mega-menu a:hover { color: var(--color-primary); }
 }
 
@@ -832,6 +833,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 .mobile-nav-list .icon { transition: transform var(--dur-base) var(--ease); color: var(--color-text-muted); }
 .mobile-sub-list { padding-bottom: var(--space-3); display: flex; flex-direction: column; gap: var(--space-3); }
 .mobile-sub-list a { padding: var(--space-1) 2px; font-weight: 400; color: var(--color-text-muted); }
+.mobile-sub-list .col-title { font-size: var(--fs-xs); color: var(--color-text-muted); font-weight: 700; margin-block: var(--space-2) var(--space-1); }
 
 /* --------------------------------------------------------------------------
    17. FOOTER  (→ XPRO Theme Builder Footer Part)
@@ -1435,6 +1437,35 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
 .discount-msg { font-size: var(--fs-xs); margin-top: 6px; }
 .discount-msg.ok { color: var(--color-success); }
 .discount-msg.err { color: var(--color-error); }
+
+/* --------------------------------------------------------------------------
+   36. ORDER TIMELINE (Track Order page)
+   -------------------------------------------------------------------------- */
+.order-timeline { display: flex; flex-direction: column; gap: var(--space-5); list-style: none; margin-top: var(--space-6); }
+.order-timeline-step { display: flex; align-items: center; gap: var(--space-3); color: var(--color-text-muted); }
+.order-timeline-step .step-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--color-border); flex-shrink: 0; }
+.order-timeline-step.is-done, .order-timeline-step.is-current { color: var(--color-text); font-weight: 600; }
+.order-timeline-step.is-done .step-dot, .order-timeline-step.is-current .step-dot { background: var(--color-primary); }
+@media (min-width: 768px) {
+  .order-timeline { flex-direction: row; align-items: flex-start; }
+  .order-timeline-step { flex-direction: column; align-items: center; text-align: center; flex: 1; position: relative; gap: var(--space-2); }
+  .order-timeline-step:not(:last-child)::after {
+    content: ""; position: absolute; top: 6px; inset-inline-start: 50%; width: 100%; height: 2px; background: var(--color-border); z-index: 0;
+  }
+  .order-timeline-step.is-done:not(:last-child)::after { background: var(--color-primary); }
+  .order-timeline-step .step-dot { position: relative; z-index: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   37. ACCOUNT TABS (Account page — Login / Sign up)
+   -------------------------------------------------------------------------- */
+.account-tabs { display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-6); }
+.account-tab {
+  flex: 1; padding: var(--space-3) var(--space-2); text-align: center;
+  font-weight: 600; color: var(--color-text-muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.account-tab.active { color: var(--color-primary); border-color: var(--color-primary); }
 
 .empty-drawer-state, .empty-page-state { text-align: center; padding-block: var(--space-8); display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
 .empty-page-state { padding-block: var(--space-20); }
