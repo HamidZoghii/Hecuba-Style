@@ -245,7 +245,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   margin-bottom: var(--space-6);
 }
 .section-head .section-title { margin: 0; }
-.section-head .section-sub { color: var(--color-text-muted); font-size: var(--fs-body); margin-top: var(--space-1); }
+.section-head .section-sub { color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); font-size: var(--fs-body); margin-top: var(--space-1); }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
@@ -534,7 +534,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 }
 .product-card .price-row { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
 .product-card .price { font-weight: 700; font-size: var(--fs-body-lg); font-family: var(--font-en), var(--font-fa); }
-.product-card .price-compare { font-size: var(--fs-small); color: var(--color-text-muted); text-decoration: line-through; font-family: var(--font-en), var(--font-fa); }
+.product-card .price-compare { font-size: var(--fs-small); color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); text-decoration: line-through; font-family: var(--font-en), var(--font-fa); }
 .product-card .discount { font-size: var(--fs-xs); color: var(--color-cta); font-weight: 700; }
 
 .swatches { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
@@ -547,7 +547,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   padding: 0;
 }
 .swatch[aria-pressed="true"] { outline: 2px solid var(--color-primary); outline-offset: 2px; }
-.swatch-more { font-size: var(--fs-xs); color: var(--color-text-muted); }
+.swatch-more { font-size: var(--fs-xs); color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); }
 
 .product-grid {
   display: grid;
@@ -838,18 +838,28 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
     top: 100%;
     inset-inline-start: 50%;
     transform: translateX(50%);
+    align-items: start;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     padding: var(--space-6);
     gap: var(--space-6);
-    z-index: var(--z-sticky);
+    z-index: var(--z-drawer);
   }
   .mega-menu.cols-1 { grid-template-columns: minmax(200px, 240px); }
   .mega-menu.cols-2 { grid-template-columns: repeat(2, minmax(180px, 220px)); }
   html[dir="rtl"] .mega-menu { transform: translateX(-50%); }
+  html[dir="rtl"] .mega-menu.cols-2 { inset-inline-start: auto; inset-inline-end: 0; transform: none; }
   .mega-menu .col-title { font-size: var(--fs-xs); color: var(--color-text-muted); margin-bottom: var(--space-3); font-weight: 700; }
+  .mega-menu.cols-2 > div:last-child::before {
+    content: "دسترسی سریع";
+    display: block;
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+  }
   .mega-menu ul { display: flex; flex-direction: column; gap: 10px; }
   .mega-menu a, .mega-menu button { font-weight: 500; font-size: var(--fs-small); }
   .mega-menu a:hover { color: var(--color-primary); }
@@ -989,8 +999,10 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .category-scroller {
     grid-template-columns: unset;
     grid-auto-flow: column;
-    grid-auto-columns: 136px;
+    grid-auto-columns: 120px;
+    gap: var(--space-3);
     overflow-x: auto;
+    justify-content: center;
     margin-inline: calc(var(--container-pad) * -1);
     padding-inline: var(--container-pad);
   }
@@ -998,8 +1010,6 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .category-scroller .category-card .ph-image {
     aspect-ratio: 1/1;
     border-radius: 50%;
-    min-width: 128px;
-    min-height: 128px;
     transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
   }
   @media (hover: hover) {
@@ -1097,7 +1107,6 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .bundle-card { grid-template-columns: auto 1fr; align-items: center; padding: var(--space-8); }
 }
 @media (min-width: 1024px) {
-  .bundle-card { grid-template-columns: minmax(260px, 340px) 1fr; }
   .bundle-items .ph-image { width: 132px; height: 132px; }
   .bundle-info { max-width: 46ch; }
 }
@@ -1110,6 +1119,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 @media (min-width: 1024px) { .instagram-grid { grid-template-columns: repeat(4, 1fr); } }
 .instagram-grid .ph-image::after { content: ""; position: absolute; inset: 0; background: var(--color-text); opacity: 0.08; }
 .instagram-head { text-align: center; max-width: 42ch; margin-inline: auto; }
+.instagram-head p { color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); }
 .instagram-head .btn { margin-top: var(--space-4); }
 
 /* --------------------------------------------------------------------------
@@ -1117,7 +1127,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
    -------------------------------------------------------------------------- */
 .social-proof {
   text-align: center;
-  color: var(--color-primary-dark);
+  color: var(--color-text);
   font-weight: 600;
   font-size: var(--fs-body-lg);
   padding-block: var(--space-6);
@@ -1195,6 +1205,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 .page-head h1 { margin-bottom: var(--space-2); }
 .page-head .breadcrumb { margin-bottom: var(--space-3); }
 .category-desc { color: var(--color-text-muted); font-size: var(--fs-body); max-width: 62ch; line-height: var(--lh-relaxed); }
+.category-desc a { color: var(--color-primary-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
 .catalog-layout {
   display: grid;
@@ -1587,6 +1598,13 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
 }
 .account-tab.active { color: var(--color-primary); border-color: var(--color-primary); }
 
+/* Overrides an inline max-width on #account-page-root (HTML edits out of scope
+   this phase) — same technique CLAUDE.md documents for the drawer specificity bug. */
+@media (min-width: 1024px) {
+  #account-page-root { max-width: 560px !important; }
+  #account-page-root .cart-page-block { padding: var(--space-8); }
+}
+
 .empty-drawer-state, .empty-page-state { text-align: center; padding-block: var(--space-8); display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
 .empty-page-state { padding-block: var(--space-20); }
 .empty-drawer-state svg, .empty-page-state svg { color: var(--color-border); }
@@ -1642,8 +1660,8 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
 .radio-card .rc-price { font-weight: 700; font-size: var(--fs-small); font-family: var(--font-en), var(--font-fa); flex-shrink: 0; }
 .radio-card.disabled { opacity: 0.5; cursor: not-allowed; }
 
-.otp-row { display: flex; gap: 8px; margin-top: 12px; }
-.otp-row input { flex: 1; }
+.otp-row { display: flex; align-items: stretch; gap: 8px; margin-top: 12px; }
+.otp-row input { flex: 1; min-height: 48px; }
 .otp-note { font-size: var(--fs-xs); color: var(--color-text-muted); margin-top: 8px; display: none; }
 .otp-note.show { display: block; }
 
