@@ -1111,14 +1111,6 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .promo-banner { grid-template-columns: 340px 1fr; padding: var(--space-10); gap: var(--space-10); }
 }
 
-.promo-banner.promo-banner--image-only {
-  display: block;
-  background: none;
-  padding: 0;
-  border-radius: 0;
-}
-.promo-banner-img { display: block; width: 100%; height: auto; }
-
 /* --------------------------------------------------------------------------
    21. CURATED / EDITORIAL SPLIT
    -------------------------------------------------------------------------- */
