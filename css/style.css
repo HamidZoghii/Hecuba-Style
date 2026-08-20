@@ -1378,6 +1378,9 @@ input[type="range"] { width: 100%; accent-color: var(--color-primary); }
     background: transparent;
     display: block;
     overflow-y: auto;
+    /* Desktop sidebar, not a drawer — must lose to the sticky header (40)
+       so an open mega-menu always renders on top of it. */
+    z-index: 1;
   }
   .filter-panel-head, .filter-panel-foot { display: none; }
   .filter-panel-body { padding: 0; overflow: visible; }
