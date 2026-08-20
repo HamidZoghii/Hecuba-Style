@@ -341,7 +341,6 @@
             <span class="price num" id="bundle-price"></span>
             <span class="price-compare num" id="bundle-price-compare"></span>
           </div>
-          <span class="bundle-save" id="bundle-save"></span>
           <a href="product.html?id=hb-025" class="btn btn-primary" aria-label="خرید ست کامل با صرفه‌جویی">خرید ست کامل — <span id="bundle-cta-save" class="num"></span> صرفه‌جویی</a>
         </div>
       </div>
@@ -528,7 +527,6 @@
     document.getElementById('bundle-price').textContent = window.HECUBA.formatToman(bundleProduct.price);
     document.getElementById('bundle-price-compare').textContent = window.HECUBA.formatToman(bundleProduct.comparePrice);
     var bundleSaveText = window.HECUBA.formatToman(bundleProduct.comparePrice - bundleProduct.price);
-    document.getElementById('bundle-save').textContent = bundleSaveText + ' صرفه‌جویی';
     document.getElementById('bundle-cta-save').textContent = bundleSaveText;
 
     window.HECUBA.renderProductList('#curated-grid', [byId('hb-022'), byId('hb-016')].filter(Boolean));

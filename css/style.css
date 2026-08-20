@@ -1124,17 +1124,42 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
    22. BUNDLE
    -------------------------------------------------------------------------- */
 .bundle-card {
-  background: var(--color-surface);
+  background-color: var(--color-surface);
+  background-image: url('images/AX/bundle-bg.jpg');
+  background-size: cover;
+  background-position: 25% center; /* mobile-first: severe crop here, tuned to keep the bra+panty in frame */
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
+  min-height: 240px; /* defensive floor; current content already exceeds this so it's a no-op today */
   display: grid;
   gap: var(--space-5);
 }
 .bundle-items { display: flex; align-items: center; gap: var(--space-2); }
 .bundle-items .ph-image { width: 84px; height: 84px; border-radius: var(--radius-md); flex-shrink: 0; }
-.bundle-plus { color: var(--color-text-muted); font-weight: 700; }
-.bundle-info { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.bundle-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  color: var(--color-text-muted);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+/* Photo backdrop (below) sits behind this column on desktop, so it gets its
+   own near-opaque panel to guarantee text contrast — see phase 7-k. */
+.bundle-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
 /* The bundle CTA's text is longer than a typical button label (includes the
    savings amount) and has no safe width cap below 1024px — let it wrap
    instead of forcing nowrap into a column that isn't wide enough for it. */
@@ -1155,7 +1180,12 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   border-radius: var(--radius-pill);
 }
 @media (min-width: 768px) {
-  .bundle-card { grid-template-columns: auto 1fr; align-items: center; padding: var(--space-8); }
+  .bundle-card {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    padding: var(--space-8);
+    background-position: left center; /* crop here is mild & mostly vertical — near-full width shown regardless */
+  }
 }
 @media (min-width: 1024px) {
   .bundle-items .ph-image { width: 132px; height: 132px; }
