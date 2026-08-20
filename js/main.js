@@ -280,8 +280,11 @@
     { name: 'راحتی', slug: 'loungewear' }
   ];
 
-  /* Number of items shown per homepage product grid (New Arrivals / Best Sellers) */
-  const HOME_GRID_COUNT = 8;
+  /* "New Arrivals" is a teaser — its "see all" link does the rest of the job.
+     "Best Sellers" is the highest-converting section on the homepage and gets
+     more real estate. This split encodes a real hierarchy between the two. */
+  const NEW_ARRIVALS_COUNT = 4;
+  const BESTSELLERS_COUNT = 8;
 
   /* Product Card Quick Add: categories with single-part sizing (S/M/L...) can add
      straight to cart from the card. bra/set/fantasy are deliberately excluded —
@@ -292,7 +295,8 @@
   window.HECUBA = window.HECUBA || {};
   window.HECUBA.PRODUCTS = PRODUCTS;
   window.HECUBA.CATEGORIES = CATEGORIES;
-  window.HECUBA.HOME_GRID_COUNT = HOME_GRID_COUNT;
+  window.HECUBA.NEW_ARRIVALS_COUNT = NEW_ARRIVALS_COUNT;
+  window.HECUBA.BESTSELLERS_COUNT = BESTSELLERS_COUNT;
   window.HECUBA.SIMPLE_SIZING_CATEGORIES = SIMPLE_SIZING_CATEGORIES;
 
   /* Category landing-page copy (→ WooCommerce term name/description) */

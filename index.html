@@ -230,8 +230,8 @@
         <h1 class="display">زیبایی، راحتی،<br>انتخاب تو.</h1>
         <p>لباس زیر و پوشاک زنانه برای هر روز، هر سلیقه و هر حال خوب — با تنوع مدل واقعی و تجربه‌ی خریدی که می‌توانی بهش اعتماد کنی.</p>
         <div class="hero-cta-group">
-          <a href="shop.html" class="btn btn-primary">مشاهده محصولات</a>
-          <a href="shop.html?filter=new" class="btn btn-outline">کالکشن جدید</a>
+          <a href="shop.html" class="btn btn-primary">خرید از کالکشن جدید</a>
+          <a href="shop.html" class="btn btn-outline">دیدن همه‌ی مدل‌ها</a>
         </div>
       </div>
       <div class="hero-media">
@@ -329,7 +329,7 @@
         <div class="promo-banner-content">
           <h2>تا ۳۰٪ تخفیف روی انتخاب‌های ویژه</h2>
           <p>مدل‌های محدود با شرایط ویژه — تا تمام نشده، انتخاب کن.</p>
-          <a href="shop.html?filter=sale" class="btn btn-primary">مشاهده تخفیف‌ها</a>
+          <a href="shop.html?filter=sale" class="btn btn-primary">دیدن مدل‌های تخفیف‌دار</a>
         </div>
       </div>
     </div>
@@ -343,7 +343,7 @@
           <span class="eyebrow">انتخاب‌های هکوبا</span>
           <h2>چیزهایی که خودمون هم می‌پوشیم</h2>
           <p>یک گلچین کوچک از مدل‌هایی که بیشترین حس راحتی و زیبایی رو با هم دارن. این‌ها نه پرفروش‌ترین‌ها، بلکه علاقه‌ی تیم هکوبا هستن.</p>
-          <a href="shop.html" class="btn btn-outline">مشاهده کالکشن</a>
+          <a href="shop.html" class="btn btn-outline">دیدن انتخاب‌های هکوبا</a>
         </div>
         <div class="product-grid" id="curated-grid" style="grid-template-columns:repeat(2,1fr);"></div>
       </div>
@@ -375,7 +375,7 @@
             <span class="price-compare num" id="bundle-price-compare"></span>
           </div>
           <span class="bundle-save" id="bundle-save"></span>
-          <a href="shop.html" class="btn btn-primary">مشاهده ست</a>
+          <a href="shop.html" class="btn btn-primary" aria-label="خرید ست کامل با صرفه‌جویی">خرید ست کامل — <span id="bundle-cta-save" class="num"></span> صرفه‌جویی</a>
         </div>
       </div>
     </div>
@@ -460,7 +460,7 @@
       <div class="final-cta">
         <h2>مدل مورد علاقه‌ات را پیدا کن</h2>
         <p>از میان کالکشن متنوع هکوبا، چیزی که واقعاً بهت میاد رو انتخاب کن.</p>
-        <a href="shop.html" class="btn btn-primary">مشاهده فروشگاه</a>
+        <a href="shop.html" class="btn btn-primary">شروع خرید</a>
       </div>
     </div>
   </section>
@@ -541,7 +541,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var P = window.HECUBA.PRODUCTS;
-    var GRID_COUNT = window.HECUBA.HOME_GRID_COUNT;
+    var NEW_COUNT = window.HECUBA.NEW_ARRIVALS_COUNT;
+    var BEST_COUNT = window.HECUBA.BESTSELLERS_COUNT;
     var byId = function (id) { return P.find(function (p) { return p.id === id; }); };
 
     function renderHomeGrid(selector, items) {
@@ -550,16 +551,18 @@
       if (el) el.classList.toggle('grid-partial-row', items.length % 4 !== 0);
     }
 
-    var newItems = P.filter(function (p) { return p.tags.indexOf('new') > -1; }).slice(0, GRID_COUNT);
+    var newItems = P.filter(function (p) { return p.tags.indexOf('new') > -1; }).slice(0, NEW_COUNT);
     renderHomeGrid('#new-arrivals-grid', newItems);
 
-    var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; }).slice(0, GRID_COUNT);
+    var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; }).slice(0, BEST_COUNT);
     renderHomeGrid('#bestsellers-grid', bestItems);
 
     var BUNDLE_PRICE = 990000, BUNDLE_COMPARE = 1230000;
     document.getElementById('bundle-price').textContent = window.HECUBA.formatToman(BUNDLE_PRICE);
     document.getElementById('bundle-price-compare').textContent = window.HECUBA.formatToman(BUNDLE_COMPARE);
-    document.getElementById('bundle-save').textContent = window.HECUBA.formatToman(BUNDLE_COMPARE - BUNDLE_PRICE) + ' صرفه‌جویی';
+    var bundleSaveText = window.HECUBA.formatToman(BUNDLE_COMPARE - BUNDLE_PRICE);
+    document.getElementById('bundle-save').textContent = bundleSaveText + ' صرفه‌جویی';
+    document.getElementById('bundle-cta-save').textContent = bundleSaveText;
 
     window.HECUBA.renderProductList('#curated-grid', [byId('hb-022'), byId('hb-016')].filter(Boolean));
 

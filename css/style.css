@@ -603,7 +603,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 @media (min-width: 640px) { .product-scroller { grid-auto-columns: 38%; } }
 @media (min-width: 1024px) {
   .product-scroller { grid-auto-flow: initial; grid-template-columns: repeat(4, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
-  /* Guard: only used when a homepage grid count isn't a multiple of 4 (see HOME_GRID_COUNT in main.js) */
+  /* Guard: only used when a homepage grid count isn't a multiple of 4 (see NEW_ARRIVALS_COUNT / BESTSELLERS_COUNT in main.js) */
   .product-scroller.grid-partial-row, .product-grid.grid-partial-row {
     display: flex;
     flex-wrap: wrap;
@@ -1116,6 +1116,13 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 .bundle-items .ph-image { width: 84px; height: 84px; border-radius: var(--radius-md); flex-shrink: 0; }
 .bundle-plus { color: var(--color-text-muted); font-weight: 700; }
 .bundle-info { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+/* The bundle CTA's text is longer than a typical button label (includes the
+   savings amount) and has no safe width cap below 1024px — let it wrap
+   instead of forcing nowrap into a column that isn't wide enough for it. */
+.bundle-info .btn-primary { white-space: normal; text-align: center; }
+@media (min-width: 1280px) {
+  .bundle-info .btn-primary { white-space: nowrap; }
+}
 .bundle-price-row { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
 .bundle-price-row .price { font-size: 1.4rem; font-weight: 700; font-family: var(--font-en), var(--font-fa); }
 .bundle-price-row .price-compare { text-decoration: line-through; color: var(--color-text); font-family: var(--font-en), var(--font-fa); }
@@ -1133,7 +1140,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
 }
 @media (min-width: 1024px) {
   .bundle-items .ph-image { width: 132px; height: 132px; }
-  .bundle-info { max-width: 46ch; }
+  .bundle-info { max-width: 50ch; }
 }
 
 /* --------------------------------------------------------------------------
