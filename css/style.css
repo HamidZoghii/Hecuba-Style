@@ -1125,7 +1125,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
    -------------------------------------------------------------------------- */
 .bundle-card {
   background-color: var(--color-surface);
-  background-image: url('images/AX/bundle-bg.jpg');
+  background-image: url('../images/AX/bundle-bg.jpg');
   background-size: cover;
   background-position: 25% center; /* mobile-first: severe crop here, tuned to keep the bra+panty in frame */
   border: 1px solid var(--color-border);
