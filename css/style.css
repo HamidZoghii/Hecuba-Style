@@ -203,6 +203,15 @@ h3, .h3 { font-size: var(--fs-h3); }
 .text-muted { color: var(--color-text-muted); }
 .text-sm { font-size: var(--fs-small); }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 /* Focus visibility — accessibility */
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
@@ -998,6 +1007,12 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .hero .container { grid-template-columns: 1fr 1fr; }
   .hero { padding-block: var(--space-10) var(--space-16); }
   .hero-media .ph-image { aspect-ratio: unset; height: min(70vh, 620px); max-height: min(70vh, 620px); min-height: 0; }
+}
+
+.hero.hero--image-only { padding-block: 0; }
+.hero-full-img { display: block; width: 100%; height: auto; }
+@media (min-width: 1600px) {
+  .hero-full-img { max-height: 720px; object-fit: cover; }
 }
 
 /* --------------------------------------------------------------------------
