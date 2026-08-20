@@ -876,6 +876,7 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
   .mega-menu.cols-2 { grid-template-columns: repeat(2, minmax(180px, 220px)); }
   html[dir="rtl"] .mega-menu { transform: translateX(-50%); }
   html[dir="rtl"] .mega-menu.cols-2 { inset-inline-start: auto; inset-inline-end: 0; transform: none; }
+  html[dir="rtl"] .mega-menu.cols-1 { inset-inline-start: auto; inset-inline-end: 0; transform: none; }
   .mega-menu .col-title { font-size: var(--fs-xs); color: var(--color-text-muted); margin-bottom: var(--space-3); font-weight: 700; }
   .mega-menu.cols-2 > div:last-child::before {
     content: "دسترسی سریع";
