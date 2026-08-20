@@ -257,6 +257,16 @@
       material: 'نخ پنبه‌ای', model: 'ساده', usage: 'خانگی', brand: BRAND,
       description: 'شلوار و تاپ نخی که بعد از یک روز طولانی حس آزادی می‌ده.',
       rating: 4.6, reviews: 44, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-025', sku: 'HEC-SET-1025', image: 'images/AX/bra-sage-lace.png',
+      name: 'ست کامل النا', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 990000, comparePrice: 1230000,
+      colors: ['#9CA286', '#202020', '#8E3045'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'کاتن نرم با تور ظریف', model: 'سه‌تکه', usage: 'روزمره', brand: BRAND,
+      description: 'سوتین، شورت و جوراب هماهنگ در یک ست کامل — همه‌چیزی که برای شروع یک روز خوب لازم داری، با صرفه‌ی واقعی نسبت به خرید جداگانه.',
+      rating: 4.8, reviews: 67, tags: ['sale'], inStock: true
     }
   ];
 

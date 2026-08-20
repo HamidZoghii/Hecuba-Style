@@ -230,7 +230,7 @@
         <h1 class="display">زیبایی، راحتی،<br>انتخاب تو.</h1>
         <p>لباس زیر و پوشاک زنانه برای هر روز، هر سلیقه و هر حال خوب — با تنوع مدل واقعی و تجربه‌ی خریدی که می‌توانی بهش اعتماد کنی.</p>
         <div class="hero-cta-group">
-          <a href="shop.html" class="btn btn-primary">خرید از کالکشن جدید</a>
+          <a href="shop.html?filter=new" class="btn btn-primary">خرید از کالکشن جدید</a>
           <a href="shop.html" class="btn btn-outline">دیدن همه‌ی مدل‌ها</a>
         </div>
       </div>
@@ -343,7 +343,7 @@
           <span class="eyebrow">انتخاب‌های هکوبا</span>
           <h2>چیزهایی که خودمون هم می‌پوشیم</h2>
           <p>یک گلچین کوچک از مدل‌هایی که بیشترین حس راحتی و زیبایی رو با هم دارن. این‌ها نه پرفروش‌ترین‌ها، بلکه علاقه‌ی تیم هکوبا هستن.</p>
-          <a href="shop.html" class="btn btn-outline">دیدن انتخاب‌های هکوبا</a>
+          <a href="shop.html?filter=bestseller" class="btn btn-outline">دیدن انتخاب‌های هکوبا</a>
         </div>
         <div class="product-grid" id="curated-grid" style="grid-template-columns:repeat(2,1fr);"></div>
       </div>
@@ -375,7 +375,7 @@
             <span class="price-compare num" id="bundle-price-compare"></span>
           </div>
           <span class="bundle-save" id="bundle-save"></span>
-          <a href="shop.html" class="btn btn-primary" aria-label="خرید ست کامل با صرفه‌جویی">خرید ست کامل — <span id="bundle-cta-save" class="num"></span> صرفه‌جویی</a>
+          <a href="product.html?id=hb-025" class="btn btn-primary" aria-label="خرید ست کامل با صرفه‌جویی">خرید ست کامل — <span id="bundle-cta-save" class="num"></span> صرفه‌جویی</a>
         </div>
       </div>
     </div>
@@ -557,10 +557,10 @@
     var bestItems = P.filter(function (p) { return p.tags.indexOf('bestseller') > -1; }).slice(0, BEST_COUNT);
     renderHomeGrid('#bestsellers-grid', bestItems);
 
-    var BUNDLE_PRICE = 990000, BUNDLE_COMPARE = 1230000;
-    document.getElementById('bundle-price').textContent = window.HECUBA.formatToman(BUNDLE_PRICE);
-    document.getElementById('bundle-price-compare').textContent = window.HECUBA.formatToman(BUNDLE_COMPARE);
-    var bundleSaveText = window.HECUBA.formatToman(BUNDLE_COMPARE - BUNDLE_PRICE);
+    var bundleProduct = byId('hb-025');
+    document.getElementById('bundle-price').textContent = window.HECUBA.formatToman(bundleProduct.price);
+    document.getElementById('bundle-price-compare').textContent = window.HECUBA.formatToman(bundleProduct.comparePrice);
+    var bundleSaveText = window.HECUBA.formatToman(bundleProduct.comparePrice - bundleProduct.price);
     document.getElementById('bundle-save').textContent = bundleSaveText + ' صرفه‌جویی';
     document.getElementById('bundle-cta-save').textContent = bundleSaveText;
 
