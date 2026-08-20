@@ -1046,6 +1046,9 @@ html[dir="rtl"] .drawer.from-start { transform: translateX(100%); }
     justify-content: center;
     margin-inline: calc(var(--container-pad) * -1);
     padding-inline: var(--container-pad);
+    /* Reserves room for the ~5.1px hover-ring overflow (scale(1.05) + box-shadow)
+       so overflow-x:auto stops clipping it vertically too. */
+    padding-block: var(--space-3);
   }
   .category-card span { font-size: 14px; }
   .category-scroller .category-card .ph-image {
