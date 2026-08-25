@@ -1,0 +1,32 @@
+# Line endings
+#
+# The repo previously stored a mix: 21 files as CRLF in the index, but
+# account.html and track-order.html as LF. That produced phantom "every line
+# changed" diffs whenever the project moved between machines or was zipped.
+#
+# `text=auto eol=crlf` normalises everything to LF inside the repository while
+# checking out CRLF in the working tree, which is what the Windows toolchain
+# here already expects. Change `eol=crlf` to `eol=lf` if the project ever moves
+# to a Unix-only workflow.
+
+*                text=auto eol=crlf
+
+# Binary — never touch these
+*.woff2          binary
+*.webp           binary
+*.png            binary
+*.jpg            binary
+*.jpeg           binary
+*.ico            binary
+*.zip            binary
+
+# SVG is text, but keep it LF so favicon/icon diffs stay readable
+*.svg            text eol=lf
+
+# Treat these as text with sensible diffs
+*.html           text eol=crlf diff=html
+*.css            text eol=crlf diff=css
+*.js             text eol=crlf
+*.md             text eol=crlf
+*.json           text eol=crlf
+*.py             text eol=lf

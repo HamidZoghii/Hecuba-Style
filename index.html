@@ -3,17 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F8F6F2">
+<meta name="color-scheme" content="light">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <title>هکوبا استایل | لباس زیر و پوشاک زنانه | زیبایی، راحتی، انتخاب تو</title>
 <meta name="description" content="فروشگاه آنلاین هکوبا استایل — لباس زیر و پوشاک زنانه با تنوع مدل، راحتی واقعی و ارسال به سراسر ایران. سوتین، شورت، ست، لباس خواب و بیشتر.">
 <link rel="canonical" href="./index.html">
 
 <!-- Open Graph -->
-<meta property="og:title" content="هکوبا استایل | زیبایی، راحتی، انتخاب تو">
-<meta property="og:description" content="لباس زیر و پوشاک زنانه برای هر روز، هر سلیقه و هر حال خوب.">
+<meta property="og:site_name" content="هکوبا استایل">
+<meta property="og:locale" content="fa_IR">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.png">
+<meta property="og:url" content="https://hamidzoghii.github.io/Hecuba-Style/index.html">
+<meta property="og:title" content="هکوبا استایل | لباس زیر و پوشاک زنانه | زیبایی، راحتی، انتخاب تو">
+<meta property="og:description" content="فروشگاه آنلاین هکوبا استایل — لباس زیر و پوشاک زنانه با تنوع مدل، راحتی واقعی و ارسال به سراسر ایران. سوتین، شورت، ست، لباس خواب و بیشتر.">
+<meta property="og:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.webp">
+<meta property="og:image:width" content="2043">
+<meta property="og:image:height" content="770">
+<meta property="og:image:alt" content="هکوبا استایل — لباس زیر و پوشاک زنانه">
 
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="هکوبا استایل | لباس زیر و پوشاک زنانه | زیبایی، راحتی، انتخاب تو">
+<meta name="twitter:description" content="فروشگاه آنلاین هکوبا استایل — لباس زیر و پوشاک زنانه با تنوع مدل، راحتی واقعی و ارسال به سراسر ایران. سوتین، شورت، ست، لباس خواب و بیشتر.">
+<meta name="twitter:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.webp">
 <!-- Google tag (gtag.js) — Placeholder, to be connected via Site Kit by Google in WordPress phase -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
 <!-- <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX'); </script> -->
@@ -29,6 +42,13 @@
 }
 </script>
 
+<!-- Preload: the two font weights that render above the fold on every page.
+     Everything else is picked up normally via @font-face (all font-display: swap). -->
+<link rel="preload" href="fonts/Peyda-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Peyda-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<!-- LCP image on the homepage -->
+<link rel="preload" href="images/AX/hero-full.webp" as="image" type="image/webp" fetchpriority="high">
+
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -41,13 +61,13 @@
 <header class="site-header" id="site-header">
   <div class="container header-inner">
 
-    <button type="button" class="btn-icon" data-open-drawer="mobile-menu" aria-label="باز کردن منو" style="order:1; --tw:1;">
+    <button type="button" class="btn-icon" data-open-drawer="mobile-menu" aria-label="باز کردن منو">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
 
-    <a href="index.html" class="logo" aria-label="هکوبا استایل — صفحه اصلی" style="order:2;">Hecuba<span>·</span>Style</a>
+    <a href="index.html" class="logo" aria-label="هکوبا استایل — صفحه اصلی">Hecuba<span>·</span>Style</a>
 
-    <nav aria-label="منوی اصلی" style="order:3;">
+    <nav aria-label="منوی اصلی">
       <ul class="main-nav">
         <li><a href="index.html" class="active">خانه</a></li>
         <li class="has-mega" tabindex="0">
@@ -102,15 +122,15 @@
       </ul>
     </nav>
 
-    <div class="header-search-desktop" style="order:4;">
+    <div class="header-search-desktop">
       <div class="search-field">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <input type="search" class="input" placeholder="جستجو در هکوبا…" aria-label="جستجو" data-search-input data-search-results-target="#search-results-desktop">
       </div>
-      <div id="search-results-desktop" class="search-results" style="position:absolute; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); width:280px; padding:8px; box-shadow:var(--shadow-md); margin-top:4px;"></div>
+      <div id="search-results-desktop" class="search-results search-results--panel"></div>
     </div>
 
-    <div class="header-actions" style="order:5;">
+    <div class="header-actions">
       <button type="button" class="btn-icon" data-open-drawer="search-drawer" aria-label="جستجو">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </button>
@@ -192,7 +212,7 @@
 <!-- Search drawer (mobile) -->
 <aside class="drawer sheet" id="search-drawer" aria-hidden="true" aria-label="جستجو">
   <div class="modal-handle"></div>
-  <div class="drawer-head" style="padding-inline:0; border:0;">
+  <div class="drawer-head drawer-head--flush">
     <div class="search-field" style="width:100%;">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input type="search" class="input" placeholder="مثلاً «سوتین مشکی»…" aria-label="جستجو" data-search-input data-search-results-target="#search-results" autofocus>
@@ -201,7 +221,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <div class="drawer-body" style="padding-inline:0;">
+  <div class="drawer-body drawer-body--flush">
     <div id="search-results" class="search-results"></div>
     <p class="text-muted text-sm" style="margin-top:var(--space-4);">پرجستجوترین‌ها: سوتین بدون سیم، ست فانتزی، لباس راحتی</p>
   </div>
@@ -226,11 +246,10 @@
 
   <!-- 02. HERO -->
   <section class="hero hero--image-only">
-    <img src="images/AX/hero-full.png"
+    <img src="images/AX/hero-full.webp"
          alt="زیبایی، راحتی، انتخاب تو — لباس زیر و پوشاک زنانه هکوبا استایل با بهترین کیفیت برای هر سلیقه و هر استایل"
-         width="1672" height="941"
          loading="eager" fetchpriority="high"
-         class="hero-full-img">
+         class="hero-full-img" decoding="async" width="2043" height="770">
     <h1 class="sr-only">زیبایی، راحتی، انتخاب تو</h1>
   </section>
 
@@ -245,15 +264,15 @@
         <a href="shop.html" class="btn-ghost">مشاهده همه ←</a>
       </div>
       <div class="category-scroller">
-        <a href="category.html?cat=bra" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bra-sage-lace.png" alt="سوتین زنانه هکوبا"></div><span>سوتین</span></a>
-        <a href="category.html?cat=brief" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/panty-sage-lace.png" alt="شورت زنانه هکوبا"></div><span>شورت</span></a>
-        <a href="category.html?cat=set" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/flatlay-sage-set-flowers.png" alt="ست لباس زیر هکوبا"></div><span>ست</span></a>
-        <a href="category.html?cat=bralette" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bra-sage-smooth.png" alt="نیم‌تنه زنانه هکوبا"></div><span>نیم‌تنه</span></a>
-        <a href="category.html?cat=fantasy" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bodysuit-black-sheer.png" alt="لباس زیر فانتزی هکوبا"></div><span>فانتزی</span></a>
-        <a href="category.html?cat=bodysuit" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bodysuit-sage-lace.png" alt="بادی زنانه هکوبا"></div><span>بادی</span></a>
-        <a href="category.html?cat=sleepwear" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/slip-sage-lace.png" alt="لباس خواب زنانه هکوبا"></div><span>لباس خواب</span></a>
-        <a href="category.html?cat=swim" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/swim-main.jpg" alt="مایو و بیکینی هکوبا"></div><span>مایو</span></a>
-        <a href="category.html?cat=loungewear" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/robe-sage-lace.png" alt="لباس راحتی هکوبا"></div><span>راحتی</span></a>
+        <a href="category.html?cat=bra" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bra-sage-lace.webp" alt="سوتین زنانه هکوبا" loading="lazy" decoding="async" width="777" height="609"></div><span>سوتین</span></a>
+        <a href="category.html?cat=brief" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/panty-sage-lace.webp" alt="شورت زنانه هکوبا" loading="lazy" decoding="async" width="759" height="591"></div><span>شورت</span></a>
+        <a href="category.html?cat=set" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/flatlay-sage-set-flowers.webp" alt="ست لباس زیر هکوبا" loading="lazy" decoding="async" width="912" height="969"></div><span>ست</span></a>
+        <a href="category.html?cat=bralette" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bra-sage-smooth.webp" alt="نیم‌تنه زنانه هکوبا" loading="lazy" decoding="async" width="837" height="609"></div><span>نیم‌تنه</span></a>
+        <a href="category.html?cat=fantasy" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bodysuit-black-sheer.webp" alt="لباس زیر فانتزی هکوبا" loading="lazy" decoding="async" width="528" height="969"></div><span>فانتزی</span></a>
+        <a href="category.html?cat=bodysuit" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/bodysuit-sage-lace.webp" alt="بادی زنانه هکوبا" loading="lazy" decoding="async" width="531" height="969"></div><span>بادی</span></a>
+        <a href="category.html?cat=sleepwear" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/slip-sage-lace.webp" alt="لباس خواب زنانه هکوبا" loading="lazy" decoding="async" width="495" height="591"></div><span>لباس خواب</span></a>
+        <a href="category.html?cat=swim" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/swim-main.webp" alt="مایو و بیکینی هکوبا" loading="lazy" decoding="async" width="1000" height="1500"></div><span>مایو</span></a>
+        <a href="category.html?cat=loungewear" class="category-card"><div class="ph-image ratio-4-5"><img class="ph-photo" src="images/AX/robe-sage-lace.webp" alt="لباس راحتی هکوبا" loading="lazy" decoding="async" width="705" height="591"></div><span>راحتی</span></a>
       </div>
     </div>
   </section>
@@ -292,7 +311,7 @@
       <div class="promo-banner">
         <div class="promo-banner-media">
           <!-- TODO: تصویر اختصاصی بنر پروموشن جایگزین شود -->
-          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/set-sage-with-robe.png" alt="ست لباس زیر سبز سیج هکوبا با ربدوشامبر و گل"></div>
+          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/set-sage-with-robe.webp" alt="ست لباس زیر سبز سیج هکوبا با ربدوشامبر و گل" loading="lazy" decoding="async" width="912" height="705"></div>
           <span class="promo-discount-circle">تا<br>۳۰٪</span>
         </div>
         <div class="promo-banner-content">
@@ -330,11 +349,11 @@
       </div>
       <div class="bundle-card">
         <div class="bundle-items">
-          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/bra-sage-lace.png" alt="سوتین"></div>
+          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/bra-sage-lace.webp" alt="سوتین" loading="lazy" decoding="async" width="777" height="609"></div>
           <span class="bundle-plus">+</span>
-          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/panty-sage-lace.png" alt="شورت"></div>
+          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/AX/panty-sage-lace.webp" alt="شورت" loading="lazy" decoding="async" width="759" height="591"></div>
           <span class="bundle-plus">+</span>
-          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt2.jpg" alt="جوراب"></div>
+          <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt2.webp" alt="جوراب" loading="lazy" decoding="async" width="1000" height="1500"></div>
         </div>
         <div class="bundle-info">
           <h3 style="margin-bottom:6px;">ست کامل النا — سوتین، شورت و جوراب</h3>
@@ -359,10 +378,10 @@
         <a href="https://instagram.com/hecubastyle" class="btn btn-outline" target="_blank" rel="noopener">مشاهده اینستاگرام</a>
       </div>
       <div class="instagram-grid">
-        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/lifestyle-coffee.jpg" alt="لحظه‌های واقعی هکوبا"></div>
-        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/fantasy-main.jpg" alt="لحظه‌های واقعی هکوبا"></div>
-        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt.jpg" alt="لحظه‌های واقعی هکوبا"></div>
-        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/swim-alt.jpg" alt="لحظه‌های واقعی هکوبا"></div>
+        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/lifestyle-coffee.webp" alt="لحظه‌های واقعی هکوبا" loading="lazy" decoding="async" width="1000" height="1503"></div>
+        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/fantasy-main.webp" alt="لحظه‌های واقعی هکوبا" loading="lazy" decoding="async" width="1000" height="1500"></div>
+        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/loungewear-alt.webp" alt="لحظه‌های واقعی هکوبا" loading="lazy" decoding="async" width="1000" height="1500"></div>
+        <div class="ph-image ratio-1-1"><img class="ph-photo" src="images/swim-alt.webp" alt="لحظه‌های واقعی هکوبا" loading="lazy" decoding="async" width="1000" height="1500"></div>
       </div>
     </div>
   </section>

@@ -3,17 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F8F6F2">
+<meta name="color-scheme" content="light">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <title>سبد خرید | هکوبا استایل</title>
 <meta name="description" content="مشاهده و ویرایش سبد خرید در فروشگاه هکوبا استایل.">
 <link rel="canonical" href="./cart.html">
 
 <!-- Open Graph -->
-<meta property="og:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.png">
+<meta property="og:site_name" content="هکوبا استایل">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hamidzoghii.github.io/Hecuba-Style/cart.html">
+<meta property="og:title" content="سبد خرید">
+<meta property="og:description" content="مشاهده و ویرایش سبد خرید در فروشگاه هکوبا استایل.">
+<meta property="og:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.webp">
+<meta property="og:image:width" content="2043">
+<meta property="og:image:height" content="770">
+<meta property="og:image:alt" content="هکوبا استایل — لباس زیر و پوشاک زنانه">
 
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="سبد خرید">
+<meta name="twitter:description" content="مشاهده و ویرایش سبد خرید در فروشگاه هکوبا استایل.">
+<meta name="twitter:image" content="https://hamidzoghii.github.io/Hecuba-Style/images/AX/hero-full.webp">
 <!-- Google tag (gtag.js) — Placeholder, to be connected via Site Kit by Google in WordPress phase -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
 <!-- <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX'); </script> -->
+
+<!-- Preload: the two font weights that render above the fold on every page.
+     Everything else is picked up normally via @font-face (all font-display: swap). -->
+<link rel="preload" href="fonts/Peyda-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Peyda-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -27,13 +48,13 @@
 <header class="site-header" id="site-header">
   <div class="container header-inner">
 
-    <button type="button" class="btn-icon" data-open-drawer="mobile-menu" aria-label="باز کردن منو" style="order:1; --tw:1;">
+    <button type="button" class="btn-icon" data-open-drawer="mobile-menu" aria-label="باز کردن منو">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
 
-    <a href="index.html" class="logo" aria-label="هکوبا استایل — صفحه اصلی" style="order:2;">Hecuba<span>·</span>Style</a>
+    <a href="index.html" class="logo" aria-label="هکوبا استایل — صفحه اصلی">Hecuba<span>·</span>Style</a>
 
-    <nav aria-label="منوی اصلی" style="order:3;">
+    <nav aria-label="منوی اصلی">
       <ul class="main-nav">
         <li><a href="index.html">خانه</a></li>
         <li class="has-mega" tabindex="0">
@@ -88,15 +109,15 @@
       </ul>
     </nav>
 
-    <div class="header-search-desktop" style="order:4;">
+    <div class="header-search-desktop">
       <div class="search-field">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <input type="search" class="input" placeholder="جستجو در هکوبا…" aria-label="جستجو" data-search-input data-search-results-target="#search-results-desktop">
       </div>
-      <div id="search-results-desktop" class="search-results" style="position:absolute; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); width:280px; padding:8px; box-shadow:var(--shadow-md); margin-top:4px;"></div>
+      <div id="search-results-desktop" class="search-results search-results--panel"></div>
     </div>
 
-    <div class="header-actions" style="order:5;">
+    <div class="header-actions">
       <button type="button" class="btn-icon" data-open-drawer="search-drawer" aria-label="جستجو">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </button>
@@ -178,7 +199,7 @@
 <!-- Search drawer (mobile) -->
 <aside class="drawer sheet" id="search-drawer" aria-hidden="true" aria-label="جستجو">
   <div class="modal-handle"></div>
-  <div class="drawer-head" style="padding-inline:0; border:0;">
+  <div class="drawer-head drawer-head--flush">
     <div class="search-field" style="width:100%;">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input type="search" class="input" placeholder="مثلاً «سوتین مشکی»…" aria-label="جستجو" data-search-input data-search-results-target="#search-results" autofocus>
@@ -187,7 +208,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <div class="drawer-body" style="padding-inline:0;">
+  <div class="drawer-body drawer-body--flush">
     <div id="search-results" class="search-results"></div>
     <p class="text-muted text-sm" style="margin-top:var(--space-4);">پرجستجوترین‌ها: سوتین بدون سیم، ست فانتزی، لباس راحتی</p>
   </div>

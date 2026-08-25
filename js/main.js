@@ -18,7 +18,7 @@
 
   const PRODUCTS = [
     {
-      id: 'hb-001', sku: 'HEC-BRA-1001', image: 'images/AX/bra-sage-smooth.png',
+      id: 'hb-001', sku: 'HEC-BRA-1001', image: 'images/AX/bra-sage-smooth.webp',
       name: 'سوتین بدون سیم مدل النا', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 690000, comparePrice: 890000,
       colors: ['#202020', '#B96777', '#E8DFD2'],
@@ -28,7 +28,7 @@
       rating: 4.8, reviews: 126, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.png', image2: 'images/AX/texture-sage-lace.png',
+      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.webp', image2: 'images/AX/texture-sage-lace.webp',
       name: 'سوتین فرم‌دهنده پوش‌آپ', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 790000, comparePrice: 990000,
       colors: ['#202020', '#B96777', '#737C54'],
@@ -38,7 +38,7 @@
       rating: 4.8, reviews: 174, tags: ['sale', 'bestseller'], inStock: true
     },
     {
-      id: 'hb-011', sku: 'HEC-BRA-1011', image: 'images/bralette-alt.jpg',
+      id: 'hb-011', sku: 'HEC-BRA-1011', image: 'images/bralette-alt.webp',
       name: 'سوتین اسپرت بدون درز', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 590000, comparePrice: null,
       colors: ['#202020', '#9CA286', '#FFFFFF'],
@@ -48,7 +48,7 @@
       rating: 4.7, reviews: 88, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-012', sku: 'HEC-BRA-1012', image: 'images/AX/bra-mocha-smooth.png',
+      id: 'hb-012', sku: 'HEC-BRA-1012', image: 'images/AX/bra-mocha-smooth.webp',
       name: 'سوتین کلاسیک سه‌بند', category: 'سوتین زنانه', categorySlug: 'bra',
       price: 650000, comparePrice: 790000,
       colors: ['#202020', '#C9A992', '#8E3045'],
@@ -58,7 +58,7 @@
       rating: 4.6, reviews: 102, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-003', sku: 'HEC-BRF-1003', image: 'images/AX/panty-sage-smooth.png',
+      id: 'hb-003', sku: 'HEC-BRF-1003', image: 'images/AX/panty-sage-smooth.webp',
       name: 'شورت کمرگهی راحت روزانه', category: 'شورت زنانه', categorySlug: 'brief',
       price: 290000, comparePrice: 350000,
       colors: ['#202020', '#9CA286', '#E8DFD2', '#B96777'],
@@ -68,7 +68,7 @@
       rating: 4.7, reviews: 212, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.png', image2: 'images/AX/panty-sage-lace.png',
+      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.webp', image2: 'images/AX/panty-sage-lace.webp',
       name: 'شورت تانگا دانتل', category: 'شورت زنانه', categorySlug: 'brief',
       price: 340000, comparePrice: null,
       colors: ['#202020', '#B96777', '#8E3045'],
@@ -78,7 +78,7 @@
       rating: 4.5, reviews: 47, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/AX/panty-mocha-smooth.png',
+      id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/AX/panty-mocha-smooth.webp',
       name: 'شورت فول شکم‌گیر', category: 'شورت زنانه', categorySlug: 'brief',
       price: 320000, comparePrice: 380000,
       colors: ['#737C54', '#9CA286'],
@@ -88,7 +88,7 @@
       rating: 4.6, reviews: 71, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-002', sku: 'HEC-SET-1002', image: 'images/AX/flatlay-sage-set-flowers.png',
+      id: 'hb-002', sku: 'HEC-SET-1002', image: 'images/AX/flatlay-sage-set-flowers.webp',
       name: 'ست دو تکه آدل', category: 'ست لباس زیر', categorySlug: 'set',
       price: 1290000, comparePrice: null,
       colors: ['#202020', '#8E3045'],
@@ -98,7 +98,7 @@
       rating: 4.9, reviews: 84, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-015', sku: 'HEC-SET-1015', image: 'images/AX/set-sage-with-robe.png',
+      id: 'hb-015', sku: 'HEC-SET-1015', image: 'images/AX/set-sage-with-robe.webp',
       name: 'ست سه‌تکه بی‌تریس', category: 'ست لباس زیر', categorySlug: 'set',
       price: 1590000, comparePrice: 1890000,
       colors: ['#202020', '#B96777'],
@@ -108,7 +108,7 @@
       rating: 4.8, reviews: 36, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-016', sku: 'HEC-SET-1016', image: 'images/AX/set-sage-light-with-robe.png',
+      id: 'hb-016', sku: 'HEC-SET-1016', image: 'images/AX/set-sage-light-with-robe.webp',
       name: 'ست پنبه‌ای روزمره', category: 'ست لباس زیر', categorySlug: 'set',
       price: 690000, comparePrice: null,
       colors: ['#9CA286', '#E8DFD2', '#202020'],
@@ -118,7 +118,7 @@
       rating: 4.7, reviews: 59, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-005', sku: 'HEC-BRL-1005', image: 'images/bralette-main.jpg',
+      id: 'hb-005', sku: 'HEC-BRL-1005', image: 'images/bralette-main.webp',
       name: 'نیم‌تنه بافت پنبه‌ای', category: 'نیم‌تنه', categorySlug: 'bralette',
       price: 450000, comparePrice: null,
       colors: ['#737C54', '#202020', '#E8DFD2'],
@@ -128,7 +128,7 @@
       rating: 4.5, reviews: 39, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-017', sku: 'HEC-BRL-1017', image: 'images/bralette-alt.jpg',
+      id: 'hb-017', sku: 'HEC-BRL-1017', image: 'images/bralette-alt.webp',
       name: 'نیم‌تنه ورزشی کراپ', category: 'نیم‌تنه', categorySlug: 'bralette',
       price: 420000, comparePrice: 480000,
       colors: ['#202020', '#9CA286', '#FFFFFF'],
@@ -138,7 +138,7 @@
       rating: 4.6, reviews: 64, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-007', sku: 'HEC-FNT-1007', image: 'images/fantasy-main.jpg',
+      id: 'hb-007', sku: 'HEC-FNT-1007', image: 'images/fantasy-main.webp',
       name: 'ست فانتزی گلدوزی مون', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
       price: 1490000, comparePrice: null,
       colors: ['#202020', '#B96777'],
@@ -148,7 +148,7 @@
       rating: 4.9, reviews: 45, tags: ['new'], inStock: false
     },
     {
-      id: 'hb-018', sku: 'HEC-FNT-1018', image: 'images/fantasy-main.jpg',
+      id: 'hb-018', sku: 'HEC-FNT-1018', image: 'images/fantasy-main.webp',
       name: 'ست فانتزی توری گل‌دار', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
       price: 1350000, comparePrice: 1650000,
       colors: ['#202020', '#8E3045', '#B96777'],
@@ -158,7 +158,7 @@
       rating: 4.8, reviews: 29, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-004', sku: 'HEC-BOD-1004', image: 'images/AX/bodysuit-black-sheer.png',
+      id: 'hb-004', sku: 'HEC-BOD-1004', image: 'images/AX/bodysuit-black-sheer.webp',
       name: 'بادی مدل رزا', category: 'بادی زنانه', categorySlug: 'bodysuit',
       price: 990000, comparePrice: 1250000,
       colors: ['#202020', '#6D2436'],
@@ -168,7 +168,7 @@
       rating: 4.6, reviews: 58, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-019', sku: 'HEC-BOD-1019', image: 'images/bodysuit-main.jpg',
+      id: 'hb-019', sku: 'HEC-BOD-1019', image: 'images/bodysuit-main.webp',
       name: 'بادی ساده روزمره', category: 'بادی زنانه', categorySlug: 'bodysuit',
       price: 690000, comparePrice: null,
       colors: ['#202020', '#E8DFD2', '#C9A992'],
@@ -178,7 +178,7 @@
       rating: 4.5, reviews: 41, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/AX/bodysuit-sage-lace.png',
+      id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/AX/bodysuit-sage-lace.webp',
       name: 'بادی تور گلدوزی', category: 'بادی زنانه', categorySlug: 'bodysuit',
       price: 1090000, comparePrice: 1290000,
       colors: ['#202020', '#8E3045'],
@@ -188,7 +188,7 @@
       rating: 4.7, reviews: 33, tags: ['bestseller', 'sale'], inStock: true
     },
     {
-      id: 'hb-006', sku: 'HEC-SLP-1006', image: 'images/AX/slip-sage-lace.png',
+      id: 'hb-006', sku: 'HEC-SLP-1006', image: 'images/AX/slip-sage-lace.webp',
       name: 'لباس خواب ساتن کوتاه', category: 'لباس خواب', categorySlug: 'sleepwear',
       price: 890000, comparePrice: 1090000,
       colors: ['#8E3045', '#202020'],
@@ -199,7 +199,7 @@
       rating: 4.8, reviews: 97, tags: ['bestseller', 'sale'], inStock: true
     },
     {
-      id: 'hb-021', sku: 'HEC-SLP-1021', image: 'images/sleepwear-main.jpg',
+      id: 'hb-021', sku: 'HEC-SLP-1021', image: 'images/sleepwear-main.webp',
       name: 'لباس خواب پنبه‌ای بلند', category: 'لباس خواب', categorySlug: 'sleepwear',
       price: 590000, comparePrice: null,
       colors: ['#E8DFD2', '#9CA286', '#202020'],
@@ -209,7 +209,7 @@
       rating: 4.6, reviews: 52, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/AX/robe-sage-lace.png',
+      id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/AX/robe-sage-lace.webp',
       name: 'لباس خواب حریر با شال', category: 'لباس خواب', categorySlug: 'sleepwear',
       price: 1190000, comparePrice: null,
       colors: ['#B96777', '#202020'],
@@ -219,7 +219,7 @@
       rating: 4.9, reviews: 22, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-008', sku: 'HEC-SWM-1008', image: 'images/swim-main.jpg',
+      id: 'hb-008', sku: 'HEC-SWM-1008', image: 'images/swim-main.webp',
       name: 'مایو یک‌تکه کلاسیک', category: 'مایو و بیکینی', categorySlug: 'swim',
       price: 990000, comparePrice: 1190000,
       colors: ['#202020', '#737C54'],
@@ -229,7 +229,7 @@
       rating: 4.6, reviews: 31, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-023', sku: 'HEC-SWM-1023', image: 'images/swim-alt.jpg',
+      id: 'hb-023', sku: 'HEC-SWM-1023', image: 'images/swim-alt.webp',
       name: 'بیکینی دو تکه فرم‌دهنده', category: 'مایو و بیکینی', categorySlug: 'swim',
       price: 890000, comparePrice: null,
       colors: ['#202020', '#C9A992', '#8E3045'],
@@ -239,7 +239,7 @@
       rating: 4.5, reviews: 18, tags: ['new'], inStock: true
     },
     {
-      id: 'hb-009', sku: 'HEC-CMF-1009', image: 'images/loungewear-alt.jpg', image2: 'images/loungewear-alt2.jpg',
+      id: 'hb-009', sku: 'HEC-CMF-1009', image: 'images/loungewear-alt.webp', image2: 'images/loungewear-alt2.webp',
       name: 'ست راحتی خانگی دو تکه', category: 'لباس راحتی', categorySlug: 'loungewear',
       price: 750000, comparePrice: null,
       colors: ['#E8DFD2', '#9CA286'],
@@ -249,7 +249,7 @@
       rating: 4.7, reviews: 63, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-024', sku: 'HEC-CMF-1024', image: 'images/loungewear-main.jpg',
+      id: 'hb-024', sku: 'HEC-CMF-1024', image: 'images/loungewear-main.webp',
       name: 'شلوار و تاپ راحتی نخی', category: 'لباس راحتی', categorySlug: 'loungewear',
       price: 640000, comparePrice: 720000,
       colors: ['#202020', '#E8DFD2', '#737C54'],
@@ -259,7 +259,7 @@
       rating: 4.6, reviews: 44, tags: ['sale'], inStock: true
     },
     {
-      id: 'hb-025', sku: 'HEC-SET-1025', image: 'images/AX/bra-sage-lace.png',
+      id: 'hb-025', sku: 'HEC-SET-1025', image: 'images/AX/bra-sage-lace.webp',
       name: 'ست کامل النا', category: 'ست لباس زیر', categorySlug: 'set',
       price: 990000, comparePrice: 1230000,
       colors: ['#9CA286', '#202020', '#8E3045'],
@@ -327,8 +327,8 @@
      02. HELPERS
      ------------------------------------------------------------------------ */
   function formatToman(n) {
-    var grouped = Math.round(n).toLocaleString('en-US');
-    var persian = grouped.replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+    const grouped = Math.round(n).toLocaleString('en-US');
+    const persian = grouped.replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'[d]; });
     return persian + ' تومان';
   }
   window.HECUBA.formatToman = formatToman;
@@ -542,8 +542,8 @@
       '<article class="product-card" data-product-id="' + p.id + '">' +
         '<div class="media">' +
           '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
-            '<div class="ph-image ratio-3-4">' + (p.image ? '<img class="ph-photo" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' : '<span>' + p.category + '</span>') + '</div>' +
-            (p.image2 ? '<div class="ph-image ratio-3-4 img-secondary"><img class="ph-photo" src="' + p.image2 + '" alt="" loading="lazy"></div>' : '') +
+            '<div class="ph-image ratio-3-4">' + (p.image ? '<img class="ph-photo" decoding="async" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' : '<span>' + p.category + '</span>') + '</div>' +
+            (p.image2 ? '<div class="ph-image ratio-3-4 img-secondary"><img class="ph-photo" decoding="async" src="' + p.image2 + '" alt="" loading="lazy"></div>' : '') +
           '</a>' +
           '<div class="card-badges">' + badges.join('') + '</div>' +
           (p.inStock ? '' : '<div class="oos-overlay"><span>ناموجود</span></div>') +
@@ -583,7 +583,7 @@
     const variantText = variantParts.join(' | ');
     return (
       '<div class="cart-line" data-cart-index="' + line.index + '">' +
-        '<a href="product.html?id=' + line.product.id + '" class="cart-line-thumb"><div class="ph-image ratio-3-4">' + (line.product.image ? '<img class="ph-photo" src="' + line.product.image + '" alt="">' : '') + '</div></a>' +
+        '<a href="product.html?id=' + line.product.id + '" class="cart-line-thumb"><div class="ph-image ratio-3-4">' + (line.product.image ? '<img class="ph-photo" decoding="async" loading="lazy" src="' + line.product.image + '" alt="">' : '') + '</div></a>' +
         '<div class="cart-line-body">' +
           '<a href="product.html?id=' + line.product.id + '" class="cart-line-name">' + line.product.name + '</a>' +
           (variantText ? '<span class="cart-line-variant">' + variantText + '</span>' : '') +
@@ -787,7 +787,7 @@
         resultsEl.innerHTML = matches.length
           ? matches.map(p =>
               '<a href="product.html?id=' + p.id + '" class="search-result-row">' +
-                '<div class="ph-image ratio-1-1" style="width:44px;height:44px;flex-shrink:0">' + (p.image ? '<img class="ph-photo" src="' + p.image + '" alt="">' : '') + '</div>' +
+                '<div class="ph-image ratio-1-1" style="width:44px;height:44px;flex-shrink:0">' + (p.image ? '<img class="ph-photo" decoding="async" loading="lazy" src="' + p.image + '" alt="">' : '') + '</div>' +
                 '<span>' + p.name + '</span>' +
                 '<span class="text-muted text-sm num" style="margin-inline-start:auto">' + formatToman(p.price) + '</span>' +
               '</a>'
@@ -1118,14 +1118,14 @@
       const isVideo = product.hasVideo && state.mainIndex === galleryLabels.length;
       mainEl.className = 'ph-image ratio-3-4' + (!product.image && state.mainIndex % 2 === 1 ? ' tone-dark' : '');
       if (product.image && !isVideo) {
-        mainEl.innerHTML = '<img class="ph-photo" src="' + product.image + '" alt="' + product.name + ' — ' + galleryLabels[state.mainIndex] + '">';
+        mainEl.innerHTML = '<img class="ph-photo" decoding="async" fetchpriority="high" src="' + product.image + '" alt="' + product.name + ' — ' + galleryLabels[state.mainIndex] + '">';
       } else {
         mainEl.innerHTML = '<span>' + (isVideo ? 'پیش‌نمایش ویدئو محصول' : galleryLabels[state.mainIndex] + ' — ' + (COLOR_MAP[product.colors[state.colorIndex]] || '')) + '</span>';
       }
     }
     function renderThumbs() {
       let html = galleryLabels.map((label, i) =>
-        '<button type="button" class="thumb' + (i === state.mainIndex ? ' active' : '') + '" data-thumb="' + i + '" aria-label="' + label + '"><div class="ph-image' + (!product.image && i % 2 === 1 ? ' tone-dark' : '') + '">' + (product.image ? '<img class="ph-photo" src="' + product.image + '" alt="">' : '') + '</div></button>'
+        '<button type="button" class="thumb' + (i === state.mainIndex ? ' active' : '') + '" data-thumb="' + i + '" aria-label="' + label + '"><div class="ph-image' + (!product.image && i % 2 === 1 ? ' tone-dark' : '') + '">' + (product.image ? '<img class="ph-photo" decoding="async" loading="lazy" src="' + product.image + '" alt="">' : '') + '</div></button>'
       ).join('');
       if (product.hasVideo) {
         const vi = galleryLabels.length;
@@ -1468,7 +1468,7 @@
       const summaryLinesEl = document.getElementById('checkout-summary-lines');
       summaryLinesEl.innerHTML = Store.cartLines().map(l => {
         const variant = [l.color ? (COLOR_MAP[l.color] || '') : '', l.size || ''].filter(Boolean).join(' / ');
-        return '<div class="summary-mini-line"><div class="ph-image ratio-3-4">' + (l.product.image ? '<img class="ph-photo" src="' + l.product.image + '" alt="">' : '') + '</div><span class="name">' + l.product.name + (variant ? ' <span class="text-muted">(' + variant + ')</span>' : '') + '</span><span class="qty num">×' + l.qty + '</span></div>';
+        return '<div class="summary-mini-line"><div class="ph-image ratio-3-4">' + (l.product.image ? '<img class="ph-photo" decoding="async" loading="lazy" src="' + l.product.image + '" alt="">' : '') + '</div><span class="name">' + l.product.name + (variant ? ' <span class="text-muted">(' + variant + ')</span>' : '') + '</span><span class="qty num">×' + l.qty + '</span></div>';
       }).join('');
 
       const subtotal = Store.cartSubtotal();
