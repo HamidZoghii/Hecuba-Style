@@ -847,7 +847,6 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
    Tighter gaps + a slightly smaller wordmark buy back ~30px. */
 @media (max-width: 767px) {
   .header-inner { gap: var(--space-1); }
-  .header-actions { gap: 0; }
   .logo { font-size: 1.15rem; }
 }
 
@@ -919,6 +918,42 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 }
 
 .header-search-desktop { display: none; }
+
+/* Mobile search bar. The mockup puts a full-width search field directly under
+   the header; previously search on mobile was only reachable via a small icon,
+   so it measured 0px wide in the page and was effectively undiscoverable.
+   This is a button styled as a field rather than a second <input>: tapping it
+   opens the existing search drawer, so autocomplete and all search behaviour
+   stay in one place instead of being duplicated. */
+.header-search-mobile { display: none; }
+@media (max-width: 767px) {
+  .header-search-mobile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    margin-block: 0 var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-family: var(--font-fa);
+    font-size: var(--fs-body);
+    text-align: start;
+    cursor: pointer;
+  }
+  .header-search-mobile span { flex: 1; }
+  .header-search-mobile .search-go {
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-aa);
+    color: #fff;
+    flex-shrink: 0;
+  }
+}
 @media (min-width: 1024px) {
   .header-search-desktop { display: block; width: 220px; }
   /* Mobile-only header controls: hide once the desktop nav + search bar take over */
@@ -1021,6 +1056,7 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 }
 
 .hero.hero--image-only { padding-block: 0; }
+.hero-full-link { display: block; }
 .hero-full-img { display: block; width: 100%; height: auto; }
 @media (min-width: 1600px) {
   .hero-full-img { max-height: 720px; object-fit: cover; }
@@ -1043,6 +1079,16 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 .category-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
 .category-card .ph-image { width: 100%; }
 .category-card span { font-size: var(--fs-small); font-weight: 600; }
+
+/* The mobile mockup shows the category strip as circles. Desktop (>=1024px)
+   already does this; mobile was still 4/5 rounded rectangles. Scoped to
+   max-width:767px so the 768px tablet rules keep their current look. */
+@media (max-width: 767px) {
+  .category-scroller .category-card .ph-image {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+  }
+}
 
 @media (min-width: 768px) {
   .category-scroller { grid-auto-columns: unset; grid-template-columns: repeat(5, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
@@ -1447,7 +1493,16 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
 /* --------------------------------------------------------------------------
    30. PRODUCT PAGE — Gallery
    -------------------------------------------------------------------------- */
-.product-hero { display: grid; gap: var(--space-6); padding-block: var(--space-5) var(--space-4); }
+.product-hero {
+  display: grid;
+  /* minmax(0,1fr), not the implicit `auto`: an auto track floors at min-content,
+     which let a wide child stretch the column past the container and pushed ~5px
+     of horizontal scroll onto the page at mobile widths. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-5) var(--space-4);
+}
+.product-hero > * { min-width: 0; }
 @media (min-width: 1024px) {
   .product-hero { grid-template-columns: 1.1fr 1fr; gap: var(--space-10); padding-block: var(--space-8) var(--space-6); align-items: start; }
 }
@@ -1553,6 +1608,16 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
 .qty-stepper button:hover { background: var(--color-bg); }
 .qty-stepper span { width: 36px; text-align: center; font-weight: 700; font-family: var(--font-en); }
 .pd-add-btn { flex: 1; }
+
+/* At 375px the row could not fit qty-stepper (126px) + wishlist (48px) + gaps
+   + the add button's min-content width, and .pd-add-btn's implicit min-width:auto
+   refused to shrink past its longest word -- so the 48px wishlist button was pushed
+   ~6px past the content edge and put horizontal scroll on the whole page.
+   Wrapping lets the add button drop to its own full-width line instead. */
+@media (max-width: 767px) {
+  .qty-cta-row { flex-wrap: wrap; }
+  .pd-add-btn { flex: 1 1 auto; min-width: 0; }
+}
 
 .pd-secondary-row { display: flex; gap: var(--space-3); margin-bottom: var(--space-6); }
 .pd-secondary-row .btn { flex: 1; }
@@ -1832,4 +1897,40 @@ html[dir="rtl"] .switch input:checked + .track::before { transform: translateX(1
   width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
   background: var(--color-secondary); color: var(--color-primary-dark);
   display: flex; align-items: center; justify-content: center;
+}
+
+
+/* --------------------------------------------------------------------------
+   39. STICKY BUY BAR  (product page, mobile only)
+   The product page runs ~5800px tall on a 375px screen, so the add-to-cart
+   button leaves the viewport after roughly one screen and never comes back.
+   Brief rule: when beauty and conversion conflict, conversion wins.
+   Revealed by JS (.is-visible) once the real button scrolls out of view.
+   -------------------------------------------------------------------------- */
+.buy-bar { display: none; }
+@media (max-width: 767px) {
+  .buy-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: var(--z-drawer);
+    padding: var(--space-3) var(--container-pad);
+    padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -2px 12px rgba(32,32,32,0.08);
+    transform: translateY(110%);
+    transition: transform var(--dur-base) var(--ease);
+    visibility: hidden;
+  }
+  /* !important per the CLAUDE.md drawer pattern: any future
+     html[dir="rtl"] .buy-bar rule would outrank this two-class selector. */
+  .buy-bar.is-visible { transform: translateY(0) !important; visibility: visible; }
+  .buy-bar-price { display: flex; flex-direction: column; line-height: 1.25; flex-shrink: 0; }
+  .buy-bar-price .price { font-size: var(--fs-body-lg); font-weight: 700; }
+  .buy-bar-price .compare { font-size: var(--fs-xs); color: var(--color-text-muted); text-decoration: line-through; }
+  .buy-bar .btn { flex: 1; min-height: 48px; }
 }

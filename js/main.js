@@ -1201,6 +1201,8 @@
     const stockMsgEl = document.getElementById('pd-stock-msg');
     const addBtn = document.getElementById('pd-add-btn');
     const buyBtn = document.getElementById('pd-buy-btn');
+    const buyBar = document.getElementById('buy-bar');
+    const barAddBtn = document.getElementById('buy-bar-add');
     function updateStockMessage() {
       const color = product.colors[state.colorIndex];
       const status = stockForVariant(product, color, state.size);
@@ -1217,6 +1219,7 @@
       addBtn.disabled = disable; buyBtn.disabled = disable;
       addBtn.style.opacity = disable ? 0.55 : 1;
       buyBtn.style.opacity = disable ? 0.55 : 1;
+      if (barAddBtn) { barAddBtn.disabled = disable; barAddBtn.style.opacity = disable ? 0.55 : 1; }
     }
 
     /* ---- Quantity ---- */
@@ -1232,6 +1235,30 @@
       Store.addToCart(product.id, state.qty, { color: product.colors[state.colorIndex], size: state.size });
       showToast('به سبد خرید اضافه شد');
     });
+
+    /* ---- Sticky buy bar (mobile) ----
+       The product page runs ~5800px tall at 375px, so #pd-add-btn leaves the
+       viewport after about one screen. This mirrors it: same handler, same
+       disabled state, revealed only once the real button is out of view.
+       Uses .is-open-style class toggling; CSS carries !important on the visible
+       transform per the specificity trap documented in CLAUDE.md. */
+    if (buyBar && barAddBtn) {
+      const barPrice = document.getElementById('buy-bar-price');
+      const barCompare = document.getElementById('buy-bar-compare');
+      if (barPrice) barPrice.textContent = formatToman(product.price);
+      if (barCompare) {
+        if (product.comparePrice) barCompare.textContent = formatToman(product.comparePrice);
+        else barCompare.style.display = 'none';
+      }
+      barAddBtn.addEventListener('click', function () { addBtn.click(); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          const showing = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+          buyBar.classList.toggle('is-visible', showing);
+          buyBar.setAttribute('aria-hidden', showing ? 'false' : 'true');
+        }, { threshold: 0 }).observe(addBtn);
+      }
+    }
     buyBtn.addEventListener('click', function () {
       Store.addToCart(product.id, state.qty, { color: product.colors[state.colorIndex], size: state.size });
       showToast('به سبد خرید اضافه شد');

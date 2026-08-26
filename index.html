@@ -147,6 +147,17 @@
       </button>
     </div>
   </div>
+  <!-- Mobile search: opens the existing #search-drawer so all search
+       behaviour (autocomplete, results) lives in one place. -->
+  <div class="container">
+    <button type="button" class="header-search-mobile" data-open-drawer="search-drawer" aria-label="جستجوی محصول">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <span>جستجوی محصول، دسته یا برند…</span>
+      <span class="search-go" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </span>
+    </button>
+  </div>
 </header>
 
 <div class="overlay" id="global-overlay"></div>
@@ -246,10 +257,12 @@
 
   <!-- 02. HERO -->
   <section class="hero hero--image-only">
-    <img src="images/AX/hero-full.webp"
+    <a href="shop.html" class="hero-full-link" aria-label="مشاهده محصولات هکوبا استایل">
+      <img src="images/AX/hero-full.webp"
          alt="زیبایی، راحتی، انتخاب تو — لباس زیر و پوشاک زنانه هکوبا استایل با بهترین کیفیت برای هر سلیقه و هر استایل"
          loading="eager" fetchpriority="high"
          class="hero-full-img" decoding="async" width="2043" height="770">
+    </a>
     <h1 class="sr-only">زیبایی، راحتی، انتخاب تو</h1>
   </section>
 
