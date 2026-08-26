@@ -1239,9 +1239,16 @@
     /* ---- Sticky buy bar (mobile) ----
        The product page runs ~5800px tall at 375px, so #pd-add-btn leaves the
        viewport after about one screen. This mirrors it: same handler, same
-       disabled state, revealed only once the real button is out of view.
-       Uses .is-open-style class toggling; CSS carries !important on the visible
-       transform per the specificity trap documented in CLAUDE.md. */
+       disabled state, revealed only once the real button has scrolled fully
+       out of view above the fold.
+       A plain rAF-throttled scroll listener is used instead of
+       IntersectionObserver: this is a single fixed target, not a list, so the
+       perf case for IO doesn't apply, and a direct getBoundingClientRect check
+       has no dependency on how a given browser schedules IO callbacks (some
+       in-app webviews -- Instagram/Telegram, relevant for this store's social
+       referral traffic -- are known to throttle IO more aggressively than
+       plain scroll events). CSS carries !important on the visible transform
+       per the specificity trap documented in CLAUDE.md. */
     if (buyBar && barAddBtn) {
       const barPrice = document.getElementById('buy-bar-price');
       const barCompare = document.getElementById('buy-bar-compare');
@@ -1251,13 +1258,28 @@
         else barCompare.style.display = 'none';
       }
       barAddBtn.addEventListener('click', function () { addBtn.click(); });
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-          const showing = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
-          buyBar.classList.toggle('is-visible', showing);
-          buyBar.setAttribute('aria-hidden', showing ? 'false' : 'true');
-        }, { threshold: 0 }).observe(addBtn);
+      let ticking = false;
+      function syncBuyBar() {
+        ticking = false;
+        const showing = addBtn.getBoundingClientRect().bottom < 0;
+        buyBar.classList.toggle('is-visible', showing);
+        buyBar.setAttribute('aria-hidden', showing ? 'false' : 'true');
       }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(syncBuyBar); }
+      }, { passive: true });
+      window.addEventListener('resize', syncBuyBar);
+      // Safety net: an instant/programmatic jump (e.g. a future "jump to reviews"
+      // link) fires far fewer 'scroll' events than a real touch gesture and can
+      // leave the bar stale. Verified live against this exact page: a real touch
+      // gesture (simulated as many small incremental scrolls) fires 'scroll'
+      // reliably in both directions and needs nothing extra. 'scrollend' was tried
+      // as a second safety net but did not fire at all in live testing for either
+      // instant or smooth scrollTo, so it is not depended on. 'touchend' is used
+      // instead: every real touch-scroll gesture on the mobile devices this bar
+      // targets ends with one, independent of scroll/scrollend event nuances.
+      window.addEventListener('touchend', syncBuyBar, { passive: true });
+      syncBuyBar();
     }
     buyBtn.addEventListener('click', function () {
       Store.addToCart(product.id, state.qty, { color: product.colors[state.colorIndex], size: state.size });
