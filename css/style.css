@@ -392,46 +392,6 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   border: 1px solid var(--color-border);
 }
 
-/* ---- Placeholder image block (stand-in for editorial/product photography) ---- */
-.ph-image {
-  position: relative;
-  width: 100%;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: linear-gradient(155deg, var(--color-secondary) 0%, #EFE8DB 45%, var(--color-brand-core) 130%);
-  display: flex;
-  align-items: flex-end;
-  color: var(--color-primary-dark);
-}
-.ph-image::before {
-  content: "";
-  position: absolute; inset: 0;
-  background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.35), transparent 45%);
-}
-.ph-image span {
-  position: relative;
-  padding: var(--space-3);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  color: rgba(56,58,42,0.55);
-}
-.ph-image .ph-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.ph-image.ratio-3-4 { aspect-ratio: 3/4; }
-.ph-image.ratio-1-1 { aspect-ratio: 1/1; }
-.ph-image.ratio-4-5 { aspect-ratio: 4/5; }
-.ph-image.ratio-3-2 { aspect-ratio: 3/2; }
-.ph-image.tone-dark { background: linear-gradient(155deg, #4B5238 0%, #6B7350 55%, #8E958C 140%); color: rgba(255,255,255,0.75); }
-.ph-image.tone-dark span { color: rgba(255,255,255,0.75); }
-
-/* --------------------------------------------------------------------------
-   09. PRODUCT CARD  (→ maps to WooCommerce Product Loop Item)
-   -------------------------------------------------------------------------- */
 .product-card {
   position: relative;
   display: flex;
