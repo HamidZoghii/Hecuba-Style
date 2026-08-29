@@ -42,49 +42,31 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 INCOMING = os.path.join(ROOT, '_incoming')
 QUALITY = 85
 
-# slot -> (target_width, target_height).  Derived from the CSS box each slot renders into.
+# slot -> (target_width, target_height). Derived from the CSS box each slot renders into.
+#
+# 2026-08 rebuild: the placeholder AX/* catalog and the sage-toned stock photos are
+# gone. Product and category-card photos are now the real photography dropped into
+# images/products/ and images/categories/, named by an arbitrary numeric key (the
+# phone export filename) rather than a semantic slug -- because a size spec keyed
+# by content ("bra-sage-lace") stops meaning anything once the photo it described
+# no longer exists. New product photos should still land in images/products/<key>.webp
+# at 720x960 (3:4 -- deliberately not 900x1200: source phone photos are 360x640, and
+# a clean 2x upscale looks less soft than the 2.5x that 900x1200 would require).
+# Category cards are images/categories/<slug>.webp at 720x720.
 SPEC = {
-    # hero + backgrounds
-    'images/AX/hero-full.webp':                 (2400, 900),
-    'images/AX/bundle-bg.webp':                 (1600, 400),
-    # category cards + product shots: 3:4 portrait
-    'images/AX/bra-sage-lace.webp':             (900, 1200),
-    'images/AX/bra-sage-smooth.webp':           (900, 1200),
-    'images/AX/bra-mocha-smooth.webp':          (900, 1200),
-    'images/AX/panty-sage-lace.webp':           (900, 1200),
-    'images/AX/panty-sage-smooth.webp':         (900, 1200),
-    'images/AX/panty-sage-lace-scallop.webp':   (900, 1200),
-    'images/AX/panty-mocha-smooth.webp':        (900, 1200),
-    'images/AX/flatlay-sage-set-flowers.webp':  (900, 1200),
-    'images/AX/set-sage-with-robe.webp':        (900, 1200),
-    'images/AX/set-sage-light-with-robe.webp':  (900, 1200),
-    'images/AX/bodysuit-black-sheer.webp':      (900, 1200),
-    'images/AX/bodysuit-sage-lace.webp':        (900, 1200),
-    'images/AX/slip-sage-lace.webp':            (900, 1200),
-    'images/AX/robe-sage-lace.webp':            (900, 1200),
-    'images/AX/texture-sage-lace.webp':         (900, 1200),
-    'images/bodysuit-main.webp':                (900, 1200),
-    'images/bralette-main.webp':                (900, 1200),
-    'images/bralette-alt.webp':                 (900, 1200),
-    'images/fantasy-main.webp':                 (900, 1200),
-    'images/sleepwear-main.webp':               (900, 1200),
-    'images/swim-main.webp':                    (900, 1200),
-    'images/swim-alt.webp':                     (900, 1200),
-    'images/loungewear-main.webp':              (900, 1200),
-    'images/loungewear-alt.webp':               (900, 1200),
-    'images/loungewear-alt2.webp':              (900, 1200),
-    'images/lifestyle-coffee.webp':             (1000, 1000),
-    # editorial / blog: 3:2 landscape
-    'images/about-editorial.webp':              (1200, 800),
-    'images/blog-bra-size.webp':                (1200, 800),
-    'images/blog-bra-types.webp':               (1200, 800),
-    'images/blog-brief-guide.webp':             (1200, 800),
-    'images/blog-care.webp':                    (1200, 800),
-    'images/blog-replace.webp':                 (1200, 800),
-    'images/blog-everyday.webp':                (1200, 800),
+    'images/AX/hero-full.webp':  (2400, 900),
+    'images/AX/bundle-bg.webp':  (1600, 400),
 }
 
+for _slug in ('bra', 'brief', 'set', 'bralette', 'fantasy', 'swim', 'loungewear',
+              'bodysuit', 'sleepwear'):
+    SPEC[f'images/categories/{_slug}.webp'] = (720, 720)
+
 BY_BASENAME = {os.path.splitext(os.path.basename(k))[0]: k for k in SPEC}
+# Product photos aren't matched by a fixed basename table (see note above) --
+# any new file dropped as images/products/<anything>.webp is accepted as-is by
+# `ingest()` at 720x960. `check()` and `sync_dims()` below already read real
+# on-disk dimensions rather than only trusting this table, so this is safe.
 
 
 def referenced_slots():
@@ -195,10 +177,14 @@ def ingest():
     for f in sorted(files):
         base = os.path.splitext(os.path.basename(f))[0]
         slot = BY_BASENAME.get(base)
-        if not slot:
-            skipped.append(os.path.basename(f))
-            continue
-        tw, th = SPEC[slot]
+        if slot:
+            tw, th = SPEC[slot]
+        else:
+            # Not hero/bundle-bg/a category card -> treat as a new product photo.
+            # Rename it yourself first if you want a meaningful filename; whatever
+            # basename it has becomes the key in js/main.js's `image:` field.
+            slot = f'images/products/{base}.webp'
+            tw, th = 720, 960
         dest = os.path.join(ROOT, slot)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         try:

@@ -1079,6 +1079,19 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 .category-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
 .category-card .ph-image { width: 100%; }
 .category-card span { font-size: var(--fs-small); font-weight: 600; }
+/* Bodysuit and sleepwear have no real product photography yet (2026-08 photo
+   refresh only covered 7 of 9 categories). A plain "coming soon" badge is more
+   honest than reusing a mismatched photo from another category. */
+.category-card.is-coming-soon .ph-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-secondary);
+  border: 1px dashed var(--color-border);
+}
+.category-card.is-coming-soon .coming-soon-badge {
+  font-size: var(--fs-xs); font-weight: 600; color: var(--color-text-muted);
+  background: var(--color-surface); padding: 4px 10px; border-radius: var(--radius-pill);
+}
+.category-card.is-coming-soon span { color: var(--color-text-muted); }
 
 /* The mobile mockup shows the category strip as circles. Desktop (>=1024px)
    already does this; mobile was still 4/5 rounded rectangles. Scoped to

@@ -18,255 +18,224 @@
 
   const PRODUCTS = [
     {
-      id: 'hb-001', sku: 'HEC-BRA-1001', image: 'images/AX/bra-sage-smooth.webp',
-      name: 'سوتین بدون سیم مدل النا', category: 'سوتین زنانه', categorySlug: 'bra',
-      price: 690000, comparePrice: 890000,
-      colors: ['#202020', '#B96777', '#E8DFD2'],
+      id: 'hb-101', sku: 'HEC-SWIM-1101', image: 'images/products/1957160.webp',
+      name: 'بیکینی هالتر تای‌دای غروب', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 1290000, comparePrice: 1590000,
+      colors: ['#D2691E', '#8B2500'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'هالتر بندی', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'طرح تای‌دای نارنجی و قرمز که رنگ‌هاش دقیقاً یادآور غروب کنار دریاست؛ بند هالتر قابل تنظیم برای فیت دقیق‌تر.',
+      rating: 4.7, reviews: 41, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-102', sku: 'HEC-SWIM-1102', image: 'images/products/2033940.webp',
+      name: 'بیکینی هالتر آبی اقیانوسی', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 1190000, comparePrice: 1450000,
+      colors: ['#1E3A8A', '#FFFFFF'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'هالتر بندی با نوار کناری', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'آبی سرمه‌ای با نوار سفید کناری؛ برش کلاسیک بیکینی که برای هر اندامی راحت میفته.',
+      rating: 4.8, reviews: 53, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-103', sku: 'HEC-SWIM-1103', image: 'images/products/2052698.webp',
+      name: 'مایو یک‌تکه راه‌راه رنگین‌کمانی', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 1390000, comparePrice: 1690000,
+      colors: ['#E07850', '#6090C0', '#F0E8A0'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'یک‌تکه بدون پد', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'ترکیب رنگ‌های راه‌راه که یک‌تکه‌ی ساده رو به یه انتخاب پرانرژی تبدیل کرده؛ پوشش کامل و راحت.',
+      rating: 4.6, reviews: 22, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-104', sku: 'HEC-SWIM-1104', image: 'images/products/2119455.webp',
+      name: 'مایو یک‌تکه زرد کات‌اوت', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 1290000, comparePrice: 1550000,
+      colors: ['#F0B000'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'یک‌تکه کات‌اوت', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'برش کات‌اوت روی کمر که فرم بدن رو قشنگ نشون می‌ده، در رنگ زرد پرانرژی برای تابستون.',
+      rating: 4.7, reviews: 34, tags: [], inStock: true
+    },
+    {
+      id: 'hb-105', sku: 'HEC-SWIM-1105', image: 'images/products/2135713.webp',
+      name: 'بیکینی گلدار آفتابگردان', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 990000, comparePrice: 1250000,
+      colors: ['#A0522D', '#E8D840'],
+      sizes: ['S', 'M', 'L'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'مثلثی بندی', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'بالاتنه‌ی مثلثی رنگ خاکی و شلوارک با پرینت آفتابگردان؛ ترکیبی متفاوت برای کسی که از یک‌رنگی خسته شده.',
+      rating: 4.5, reviews: 18, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-106', sku: 'HEC-SWIM-1106', image: 'images/products/2139453.webp',
+      name: 'بیکینی مشکی بندی مدل هارلی', category: 'مایو زنانه', categorySlug: 'swim',
+      price: 890000, comparePrice: 1090000,
+      colors: ['#1A1A1A'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'پارچه‌ی مایو ضدکلر با خاصیت خشک‌شوندگی سریع', model: 'بندی با گره رو به بالا', usage: 'ساحل و استخر', brand: BRAND,
+      description: 'مشکی کلاسیک، بندهای قابل تنظیم دور گردن و کمر؛ یک بیکینی پایه که تو هر کمد جا داره.',
+      rating: 4.8, reviews: 61, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-201', sku: 'HEC-SET-1201', image: 'images/products/1929064.webp',
+      name: 'ست سوتین و شورت خاکستری مه‌آلود', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 890000, comparePrice: 1090000,
+      colors: ['#A8A8B4'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'میکروفایبر نرم با پوشش مخملی', model: 'سوتین بدون سیم و شورت هم‌رنگ', usage: 'روزمره', brand: BRAND,
+      description: 'ست دوتکه‌ی خاکستری با پارچه‌ای به‌شدت نرم؛ گزینه‌ای بی‌ادعا برای هر روز که هم راحته هم شیک.',
+      rating: 4.7, reviews: 29, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-202', sku: 'HEC-SET-1202', image: 'images/products/2025470.webp',
+      name: 'ست کنتراست مشکی و سبز زیتونی', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 950000, comparePrice: 1190000,
+      colors: ['#1A1A1A', '#8A9A78'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'کاتن نرم با یقه‌ی توری', model: 'سوتین و شورت کنتراست‌رنگ', usage: 'روزمره', brand: BRAND,
+      description: 'سوتین مشکی و شورت سبز زیتونی، ترکیبی جسورانه به‌جای ست تک‌رنگ همیشگی.',
+      rating: 4.6, reviews: 24, tags: [], inStock: true
+    },
+    {
+      id: 'hb-203', sku: 'HEC-SET-1203', image: 'images/products/2043512.webp',
+      name: 'ست سوتین و شورت آبی پودری', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 890000, comparePrice: 1090000,
+      colors: ['#A8C8E8'],
+      sizes: ['S', 'M', 'L', 'XL'],
+      material: 'میکروفایبر نرم با پوشش مخملی', model: 'سوتین بدون سیم و شورت هم‌رنگ', usage: 'روزمره', brand: BRAND,
+      description: 'آبی پودری آرام‌بخش؛ جنس نرم و بدون درز که زیر لباس هم اصلاً حس نمی‌شه.',
+      rating: 4.8, reviews: 37, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-204', sku: 'HEC-SET-1204', image: 'images/products/2303297.webp',
+      name: 'ست توری مشکی مدل شب', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 1090000, comparePrice: 1350000,
+      colors: ['#1A1A1A'],
+      sizes: ['S', 'M', 'L'],
+      material: 'توری الاستیک ظریف', model: 'سوتین سیم‌دار و شورت توری', usage: 'مخصوص مهمانی', brand: BRAND,
+      description: 'توری ظریف مشکی با جزئیات دوخت‌شده؛ برای شب‌هایی که می‌خوای یه‌کم خاص‌تر باشی.',
+      rating: 4.7, reviews: 19, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-205', sku: 'HEC-SET-1205', image: 'images/products/3156808.webp',
+      name: 'ست توری مشکی و طرح پلنگی', category: 'ست لباس زیر', categorySlug: 'set',
+      price: 1150000, comparePrice: 1420000,
+      colors: ['#1A1A1A', '#6B4A2A'],
+      sizes: ['S', 'M', 'L'],
+      material: 'توری الاستیک ظریف', model: 'سوتین توری و شورت پلنگی', usage: 'مخصوص مهمانی', brand: BRAND,
+      description: 'سوتین توری مشکی همراه با شورت طرح پلنگی؛ ترکیبی جسور برای کسی که از طرح‌های ساده خسته شده.',
+      rating: 4.6, reviews: 15, tags: ['sale'], inStock: true
+    },
+    {
+      id: 'hb-301', sku: 'HEC-BRA-1301', image: 'images/products/1905514.webp',
+      name: 'سوتین ساتن مدل دوقلو', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 690000, comparePrice: 850000,
+      colors: ['#0B3D2E', '#4B0B33'],
+      sizes: ['75B', '80B', '85B', '90B'],
+      material: 'ساتن نرم با یقه‌ی گسترده', model: 'بدون سیم، بند پهن', usage: 'روزمره', brand: BRAND,
+      description: 'سوتین ساتن با یقه‌ی گسترده و بند پهن راحت؛ در دو رنگ سبز جنگلی و بنفش تیره.',
+      rating: 4.7, reviews: 33, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-302', sku: 'HEC-BRA-1302', image: 'images/products/2436579.webp',
+      name: 'سوتین بدون سیم لاوندری', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 590000, comparePrice: 750000,
+      colors: ['#E8E0F0'],
       sizes: ['75B', '80B', '85B', '90B'],
       material: 'کاتن پنبه‌ای نرم', model: 'بدون سیم', usage: 'روزمره', brand: BRAND,
-      description: 'یک سوتین بدون سیم که تمام روز حسش نمی‌کنی؛ نرم، سبک و بدون هیچ فشاری روی پوست.',
-      rating: 4.8, reviews: 126, tags: ['bestseller'], inStock: true
+      description: 'رنگ لاوندر روشن و ملایم؛ یک سوتین بدون سیم که تمام روز حسش نمی‌کنی.',
+      rating: 4.8, reviews: 58, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-010', sku: 'HEC-BRA-1010', image: 'images/AX/bra-sage-lace.webp', image2: 'images/AX/texture-sage-lace.webp',
-      name: 'سوتین فرم‌دهنده پوش‌آپ', category: 'سوتین زنانه', categorySlug: 'bra',
-      price: 790000, comparePrice: 990000,
-      colors: ['#202020', '#B96777', '#737C54'],
-      sizes: ['70B', '75B', '80B', '85B', '90B'],
-      material: 'میکروفایبر بدون درز', model: 'پوش‌آپ', usage: 'مجلسی', brand: BRAND,
-      description: 'فرم‌دهی طبیعی برای لحظه‌های خاص، بدون این‌که حس کنی چیزی اضافه پوشیدی.',
-      rating: 4.8, reviews: 174, tags: ['sale', 'bestseller'], inStock: true
+      id: 'hb-303', sku: 'HEC-BRA-1303', image: 'images/products/3118717.webp',
+      name: 'سوتین دوردوزی مشکی و صورتی', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 650000, comparePrice: 820000,
+      colors: ['#1A1A1A', '#E8B8C8'],
+      sizes: ['75B', '80B', '85B', '90B'],
+      material: 'کاتن دوردوزی با تور حاشیه', model: 'بدون سیم با تور', usage: 'روزمره', brand: BRAND,
+      description: 'حاشیه‌ی توری ظریف روی بدنه‌ی دوردوزی؛ در مشکی کلاسیک و صورتی ملایم.',
+      rating: 4.6, reviews: 21, tags: [], inStock: true
     },
     {
-      id: 'hb-011', sku: 'HEC-BRA-1011', image: 'images/bralette-alt.webp',
-      name: 'سوتین اسپرت بدون درز', category: 'سوتین زنانه', categorySlug: 'bra',
-      price: 590000, comparePrice: null,
-      colors: ['#202020', '#9CA286', '#FFFFFF'],
+      id: 'hb-304', sku: 'HEC-BRA-1304', image: 'images/products/3153454.webp',
+      name: 'سوتین ساده مدل رزا', category: 'سوتین زنانه', categorySlug: 'bra',
+      price: 590000, comparePrice: 750000,
+      colors: ['#C08090'],
+      sizes: ['75B', '80B', '85B', '90B'],
+      material: 'کاتن پنبه‌ای نرم', model: 'بدون سیم', usage: 'روزمره', brand: BRAND,
+      description: 'صورتی رز آرام؛ ساده و بی‌حاشیه برای پوشیدن روزانه بدون فکر کردن بهش.',
+      rating: 4.7, reviews: 27, tags: [], inStock: true
+    },
+    {
+      id: 'hb-401', sku: 'HEC-BRALETTE-1401', image: 'images/products/2956831.webp',
+      name: 'برالت نخی سه‌رنگ', category: 'نیم‌تنه (برالت)', categorySlug: 'bralette',
+      price: 450000, comparePrice: 590000,
+      colors: ['#A8C8E8', '#E8A8B8', '#F5F0E8'],
+      sizes: ['S', 'M', 'L'],
+      material: 'نخی کشی نرم', model: 'برالت تک‌بند', usage: 'راحتی خانگی', brand: BRAND,
+      description: 'برالت نخی ساده با بند نازک؛ در سه رنگ آبی، صورتی و کرم برای ست کردن با هر چیزی.',
+      rating: 4.6, reviews: 31, tags: ['bestseller'], inStock: true
+    },
+    {
+      id: 'hb-402', sku: 'HEC-BRALETTE-1402', image: 'images/products/3101718.webp',
+      name: 'برالت دکمه‌دار کالکشن رنگی', category: 'نیم‌تنه (برالت)', categorySlug: 'bralette',
+      price: 490000, comparePrice: 620000,
+      colors: ['#A8C8E8', '#1A1A1A', '#F0E8D8'],
+      sizes: ['S', 'M', 'L'],
+      material: 'نخی کشی با دکمه‌ی جلو', model: 'برالت دکمه‌دار', usage: 'راحتی خانگی', brand: BRAND,
+      description: 'مدل دکمه‌دار جلو که پوشیدن و درآوردنش خیلی راحت‌تره؛ در چند رنگ و طرح مختلف.',
+      rating: 4.5, reviews: 16, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-501', sku: 'HEC-BRIEF-1501', image: 'images/products/2047644.webp',
+      name: 'شورت کالکشن طرح‌دار', category: 'شورت زنانه', categorySlug: 'brief',
+      price: 290000, comparePrice: 380000,
+      colors: ['#E8A0B8', '#C8C8D8'],
       sizes: ['S', 'M', 'L', 'XL'],
-      material: 'پارچه تنفس‌پذیر ورزشی', model: 'اسپرت', usage: 'ورزشی', brand: BRAND,
-      description: 'برای روزهای پرتحرک؛ بدون درز، خنک و کاملاً همراه با حرکات بدن.',
-      rating: 4.7, reviews: 88, tags: ['new'], inStock: true
+      material: 'کاتن نرم با کش راحت', model: 'شورت کلاسیک کمر متوسط', usage: 'روزمره', brand: BRAND,
+      description: 'مجموعه‌ای از طرح‌ها و رنگ‌های مختلف؛ برای کسی که میخواد کشو لباس زیرش رنگی باشه.',
+      rating: 4.6, reviews: 44, tags: ['bestseller'], inStock: true
     },
     {
-      id: 'hb-012', sku: 'HEC-BRA-1012', image: 'images/AX/bra-mocha-smooth.webp',
-      name: 'سوتین کلاسیک سه‌بند', category: 'سوتین زنانه', categorySlug: 'bra',
-      price: 650000, comparePrice: 790000,
-      colors: ['#202020', '#C9A992', '#8E3045'],
-      sizes: ['70B', '75B', '80B', '85B'],
-      material: 'کاتن ممزوج', model: 'کلاسیک', usage: 'روزمره', brand: BRAND,
-      description: 'یک انتخاب کلاسیک و همیشگی برای پوشیدن زیر هر نوع لباسی، هر روز.',
-      rating: 4.6, reviews: 102, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-003', sku: 'HEC-BRF-1003', image: 'images/AX/panty-sage-smooth.webp',
-      name: 'شورت کمرگهی راحت روزانه', category: 'شورت زنانه', categorySlug: 'brief',
-      price: 290000, comparePrice: 350000,
-      colors: ['#202020', '#9CA286', '#E8DFD2', '#B96777'],
-      sizes: ['S', 'M', 'L', 'XL', '2XL'],
-      material: 'کاتن الاستیک', model: 'کمرگهی', usage: 'روزمره', brand: BRAND,
-      description: 'راحتی واقعی برای هر روز؛ کش نرم، بدون فشار روی کمر و پوست.',
-      rating: 4.7, reviews: 212, tags: ['bestseller'], inStock: true
-    },
-    {
-      id: 'hb-013', sku: 'HEC-BRF-1013', image: 'images/AX/panty-sage-lace-scallop.webp', image2: 'images/AX/panty-sage-lace.webp',
-      name: 'شورت تانگا دانتل', category: 'شورت زنانه', categorySlug: 'brief',
-      price: 340000, comparePrice: null,
-      colors: ['#202020', '#B96777', '#8E3045'],
-      sizes: ['S', 'M', 'L'],
-      material: 'دانتل نرم', model: 'تانگا', usage: 'مجلسی', brand: BRAND,
-      description: 'ظریف و سبک، برای شب‌هایی که دلت می‌خواد کمی خاص‌تر باشی.',
-      rating: 4.5, reviews: 47, tags: ['new'], inStock: true
-    },
-    {
-      id: 'hb-014', sku: 'HEC-BRF-1014', image: 'images/AX/panty-mocha-smooth.webp',
-      name: 'شورت فول شکم‌گیر', category: 'شورت زنانه', categorySlug: 'brief',
-      price: 320000, comparePrice: 380000,
-      colors: ['#737C54', '#9CA286'],
-      sizes: ['M', 'L', 'XL', '2XL'],
-      material: 'میکروفایبر فرم‌دهنده', model: 'فول', usage: 'روزمره', brand: BRAND,
-      description: 'پوشش کامل و فرم‌دهنده، برای روزهایی که به آرامش و ثبات بیشتری نیاز داری.',
-      rating: 4.6, reviews: 71, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-002', sku: 'HEC-SET-1002', image: 'images/AX/flatlay-sage-set-flowers.webp',
-      name: 'ست دو تکه آدل', category: 'ست لباس زیر', categorySlug: 'set',
-      price: 1290000, comparePrice: null,
-      colors: ['#202020', '#8E3045'],
+      id: 'hb-502', sku: 'HEC-BRIEF-1502', image: 'images/products/3043995.webp',
+      name: 'شورت گلدار رز قرمز', category: 'شورت زنانه', categorySlug: 'brief',
+      price: 250000, comparePrice: 320000,
+      colors: ['#F0EDE5', '#C02020'],
       sizes: ['S', 'M', 'L', 'XL'],
-      material: 'لمینت گلدوزی‌شده', model: 'دو تکه', usage: 'مجلسی', brand: BRAND,
-      description: 'ست دو تکه‌ای که هم زیباست، هم اندازه‌ی روزهای معمولی و هم لحظه‌های خاص.',
-      rating: 4.9, reviews: 84, tags: ['new'], inStock: true
+      material: 'کاتن نرم با کش راحت', model: 'شورت کلاسیک کمر متوسط', usage: 'روزمره', brand: BRAND,
+      description: 'زمینه‌ی سفید با پرینت گل رز قرمز؛ فمینین و راحت برای پوشش روزانه.',
+      rating: 4.7, reviews: 25, tags: [], inStock: true
     },
     {
-      id: 'hb-015', sku: 'HEC-SET-1015', image: 'images/AX/set-sage-with-robe.webp',
-      name: 'ست سه‌تکه بی‌تریس', category: 'ست لباس زیر', categorySlug: 'set',
-      price: 1590000, comparePrice: 1890000,
-      colors: ['#202020', '#B96777'],
-      sizes: ['S', 'M', 'L'],
-      material: 'توری گلدوزی‌شده', model: 'سه‌تکه', usage: 'مجلسی', brand: BRAND,
-      description: 'سه تکه‌ای ظریف با گلدوزی دست‌ساز، برای وقتی می‌خوای حس متفاوتی داشته باشی.',
-      rating: 4.8, reviews: 36, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-016', sku: 'HEC-SET-1016', image: 'images/AX/set-sage-light-with-robe.webp',
-      name: 'ست پنبه‌ای روزمره', category: 'ست لباس زیر', categorySlug: 'set',
-      price: 690000, comparePrice: null,
-      colors: ['#9CA286', '#E8DFD2', '#202020'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      material: 'کاتن نرم', model: 'دو تکه', usage: 'روزمره', brand: BRAND,
-      description: 'یک ست ساده و پنبه‌ای برای شروع روزهایی که فقط راحتی مهمه.',
-      rating: 4.7, reviews: 59, tags: ['new'], inStock: true
-    },
-    {
-      id: 'hb-005', sku: 'HEC-BRL-1005', image: 'images/bralette-main.webp',
-      name: 'نیم‌تنه بافت پنبه‌ای', category: 'نیم‌تنه', categorySlug: 'bralette',
-      price: 450000, comparePrice: null,
-      colors: ['#737C54', '#202020', '#E8DFD2'],
-      sizes: ['S', 'M', 'L'],
-      material: 'ریب کاتن', model: 'ساده', usage: 'روزمره', brand: BRAND,
-      description: 'سبک، بدون قالب و بدون بند اضافه؛ درست مثل نپوشیدن هیچ‌چیز.',
-      rating: 4.5, reviews: 39, tags: ['new'], inStock: true
-    },
-    {
-      id: 'hb-017', sku: 'HEC-BRL-1017', image: 'images/bralette-alt.webp',
-      name: 'نیم‌تنه ورزشی کراپ', category: 'نیم‌تنه', categorySlug: 'bralette',
-      price: 420000, comparePrice: 480000,
-      colors: ['#202020', '#9CA286', '#FFFFFF'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      material: 'پارچه ورزشی کشی', model: 'اسپرت', usage: 'ورزشی', brand: BRAND,
-      description: 'کراپ ورزشی که زیر هر تاپی هم شیک می‌شینه، هم حمایت لازم رو می‌ده.',
-      rating: 4.6, reviews: 64, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-007', sku: 'HEC-FNT-1007', image: 'images/fantasy-main.webp',
-      name: 'ست فانتزی گلدوزی مون', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
-      price: 1490000, comparePrice: null,
-      colors: ['#202020', '#B96777'],
-      sizes: ['S', 'M', 'L'],
-      material: 'دانتل فرانسوی', model: 'توری', usage: 'مجلسی', brand: BRAND,
-      description: 'گلدوزی ظریف روی توری فرانسوی، برای شب‌هایی که قراره به‌یادماندنی باشن.',
-      rating: 4.9, reviews: 45, tags: ['new'], inStock: false
-    },
-    {
-      id: 'hb-018', sku: 'HEC-FNT-1018', image: 'images/fantasy-main.webp',
-      name: 'ست فانتزی توری گل‌دار', category: 'لباس زیر فانتزی', categorySlug: 'fantasy',
-      price: 1350000, comparePrice: 1650000,
-      colors: ['#202020', '#8E3045', '#B96777'],
-      sizes: ['S', 'M', 'L'],
-      material: 'توری الاستیک ظریف', model: 'توری', usage: 'مجلسی', brand: BRAND,
-      description: 'طرح گل‌دار روی توری الاستیک، ظریف و راحت در آن واحد.',
-      rating: 4.8, reviews: 29, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-004', sku: 'HEC-BOD-1004', image: 'images/AX/bodysuit-black-sheer.webp',
-      name: 'بادی مدل رزا', category: 'بادی زنانه', categorySlug: 'bodysuit',
-      price: 990000, comparePrice: 1250000,
-      colors: ['#202020', '#6D2436'],
-      sizes: ['S', 'M', 'L'],
-      material: 'مدال فرانسه با دانتل', model: 'توری', usage: 'مجلسی', brand: BRAND,
-      description: 'بادی‌ای که زیر هر لباسی فرم می‌گیره و ظاهر مرتبی به کل استایلت می‌ده.',
-      rating: 4.6, reviews: 58, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-019', sku: 'HEC-BOD-1019', image: 'images/bodysuit-main.webp',
-      name: 'بادی ساده روزمره', category: 'بادی زنانه', categorySlug: 'bodysuit',
-      price: 690000, comparePrice: null,
-      colors: ['#202020', '#E8DFD2', '#C9A992'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      material: 'کاتن الاستیک', model: 'ساده', usage: 'روزمره', brand: BRAND,
-      description: 'یک بادی ساده و کاتن برای روزهایی که دنبال یک لایه‌ی راحت زیر لباس هستی.',
-      rating: 4.5, reviews: 41, tags: ['bestseller'], inStock: true
-    },
-    {
-      id: 'hb-020', sku: 'HEC-BOD-1020', image: 'images/AX/bodysuit-sage-lace.webp',
-      name: 'بادی تور گلدوزی', category: 'بادی زنانه', categorySlug: 'bodysuit',
-      price: 1090000, comparePrice: 1290000,
-      colors: ['#202020', '#8E3045'],
-      sizes: ['S', 'M', 'L'],
-      material: 'توری گلدوزی‌شده', model: 'توری', usage: 'مجلسی', brand: BRAND,
-      description: 'گلدوزی روی توری، برای لحظه‌هایی که دلت جزئیات ظریف می‌خواد.',
-      rating: 4.7, reviews: 33, tags: ['bestseller', 'sale'], inStock: true
-    },
-    {
-      id: 'hb-006', sku: 'HEC-SLP-1006', image: 'images/AX/slip-sage-lace.webp',
-      name: 'لباس خواب ساتن کوتاه', category: 'لباس خواب', categorySlug: 'sleepwear',
+      id: 'hb-601', sku: 'HEC-LOUNGE-1601', image: 'images/products/2037820.webp',
+      name: 'ربدوشامبر راه‌راه آبی', category: 'لباس راحتی', categorySlug: 'loungewear',
       price: 890000, comparePrice: 1090000,
-      colors: ['#8E3045', '#202020'],
+      colors: ['#6080B0', '#F0F0F0'],
+      sizes: ['Free Size'],
+      material: 'پارچه‌ی حوله‌ای نرم', model: 'ربدوشامبر بلند با کمربند', usage: 'راحتی خانگی', brand: BRAND,
+      description: 'ربدوشامبر راه‌راه آبی و سفید با کمربند؛ برای صبح‌های آروم و شب‌های سرد.',
+      rating: 4.8, reviews: 22, tags: ['new'], inStock: true
+    },
+    {
+      id: 'hb-602', sku: 'HEC-LOUNGE-1602', image: 'images/products/3051139.webp',
+      name: 'ست لباس راحتی سفید و آبی', category: 'لباس راحتی', categorySlug: 'loungewear',
+      price: 690000, comparePrice: 890000,
+      colors: ['#F5F5F0', '#A8C8E0'],
       sizes: ['S', 'M', 'L', 'XL'],
-      material: 'ساتن نرم', model: 'کلاسیک', usage: 'مجلسی', brand: BRAND,
-      description: 'ساتن نرم روی پوست؛ سبک، خنک و کمی هم لاکچری برای شب.',
-      hasVideo: true,
-      rating: 4.8, reviews: 97, tags: ['bestseller', 'sale'], inStock: true
+      material: 'کاتن نرم دولایه', model: 'تاپ و شلوارک ست', usage: 'راحتی خانگی', brand: BRAND,
+      description: 'تاپ سفید ساده با شلوارک راه‌راه آبی؛ ست راحتی برای خونه که شیک هم هست.',
+      rating: 4.7, reviews: 30, tags: [], inStock: true
     },
     {
-      id: 'hb-021', sku: 'HEC-SLP-1021', image: 'images/sleepwear-main.webp',
-      name: 'لباس خواب پنبه‌ای بلند', category: 'لباس خواب', categorySlug: 'sleepwear',
-      price: 590000, comparePrice: null,
-      colors: ['#E8DFD2', '#9CA286', '#202020'],
-      sizes: ['S', 'M', 'L', 'XL', 'Free Size'],
-      material: 'کاتن نخی نرم', model: 'ساده', usage: 'خانگی', brand: BRAND,
-      description: 'پنبه‌ای، بلند و آرامش‌بخش؛ دقیقاً چیزی که برای یک خواب خوب لازم داری.',
-      rating: 4.6, reviews: 52, tags: ['bestseller'], inStock: true
-    },
-    {
-      id: 'hb-022', sku: 'HEC-SLP-1022', image: 'images/AX/robe-sage-lace.webp',
-      name: 'لباس خواب حریر با شال', category: 'لباس خواب', categorySlug: 'sleepwear',
-      price: 1190000, comparePrice: null,
-      colors: ['#B96777', '#202020'],
+      id: 'hb-701', sku: 'HEC-FANTASY-1701', image: 'images/products/3133289.webp',
+      name: 'لباس فانتزی استرپی مشکی', category: 'فانتزی', categorySlug: 'fantasy',
+      price: 990000, comparePrice: 1290000,
+      colors: ['#1A1A1A'],
       sizes: ['S', 'M', 'L'],
-      material: 'حریر لطیف', model: 'توری', usage: 'مجلسی', brand: BRAND,
-      description: 'حریر لطیف با یک شال همراه، برای شب‌هایی که می‌خوای خاص بپوشی.',
-      rating: 4.9, reviews: 22, tags: ['new'], inStock: true
-    },
-    {
-      id: 'hb-008', sku: 'HEC-SWM-1008', image: 'images/swim-main.webp',
-      name: 'مایو یک‌تکه کلاسیک', category: 'مایو و بیکینی', categorySlug: 'swim',
-      price: 990000, comparePrice: 1190000,
-      colors: ['#202020', '#737C54'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      material: 'لایکرا مقاوم به کلر', model: 'کلاسیک', usage: 'ساحلی', brand: BRAND,
-      description: 'یک‌تکه و کلاسیک، مقاوم در برابر کلر استخر و رنگ‌ثابت زیر آفتاب.',
-      rating: 4.6, reviews: 31, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-023', sku: 'HEC-SWM-1023', image: 'images/swim-alt.webp',
-      name: 'بیکینی دو تکه فرم‌دهنده', category: 'مایو و بیکینی', categorySlug: 'swim',
-      price: 890000, comparePrice: null,
-      colors: ['#202020', '#C9A992', '#8E3045'],
-      sizes: ['S', 'M', 'L'],
-      material: 'لایکرا فرم‌دهنده', model: 'پوش‌آپ', usage: 'ساحلی', brand: BRAND,
-      description: 'فرم‌دهنده و راحت، برای روزهای ساحل بدون نگرانی از فرم بدن.',
-      rating: 4.5, reviews: 18, tags: ['new'], inStock: true
-    },
-    {
-      id: 'hb-009', sku: 'HEC-CMF-1009', image: 'images/loungewear-alt.webp', image2: 'images/loungewear-alt2.webp',
-      name: 'ست راحتی خانگی دو تکه', category: 'لباس راحتی', categorySlug: 'loungewear',
-      price: 750000, comparePrice: null,
-      colors: ['#E8DFD2', '#9CA286'],
-      sizes: ['S', 'M', 'L', 'XL', 'Free Size'],
-      material: 'نخ پنبه‌ای گرم', model: 'دو تکه', usage: 'خانگی', brand: BRAND,
-      description: 'ست راحتی نخی برای شب‌های خانه؛ نرم، گرم و بدون هیچ محدودیتی در حرکت.',
-      rating: 4.7, reviews: 63, tags: ['bestseller'], inStock: true
-    },
-    {
-      id: 'hb-024', sku: 'HEC-CMF-1024', image: 'images/loungewear-main.webp',
-      name: 'شلوار و تاپ راحتی نخی', category: 'لباس راحتی', categorySlug: 'loungewear',
-      price: 640000, comparePrice: 720000,
-      colors: ['#202020', '#E8DFD2', '#737C54'],
-      sizes: ['S', 'M', 'L', 'XL', '2XL'],
-      material: 'نخ پنبه‌ای', model: 'ساده', usage: 'خانگی', brand: BRAND,
-      description: 'شلوار و تاپ نخی که بعد از یک روز طولانی حس آزادی می‌ده.',
-      rating: 4.6, reviews: 44, tags: ['sale'], inStock: true
-    },
-    {
-      id: 'hb-025', sku: 'HEC-SET-1025', image: 'images/AX/bra-sage-lace.webp',
-      name: 'ست کامل النا', category: 'ست لباس زیر', categorySlug: 'set',
-      price: 990000, comparePrice: 1230000,
-      colors: ['#9CA286', '#202020', '#8E3045'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      material: 'کاتن نرم با تور ظریف', model: 'سه‌تکه', usage: 'روزمره', brand: BRAND,
-      description: 'سوتین، شورت و جوراب هماهنگ در یک ست کامل — همه‌چیزی که برای شروع یک روز خوب لازم داری، با صرفه‌ی واقعی نسبت به خرید جداگانه.',
-      rating: 4.8, reviews: 67, tags: ['sale'], inStock: true
+      material: 'الاستیک با تسمه‌های تنظیم‌شونده', model: 'هارنس استرپی چندتکه', usage: 'مخصوص شب', brand: BRAND,
+      description: 'طراحی هارنسی با تسمه‌های متقاطع؛ برای شب‌هایی که دنبال چیزی فراتر از معمولی هستی.',
+      rating: 4.5, reviews: 12, tags: ['new'], inStock: true
     }
   ];
 

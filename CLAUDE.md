@@ -46,6 +46,37 @@ docs/brief.md     ← original 78-section client brief (source of truth for cont
 
 `category.html` and `product.html` are **single templates** driven by query string (`?cat=bra`, `?id=hb-001`) — don't create per-category or per-product HTML files.
 
+## Product catalog (2026-08 rebuild — real photos, not placeholders)
+The 25 fictional sage-palette products were fully replaced with **22 real products**
+built from the client's own phone photography (`images/products/<key>.webp`, key =
+the original phone export filename, arbitrary — don't try to read meaning into it).
+Ids were renumbered by category block: `hb-1xx` swim, `hb-2xx` set, `hb-3xx` bra,
+`hb-4xx` bralette, `hb-5xx` brief, `hb-6xx` loungewear, `hb-7xx` fantasy.
+
+**`bodysuit` and `sleepwear` currently have zero products.** No real photos exist
+for either category yet. Their category cards render a "به‌زودی" placeholder
+(`.category-card.is-coming-soon`, no `<img>`) instead of a mismatched photo —
+`category.html?cat=bodysuit` renders the pre-existing `#empty-state` and does not
+crash, this was already handled by the shop/category empty-state UI. Don't
+delete these categories from `CATEGORIES` or `shop.html`'s filter list to "clean
+up" the empty state — they're intentionally still there, waiting on photography.
+
+**3 supplied photos were deliberately excluded from the catalog**, not just
+uncategorized: one showed a real Real Madrid/Adidas-branded jersey-styled item
+(trademark risk — official club crest, sponsor branding, not licensed
+merchandise), two showed sealed third-party retail packaging (a "MOZE"-branded
+box with the manufacturer's own stock photo on it, not the client's product
+photography, and the garment itself isn't visible outside the box). If asked to
+revisit these, the fix is new photography — a plain garment shot with no
+third-party branding or box art — not further cropping of the originals.
+
+**Homepage sections that reference specific product ids by hardcoded `hb-xxx`
+string** (bundle-price wiring and the `#curated-grid` picks, both in an inline
+`<script>` at the bottom of `index.html`, *not* in `js/main.js`) will silently
+break (`Cannot read properties of undefined`) if that id is ever removed from
+`PRODUCTS` again. `grep -n "byId('hb-" *.html js/main.js` before deleting any
+product id.
+
 ## Design tokens (already defined in `:root` in style.css — reuse, don't redefine)
 - Primary (sage olive): `--color-primary` `#737C54` / brand core `#9CA286`
 - Secondary (warm beige): `--color-secondary` `#E8DFD2`
