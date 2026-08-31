@@ -944,6 +944,11 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
     text-align: start;
     cursor: pointer;
   }
+  /* The header icon row's own search button opens the exact same drawer as the
+     bar above — showing both was flagged as visibly redundant on a real device.
+     Hidden here, not removed from the DOM: still present (and shown) at
+     tablet/desktop widths where .header-search-mobile itself is display:none. */
+  .header-search-icon { display: none; }
   .header-search-mobile span { flex: 1; }
   .header-search-mobile .search-go {
     display: flex; align-items: center; justify-content: center;
@@ -1257,8 +1262,11 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
    23. INSTAGRAM SECTION
    -------------------------------------------------------------------------- */
 .instagram-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); margin-top: var(--space-6); }
-@media (min-width: 768px) { .instagram-grid { grid-template-columns: repeat(5, 1fr); } }
-@media (min-width: 1024px) { .instagram-grid { grid-template-columns: repeat(4, 1fr); } }
+/* 6 photos total: 3 columns divides evenly (2 clean rows) at every width up to
+   1024px, so no separate tablet override is needed -- the previous repeat(5,1fr)
+   here left a single orphaned photo alone in row 2, which is exactly the layout
+   bug being fixed. Desktop goes to 6 columns (one full row) for the same reason. */
+@media (min-width: 1024px) { .instagram-grid { grid-template-columns: repeat(6, 1fr); } }
 .instagram-grid .ph-image::after { content: ""; position: absolute; inset: 0; background: var(--color-text); opacity: 0.08; }
 .instagram-head { text-align: center; max-width: 42ch; margin-inline: auto; }
 .instagram-head p { color: color-mix(in srgb, var(--color-text) 45%, var(--color-text-muted) 55%); }
