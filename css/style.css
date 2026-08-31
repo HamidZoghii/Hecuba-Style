@@ -841,16 +841,25 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 }
 .logo span { color: var(--color-cta); }
 
-/* Mobile header fits in 375px only if the row is not over-committed:
-   44 (menu) + logo + 182 (4 action icons) + gaps had to fit in 343px of
-   content box and did not, which is what was crushing the menu button.
-   Tighter gaps + a slightly smaller wordmark buy back ~30px. */
+/* Mobile header row: menu(44) + logo + [search, wishlist, account, cart](182) +
+   gaps, all in ~375px. This is tight even with the icon count back at 4 (the
+   search icon returned to this row instead of a separate full-width bar) --
+   measured at ~378px of content wanting to fit ~375px of space. Zeroing the
+   action-icon gap and trimming the wordmark a touch further buys back the
+   needed margin; this could not be re-verified against a live render this
+   session (browser tooling was unavailable), so double check on a 360px-wide
+   device specifically -- that's tighter than the 375px this was computed for. */
 @media (max-width: 767px) {
   .header-inner { gap: var(--space-1); }
-  .logo { font-size: 1.15rem; }
+  .logo { font-size: 1.05rem; }
 }
 
 .header-actions { display: flex; align-items: center; gap: 2px; }
+/* Placed after the base rule above deliberately -- equal specificity means
+   source order decides, and a media-query block earlier in the file loses to
+   a later unconditional rule regardless of viewport. (Same class of bug as
+   the documented RTL drawer specificity trap.) */
+@media (max-width: 767px) { .header-actions { gap: 0; } }
 .icon-badge-count {
   position: absolute;
   top: 2px; inset-inline-end: 2px;
@@ -918,47 +927,6 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 }
 
 .header-search-desktop { display: none; }
-
-/* Mobile search bar. The mockup puts a full-width search field directly under
-   the header; previously search on mobile was only reachable via a small icon,
-   so it measured 0px wide in the page and was effectively undiscoverable.
-   This is a button styled as a field rather than a second <input>: tapping it
-   opens the existing search drawer, so autocomplete and all search behaviour
-   stay in one place instead of being duplicated. */
-.header-search-mobile { display: none; }
-@media (max-width: 767px) {
-  .header-search-mobile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    width: 100%;
-    min-height: 44px;
-    padding: 0 var(--space-3);
-    margin-block: 0 var(--space-3);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    color: var(--color-text-muted);
-    font-family: var(--font-fa);
-    font-size: var(--fs-body);
-    text-align: start;
-    cursor: pointer;
-  }
-  /* The header icon row's own search button opens the exact same drawer as the
-     bar above — showing both was flagged as visibly redundant on a real device.
-     Hidden here, not removed from the DOM: still present (and shown) at
-     tablet/desktop widths where .header-search-mobile itself is display:none. */
-  .header-search-icon { display: none; }
-  .header-search-mobile span { flex: 1; }
-  .header-search-mobile .search-go {
-    display: flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px;
-    border-radius: var(--radius-sm);
-    background: var(--color-primary-aa);
-    color: #fff;
-    flex-shrink: 0;
-  }
-}
 @media (min-width: 1024px) {
   .header-search-desktop { display: block; width: 220px; }
   /* Mobile-only header controls: hide once the desktop nav + search bar take over */
