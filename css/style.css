@@ -1031,6 +1031,14 @@ html[dir="rtl"] .drawer.sheet { transform: translateY(100%); }
 .hero.hero--image-only { padding-block: 0; }
 .hero-full-link { display: block; }
 .hero-full-img { display: block; width: 100%; height: auto; }
+/* The <img> width/height attributes (2043x770, ~2.65:1) describe the desktop
+   file and are what the browser uses to reserve layout space before any image
+   loads. The mobile <source> (900x690, ~1.3:1) is a different shape, so without
+   this override the reserved box is wrong at mobile widths and the page jumps
+   once the real file loads and height:auto recalculates against it. */
+@media (max-width: 767px) {
+  .hero-full-img { aspect-ratio: 900 / 690; }
+}
 @media (min-width: 1600px) {
   .hero-full-img { max-height: 720px; object-fit: cover; }
 }

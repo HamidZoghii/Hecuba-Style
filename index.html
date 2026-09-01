@@ -247,10 +247,13 @@
   <!-- 02. HERO -->
   <section class="hero hero--image-only">
     <a href="shop.html" class="hero-full-link" aria-label="مشاهده محصولات هکوبا استایل">
-      <img src="images/AX/hero-full.webp"
-         alt="زیبایی، راحتی، انتخاب تو — لباس زیر و پوشاک زنانه هکوبا استایل با بهترین کیفیت برای هر سلیقه و هر استایل"
-         loading="eager" fetchpriority="high"
-         class="hero-full-img" decoding="async" width="2043" height="770">
+      <picture>
+        <source media="(max-width: 767px)" srcset="images/AX/hero-mobile.webp">
+        <img src="images/AX/hero-full.webp"
+           alt="زیبایی، راحتی، انتخاب تو — لباس زیر و پوشاک زنانه هکوبا استایل با بهترین کیفیت برای هر سلیقه و هر استایل"
+           loading="eager" fetchpriority="high"
+           class="hero-full-img" decoding="async" width="2043" height="770">
+      </picture>
     </a>
     <h1 class="sr-only">زیبایی، راحتی، انتخاب تو</h1>
   </section>
