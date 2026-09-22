@@ -1,6 +1,10 @@
-# Hecuba Style — پروتوتایپ کامل (فاز ۱ تا ۵)
+# Hecuba Style
 
-پروژه تکمیل شد ✅ — یک Prototype کامل، چندصفحه‌ای، Mobile-First و RTL برای Hecuba Style، آماده برای بررسی و انتقال به WordPress + WooCommerce + Elementor.
+پروتوتایپ کامل یه فروشگاه اینترنتی برای Hecuba Style — چندصفحه‌ای، Mobile-First و RTL، با HTML/CSS/JS ساده (بدون فریم‌ورک)، آماده برای انتقال به WordPress + WooCommerce + Elementor.
+
+## آماده‌سازی برای Elementor + WooCommerce
+
+Header/Footer و باقی Sectionها Container-based و بدون تودرتوی پیچیده نوشته شدن، Product Card ساختار تخته و مستقیم قابل تبدیل به WooCommerce Loop Item است، Swatchهای رنگ و دکمه Wishlist هم data attribute آماده اتصال به افزونه‌های Variation Swatches و TI Wishlist دارن.
 
 ## ساختار پروژه (۱۷ صفحه)
 ```
@@ -28,18 +32,6 @@ hecuba/
 └── README.md
 ```
 
-## نحوه پیش‌نمایش
-```
-cd hecuba
-python3 -m http.server 8080
-```
-سپس در مرورگر: `http://localhost:8080`
-
-## فاز ۵ — نکات
-- **۹ صفحه جدید** ساخته شد: About، Contact (+ فرم تماس UI-only، در وردپرس با WPForms جایگزین می‌شه)، FAQ (گروه‌بندی‌شده در ۴ دسته با Accordion مستقل)، Blog (لیست ۶ مقاله نمونه — صفحات تکی مقاله در scope این پروتوتایپ نیست)، Returns، Shipping، Size Guide (مستقل)، Privacy، Terms.
-- تمام لینک‌های Footer/Header که در فازهای قبل به این صفحات اشاره می‌کردن، حالا زنده و کاری هستن — هیچ Dead Link‌ای باقی نمونده (با اسکریپت بررسی خودکار تایید شد).
-- لینک «وبلاگ» و «درباره ما» به Footer («فروشگاه» column) در همه صفحات اضافه شد.
-
 ## خلاصه کل پروژه (چک‌لیست کیفیت طبق بریف، بخش ۷۶)
 - ✅ در ۵ ثانیه اول مشخصه هکوبا چی می‌فروشه (Hero + Trust Strip)
 - ✅ کاربر موبایل سریع وارد Shop می‌شه (ناوبری، CTA اصلی، Sticky CTAها)
@@ -63,41 +55,6 @@ python3 -m http.server 8080
 - فیلترهای Shop/Category به‌صورت Checkbox/Range مستقل هستن → آماده اتصال به **Filter Everything**.
 - جایگاه OTP پیامکی در Checkout آماده اتصال به افزونه SMS.
 - داده نمونه ۲۴ محصول در `js/main.js` (`window.HECUBA.PRODUCTS`) ساختاری کاملاً قابل‌توسعه به ۱۲۰+ محصول واقعی داره.
-
-## محدودیت‌های شناخته‌شده (خارج از Scope این پروتوتایپ)
-- صفحات تکی مقالات وبلاگ (فقط لیست مقالات ساخته شده).
-- صفحه Account/ورود کاربر (چون Guest Checkout الزامی و اولویت اول بریف بود).
-- صفحه اختصاصی Order Tracking (لینک آماده در Order Success، اما پیاده‌سازی کامل نشده).
-- تصاویر Placeholder گرافیکی هستن، نه عکس واقعی — در انتقال به وردپرس با عکاسی واقعی Hecuba جایگزین می‌شن.
-- پرداخت، پیامک OTP و فرم تماس، همگی UI/UX واقعی دارن ولی Backend واقعی ندارن (طبق دستور بریف، نیازی به آن‌ها در این مرحله نبود).
-
-## نحوه پیش‌نمایش
-برای جلوگیری از محدودیت CORS مرورگر روی فایل‌های لوکال، بهتر است با یک سرور ساده باز شود:
-```
-cd hecuba
-python3 -m http.server 8080
-```
-سپس در مرورگر: `http://localhost:8080`
-
-(باز کردن مستقیم `index.html` با دابل‌کلیک هم کار می‌کند چون همه فایل‌ها relative path هستند و از fetch استفاده نشده.)
-
-## نکات مهم فاز ۱
-- **Mobile First:** تمام استایل‌ها ابتدا برای موبایل نوشته شده و با `min-width` برای تبلت (768px) و دسکتاپ (1024px+) گسترش پیدا کرده‌اند.
-- **RTL کامل:** `dir="rtl"` روی `<html>`، آیکون‌ها و Drawerها جهت‌دار (با `inset-inline-start/end`) پیاده‌سازی شده‌اند.
-- **تصاویر Placeholder:** به‌جای عکس‌های واقعی، از بلوک‌های گرادیانی با پالت برند (`.ph-image`) استفاده شده تا در مرحله انتقال به وردپرس با عکاسی واقعی محصولات هکوبا جایگزین شوند — این تصمیم برای جلوگیری از هرگونه تصویر نامناسب یا ناهماهنگ با هویت برند گرفته شد.
-- **داده محصول نمونه:** ۱۰ محصول نمونه در `js/main.js` (`window.HECUBA.PRODUCTS`) با ساختار کامل (رنگ، سایز، قیمت، تخفیف، موجودی، برچسب) تعریف شده — این ساختار مستقیماً قابل توسعه به ۱۲۰+ محصول و مپ به WooCommerce است.
-- **Cart / Wishlist:** با LocalStorage کار می‌کنند و بعد از Refresh باقی می‌مانند.
-
-## آماده‌سازی برای Elementor + WooCommerce
-- Header و Footer به‌صورت Section/Container ساده و بدون تودرتویی غیرضروری نوشته شده‌اند → قابل بازسازی با **XPRO Theme Builder**.
-- `.product-card` ساختار تخت (تصویر → نام → قیمت → Swatch → CTA) دارد → قابل تبدیل به **WooCommerce Product Loop Item**.
-- تمام Sectionهای Homepage به‌صورت بلوک‌های مستقل و Container-based نوشته شده‌اند (بدون CSS Grid/Flex تو در توی پیچیده) → قابل بازسازی با Elementor Pro Widgets.
-- کلاس‌های Swatch رنگ آماده اتصال به **Variation Swatches for WooCommerce** هستند (`data-product-id` روی دکمه Wishlist نیز برای **TI WooCommerce Wishlist** آماده شده).
-
-## فازهای بعدی (در انتظار تایید)
-| فاز | محتوا |
-|---|---|
-| فاز ۲ | Shop/Category Page + Product Card + Filter |
-| فاز ۳ | Product Detail Page |
+| Product Detail Page |
 | فاز ۴ | Cart + Checkout + Wishlist |
 | فاز ۵ | صفحات باقی‌مانده |
